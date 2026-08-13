@@ -1,0 +1,167 @@
+@import "tailwindcss";
+
+/* Dark Mode über eine Klasse am <html>-Element statt über die
+   Systemeinstellung – so kann der Nutzer bewusst umschalten. */
+@custom-variant dark (&:where(.dark, .dark *));
+
+:root {
+  /* Flächen */
+  --color-bg: #f8fafc;
+  --color-surface: #ffffff;
+  --color-surface-muted: #f1f5f9;
+  --color-border: #e2e8f0;
+
+  /* Text */
+  --color-text: #0f172a;
+  --color-text-muted: #475569;
+  --color-text-subtle: #64748b;
+
+  /* Marke: ruhiges Petrol, seriös und gut lesbar */
+  --color-brand: #0f766e;
+  --color-brand-strong: #115e59;
+  --color-brand-soft: #ccfbf1;
+  --color-on-brand: #ffffff;
+
+  /* Signalfarben */
+  --color-warning: #b45309;
+  --color-warning-soft: #fef3c7;
+  --color-danger: #b91c1c;
+  --color-danger-soft: #fee2e2;
+  --color-info-soft: #e0f2fe;
+
+  --color-focus: #0d9488;
+}
+
+.dark {
+  --color-bg: #0b1220;
+  --color-surface: #111a2b;
+  --color-surface-muted: #17223a;
+  --color-border: #253352;
+
+  --color-text: #e8eefc;
+  --color-text-muted: #b3c0da;
+  --color-text-subtle: #90a0c0;
+
+  --color-brand: #2dd4bf;
+  --color-brand-strong: #5eead4;
+  --color-brand-soft: #10312f;
+  --color-on-brand: #04211f;
+
+  --color-warning: #fbbf24;
+  --color-warning-soft: #3a2c0c;
+  --color-danger: #fca5a5;
+  --color-danger-soft: #3b1414;
+  --color-info-soft: #10263a;
+
+  --color-focus: #5eead4;
+}
+
+@theme inline {
+  --color-bg: var(--color-bg);
+  --color-surface: var(--color-surface);
+  --color-surface-muted: var(--color-surface-muted);
+  --color-border: var(--color-border);
+  --color-text: var(--color-text);
+  --color-text-muted: var(--color-text-muted);
+  --color-text-subtle: var(--color-text-subtle);
+  --color-brand: var(--color-brand);
+  --color-brand-strong: var(--color-brand-strong);
+  --color-brand-soft: var(--color-brand-soft);
+  --color-on-brand: var(--color-on-brand);
+  --color-warning: var(--color-warning);
+  --color-warning-soft: var(--color-warning-soft);
+  --color-danger: var(--color-danger);
+  --color-danger-soft: var(--color-danger-soft);
+  --color-info-soft: var(--color-info-soft);
+  --color-focus: var(--color-focus);
+
+  --font-sans:
+    ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue",
+    Arial, sans-serif;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    /* Verhindert, dass die Sticky-Werbefläche Inhalte am Seitenende verdeckt. */
+    scroll-padding-top: 5rem;
+  }
+
+  body {
+    background-color: var(--color-bg);
+    color: var(--color-text);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* Deutlich sichtbarer Fokusring für Tastaturbedienung. */
+  :focus-visible {
+    outline: 3px solid var(--color-focus);
+    outline-offset: 2px;
+    border-radius: 4px;
+  }
+
+  /* Zahleneingaben ohne Spinner – sie sind auf Mobilgeräten fehleranfällig. */
+  input[type="number"]::-webkit-outer-spin-button,
+  input[type="number"]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+  input[type="number"] {
+    -moz-appearance: textfield;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+}
+
+@layer components {
+  /* Fliesstext in den Erklärungsabschnitten der Rechnerseiten. */
+  .prose-rp {
+    color: var(--color-text-muted);
+    line-height: 1.7;
+  }
+  .prose-rp p + p {
+    margin-top: 1rem;
+  }
+  .prose-rp strong {
+    color: var(--color-text);
+    font-weight: 600;
+  }
+  .prose-rp a {
+    color: var(--color-brand);
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+  .prose-rp ul {
+    margin-top: 1rem;
+    list-style: disc;
+    padding-left: 1.25rem;
+  }
+  .prose-rp ol {
+    margin-top: 1rem;
+    list-style: decimal;
+    padding-left: 1.25rem;
+  }
+  .prose-rp li + li {
+    margin-top: 0.5rem;
+  }
+  /* Bereiche innerhalb eines Fliesstext-Abschnitts, die keine
+     Fliesstext-Formatierung erhalten sollen (z. B. Kartenlisten). */
+  .prose-rp .not-prose ul,
+  .prose-rp .not-prose ol,
+  .prose-rp ul.not-prose,
+  .prose-rp ol.not-prose {
+    list-style: none;
+    padding-left: 0;
+  }
+}
