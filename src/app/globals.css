@@ -125,6 +125,17 @@
 }
 
 @layer components {
+  /* Werbefläche: reserviert ihre Höhe immer, damit kein Layout-Shift
+     entsteht. Die Werte kommen als CSS-Variablen aus der AdSlot-Komponente. */
+  .ad-slot-box {
+    min-height: var(--ad-min-mobile, 250px);
+  }
+  @media (min-width: 1024px) {
+    .ad-slot-box {
+      min-height: var(--ad-min-desktop, 250px);
+    }
+  }
+
   /* Fliesstext in den Erklärungsabschnitten der Rechnerseiten. */
   .prose-rp {
     color: var(--color-text-muted);

@@ -48,9 +48,14 @@ export function AdSlot({
     }
   }, [allowed]);
 
+  /**
+   * Beide Mindesthöhen als CSS-Variablen. Die Umschaltung übernimmt die
+   * Klasse .ad-slot-box in globals.css per Media Query – ein Inline-Style
+   * würde eine Breakpoint-Klasse überschreiben und die Desktop-Höhe nie
+   * wirksam werden lassen.
+   */
   const style = {
-    minHeight: `${config.minHeight.mobile}px`,
-    // Auf grösseren Bildschirmen greift die Desktop-Mindesthöhe.
+    ["--ad-min-mobile" as string]: `${config.minHeight.mobile}px`,
     ["--ad-min-desktop" as string]: `${config.minHeight.desktop}px`,
   } as React.CSSProperties;
 
@@ -63,10 +68,7 @@ export function AdSlot({
       <p className="mb-1 text-center text-[11px] uppercase tracking-widest text-text-subtle">
         Anzeige
       </p>
-      <div
-        className="flex items-center justify-center overflow-hidden rounded-lg border border-dashed border-border bg-surface-muted/60 lg:min-h-[var(--ad-min-desktop)]"
-        style={{ minHeight: `${config.minHeight.mobile}px` }}
-      >
+      <div className="ad-slot-box flex items-center justify-center overflow-hidden rounded-lg border border-dashed border-border bg-surface-muted/60">
         {!adsConfigured ? (
           <span className="px-4 py-6 text-center text-xs text-text-subtle">
             Entwicklungs-Platzhalter · {config.label}
