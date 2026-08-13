@@ -1,7 +1,6 @@
 import { describe, expect, it } from "vitest";
 import {
   LIMITS,
-  clamp,
   parseNumeric,
   round,
   safeDivide,
@@ -77,18 +76,6 @@ describe("safeDivide", () => {
   it("gibt bei ungültigen Werten null zurück", () => {
     expect(safeDivide(Number.NaN, 2)).toBeNull();
     expect(safeDivide(10, Number.POSITIVE_INFINITY)).toBeNull();
-  });
-});
-
-describe("clamp", () => {
-  it("begrenzt nach unten und oben", () => {
-    expect(clamp(5, 10, 20)).toBe(10);
-    expect(clamp(25, 10, 20)).toBe(20);
-    expect(clamp(15, 10, 20)).toBe(15);
-  });
-
-  it("fängt ungültige Werte ab", () => {
-    expect(clamp(Number.NaN, 10, 20)).toBe(10);
   });
 });
 

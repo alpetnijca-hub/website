@@ -42,8 +42,3 @@ export function useNumericField(
     error: touched && !parsed.ok ? parsed.error : undefined,
   };
 }
-
-/** Hülle für den Formularbereich eines Rechners. */
-export function formGridClasses(): string {
-  return "grid gap-5 sm:grid-cols-2";
-}

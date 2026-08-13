@@ -34,7 +34,21 @@ export const site = {
   contactEmail: "kontakt@example.com",
   /** Betreiberangabe. Platzhalter bis zum Ausfüllen des Impressums. */
   operator: "[Name des Betreibers]",
+  /**
+   * Telegram-Benutzername für den Kontakt – ohne @.
+   *
+   * >>> HIER DEINEN ECHTEN TELEGRAM-NAMEN EINTRAGEN <<<
+   * Solange hier der Platzhalter steht, zeigt die Kontaktseite einen Hinweis
+   * an, statt einen Link ins Leere anzubieten.
+   */
+  telegram: "dein_telegram_username",
 } as const;
+
+/** True, solange der Telegram-Name noch nicht ausgetauscht wurde. */
+export const telegramConfigured = site.telegram !== "dein_telegram_username";
+
+/** Öffentlicher Telegram-Link. */
+export const telegramUrl = `https://t.me/${site.telegram}`;
 
 /** Vollständige URL zu einem internen Pfad, z. B. für Canonical-Tags. */
 export function absoluteUrl(path: string): string {

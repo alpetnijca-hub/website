@@ -69,12 +69,6 @@ export function parseNumeric(raw: string, spec: NumericSpec): ParseResult {
   return { ok: true, value };
 }
 
-/** Begrenzt einen Wert auf einen Bereich – schützt vor Ausreissern. */
-export function clamp(value: number, min: number, max: number): number {
-  if (!Number.isFinite(value)) return min;
-  return Math.min(Math.max(value, min), max);
-}
-
 /**
  * Rundet auf eine feste Anzahl Nachkommastellen.
  *

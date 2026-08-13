@@ -7,7 +7,7 @@ import {
   subscribeConsent,
 } from "@/lib/consent";
 import { useIsClient } from "@/lib/useClient";
-import type { ConsentCategory, StoredConsent } from "@/types/consent";
+import type { StoredConsent } from "@/types/consent";
 
 /**
  * Liest die aktuelle Einwilligung und aktualisiert sich, sobald der Nutzer
@@ -27,10 +27,3 @@ export function useConsent(): { consent: StoredConsent | null; ready: boolean } 
   const ready = useIsClient();
   return { consent, ready };
 }
-
-/** Prüft eine einzelne Kategorie. Ohne Entscheidung immer false. */
-export function useHasConsent(category: ConsentCategory): boolean {
-  const { consent } = useConsent();
-  return consent?.choices[category] === true;
-}
-
