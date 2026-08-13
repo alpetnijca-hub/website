@@ -85,7 +85,7 @@ export default function Page() {
           melden wir uns in der Regel innerhalb weniger Tage.
         </p>
         <p>
-          Für rechtliche Anliegen findest du die Angaben im{" "}
+          Die vollständigen Anbieterangaben stehen im{" "}
           <a href="/impressum">Impressum</a>. Fragen zum Umgang mit Daten
           beantwortet die <a href="/datenschutz">Datenschutzerklärung</a>.
         </p>

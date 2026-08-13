@@ -1,88 +1,104 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import { PageShell, Section } from "@/components/layout/PageShell";
-import { PlaceholderNotice } from "@/components/ui/Disclaimer";
+import { Callout } from "@/components/ui/Callout";
 import { pageMetadata } from "@/lib/seo";
-import { site } from "@/config/site";
+import { operatorAddress, site } from "@/config/site";
 
 export const metadata: Metadata = pageMetadata({
   title: "Impressum",
-  description: `Anbieterkennzeichnung von ${site.name}.`,
+  description: `Anbieterkennzeichnung und Kontaktangaben für ${site.name}.`,
   path: "/impressum",
-  // Solange die Angaben Platzhalter sind, gehört die Seite nicht in den Index.
-  noIndex: true,
 });
 
 export default function Page() {
   return (
-    <PageShell
-      title="Impressum"
-      breadcrumbs={[{ name: "Impressum" }]}
-    >
-      <PlaceholderNotice topic="Impressumstext" />
-
-      <Section title="Angaben gemäss § 5 DDG">
-        <p className="whitespace-pre-line">
-          {`[Vor- und Nachname bzw. Firmenname]
-[Strasse und Hausnummer]
-[Postleitzahl und Ort]
-[Land]`}
-        </p>
+    <PageShell title="Impressum" breadcrumbs={[{ name: "Impressum" }]}>
+      <Section title="Verantwortlich für dieses Angebot">
+        <p className="whitespace-pre-line">{operatorAddress}</p>
       </Section>
 
       <Section title="Kontakt">
         <p className="whitespace-pre-line">
           {`E-Mail: ${site.contactEmail}
-Telegram: @${site.telegram}
-Telefon: [optional, falls vorhanden]`}
+Telefon: ${site.operator.phone}
+Telegram: @${site.telegram}`}
+        </p>
+        <p className="mt-3">
+          Für Fragen zur Website nutze am besten die{" "}
+          <Link href="/kontakt">Kontaktseite</Link>. Wir beantworten keine
+          individuellen Gesundheits- oder Finanzfragen.
         </p>
       </Section>
 
-      <Section title="Vertreten durch">
-        <p>[Bei juristischen Personen: vertretungsberechtigte Person]</p>
+      <Section title="Verantwortlich für den Inhalt">
+        <p className="whitespace-pre-line">{operatorAddress}</p>
       </Section>
 
-      <Section title="Registereintrag">
-        <p className="whitespace-pre-line">
-          {`[Falls vorhanden: Registergericht und Registernummer]
-[Falls vorhanden: Umsatzsteuer-Identifikationsnummer gemäss § 27 a UStG]`}
-        </p>
-      </Section>
-
-      <Section title="Verantwortlich für den Inhalt nach § 18 Abs. 2 MStV">
-        <p className="whitespace-pre-line">
-          {`[Name]
-[Anschrift]`}
-        </p>
-      </Section>
-
-      <Section title="Streitschlichtung">
+      <Section title="Art des Angebots">
         <p>
-          [Hier gehört ein Hinweis zur Verbraucherstreitbeilegung hin. Der
-          konkrete Wortlaut hängt davon ab, ob und in welcher Form die Website
-          gewerblich betrieben wird.]
+          {site.name} ist ein privat betriebenes Informationsangebot mit
+          kostenlosen Online-Rechnern. Die Website finanziert sich über
+          Werbeanzeigen. Es werden keine Waren oder Dienstleistungen verkauft,
+          keine Verträge geschlossen und keine Zahlungen entgegengenommen.
         </p>
       </Section>
 
-      <Section title="Haftung für Inhalte und Links">
+      <Section title="Haftung für Inhalte">
         <p>
-          [Hier gehören Haftungshinweise hin. Vorformulierte Textbausteine aus
-          dem Internet sind nicht automatisch passend – der Text muss zum
-          tatsächlichen Angebot passen.]
+          Die Inhalte dieser Website werden mit Sorgfalt erstellt. Für die
+          Richtigkeit, Vollständigkeit und Aktualität der Rechenergebnisse und
+          Erklärungen können wir jedoch keine Gewähr übernehmen. Alle Rechner
+          liefern rechnerische Schätzwerte auf Basis der jeweils angegebenen
+          Formeln und ersetzen keine ärztliche, ernährungsberaterische,
+          steuerliche oder finanzielle Beratung.
+        </p>
+        <p>
+          Welche Formel einem Ergebnis zugrunde liegt und wo ihre Grenzen
+          liegen, steht auf jeder Rechnerseite und zusammengefasst unter{" "}
+          <Link href="/quellen-und-methoden">Quellen und Methoden</Link>.
         </p>
       </Section>
 
-      <Section title="Hinweis zum Stand dieser Seite">
+      <Section title="Haftung für Links">
         <p>
-          Diese Seite ist ein technischer Platzhalter innerhalb der
-          Projektvorlage. Die Angaben oben sind nicht ausgefüllt und daher
-          rechtlich wirkungslos. Vor der Veröffentlichung müssen sie vollständig
-          und korrekt eingetragen werden. Welche Angaben im Einzelfall
-          verpflichtend sind, hängt unter anderem davon ab, ob die Website
-          gewerblich betrieben wird und ob Einnahmen über Werbung erzielt werden
-          – was hier der Fall sein soll. Wir empfehlen ausdrücklich eine
-          anwaltliche Prüfung.
+          Diese Website verweist an einzelnen Stellen auf externe Seiten, etwa
+          auf wissenschaftliche Veröffentlichungen im Quellenverzeichnis. Auf
+          deren Inhalte haben wir keinen Einfluss. Für die Inhalte verlinkter
+          Seiten ist ausschliesslich deren Betreiber verantwortlich. Zum
+          Zeitpunkt der Verlinkung waren keine rechtswidrigen Inhalte
+          erkennbar. Wird uns eine Rechtsverletzung bekannt, entfernen wir den
+          Link umgehend.
         </p>
       </Section>
+
+      <Section title="Urheberrecht">
+        <p>
+          Die auf dieser Website erstellten Inhalte und Werke unterliegen dem
+          Urheberrecht. Die Formeln selbst sind Allgemeingut beziehungsweise
+          stammen aus den im Quellenverzeichnis genannten Veröffentlichungen –
+          urheberrechtlich geschützt sind die Texte, die Gestaltung und die
+          Umsetzung.
+        </p>
+      </Section>
+
+      <Section title="Streitbeilegung">
+        <p>
+          Wir sind nicht bereit und nicht verpflichtet, an
+          Streitbeilegungsverfahren vor einer Verbraucherschlichtungsstelle
+          teilzunehmen.
+        </p>
+      </Section>
+
+      <div className="mt-10">
+        <Callout tone="info" title="Hinweis zum Stand dieser Seite">
+          Die Angaben oben sind vollständig und aktuell. Ob im Einzelfall
+          weitere Pflichtangaben erforderlich sind – etwa bei einer späteren
+          gewerblichen Anmeldung, bei Umsatzsteuerpflicht oder bei einem
+          Vertreter nach Art. 27 DSGVO – hängt von der weiteren Entwicklung des
+          Angebots ab und sollte fachkundig geprüft werden.
+        </Callout>
+      </div>
     </PageShell>
   );
 }

@@ -7,24 +7,24 @@ Voraussetzung für den Livegang, alles Weitere folgt danach.
 
 ### Rechtstexte
 
-- [ ] **Impressum ausfüllen** (`src/app/impressum/page.tsx`). Alle Felder in
-      eckigen Klammern ersetzen. Anwaltlich prüfen lassen – die Seite wird
-      gewerblich betrieben, sobald Werbeeinnahmen fliessen.
-- [ ] **Datenschutzerklärung schreiben** (`src/app/datenschutz/page.tsx`). Der
-      Abschnitt „Was technisch tatsächlich passiert“ ist bereits korrekt
-      ausgefüllt und kann als Grundlage dienen. Es fehlen: Verantwortlicher,
-      Rechtsgrundlagen, Hosting-Anbieter, Werbenetzwerk, Speicherdauern,
-      Betroffenenrechte, Aufsichtsbehörde.
-- [ ] `<PlaceholderNotice />` aus beiden Seiten entfernen, sobald die Texte
-      stehen.
-- [ ] `noIndex: true` in den Metadaten beider Seiten entfernen.
-- [ ] Beide Pfade aus `disallow` in `src/app/robots.ts` streichen.
+- [x] **Impressum ausgefüllt** (`src/app/impressum/page.tsx`) – mit echten
+      Angaben des Betreibers.
+- [x] **Datenschutzerklärung geschrieben** (`src/app/datenschutz/page.tsx`) –
+      zugeschnitten auf die tatsächliche Verarbeitung, ohne Bausteine für
+      Vorgänge, die es hier nicht gibt.
+- [x] Beide Seiten sind indexierbar und in der Sitemap.
+- [ ] **Beide Texte fachkundig prüfen lassen.** Sie sind vollständig und
+      inhaltlich zutreffend, aber nicht anwaltlich geprüft. Offene Punkte:
+      Vertreter nach Art. 27 DSGVO (Betreiber sitzt in der Schweiz, Angebot
+      richtet sich auch an EU-Nutzer) und die Frage der gewerblichen Anmeldung,
+      sobald Werbeeinnahmen fliessen.
+- [ ] **Hosting-Anbieter im Datenschutztext konkret benennen**, sobald er
+      feststeht, und den Auftragsverarbeitungsvertrag abschliessen.
 
 ### Grundkonfiguration
 
-- [ ] `src/config/site.ts`: `name`, `contactEmail`, `operator` und vor allem
-      **`telegram`** auf die echten Werte setzen. Solange dort
-      `dein_telegram_username` steht, zeigt die Kontaktseite einen Warnhinweis.
+- [x] `src/config/site.ts`: Name, Kontaktadresse, Betreiberangaben und
+      Telegram-Benutzername sind eingetragen.
 - [ ] `NEXT_PUBLIC_SITE_URL` auf die echte Domain setzen – ohne Schrägstrich am
       Ende. **Ohne diesen Schritt zeigen alle Canonical-URLs und die Sitemap
       auf localhost.**

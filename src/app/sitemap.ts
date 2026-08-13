@@ -9,8 +9,6 @@ import { activeCategories } from "@/config/categories";
  * Geplante Rechner und geplante Kategorien erscheinen bewusst nicht: Ihre
  * Seiten existieren noch nicht, und eine Sitemap mit 404-Adressen schadet
  * mehr, als sie nützt.
- *
- * Die Rechtstexte fehlen ebenfalls, solange sie Platzhalter sind.
  */
 export default function sitemap(): MetadataRoute.Sitemap {
   const lastModified = new Date();
@@ -23,6 +21,9 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { path: "/quellen-und-methoden", priority: 0.5 },
     { path: "/redaktionelle-richtlinien", priority: 0.4 },
     { path: "/cookie-einstellungen", priority: 0.2 },
+    { path: "/impressum", priority: 0.2 },
+    { path: "/datenschutz", priority: 0.3 },
+    { path: "/rechner/a-z", priority: 0.6 },
   ];
 
   return [

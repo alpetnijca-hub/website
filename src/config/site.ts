@@ -27,16 +27,34 @@ export const site = {
   locale: "de-DE",
   /** Sprachattribut des <html>-Elements. */
   lang: "de",
-  /**
-   * Kontaktadresse. Vor dem Livegang durch eine echte Adresse ersetzen –
-   * sie erscheint auf der Kontaktseite und im Impressum-Platzhalter.
-   */
-  contactEmail: "kontakt@example.com",
-  /** Betreiberangabe. Platzhalter bis zum Ausfüllen des Impressums. */
-  operator: "[Name des Betreibers]",
+  /** Kontaktadresse für Impressum, Datenschutz und Kontaktseite. */
+  contactEmail: "alvinramdedovic@gmail.com",
   /** Telegram-Benutzername für den Kontakt – ohne @. */
   telegram: "Bullishmind2",
+
+  /**
+   * Angaben für Impressum und Datenschutzerklärung.
+   * Diese Werte erscheinen als verantwortliche Stelle – sie müssen korrekt
+   * und aktuell sein.
+   */
+  operator: {
+    name: "Alvin Ramdedovic",
+    street: "Neugasse 4b",
+    postalCode: "9242",
+    city: "Oberuzwil",
+    country: "Schweiz",
+    /** In internationaler Schreibweise, damit die Nummer aus dem Ausland wählbar ist. */
+    phone: "+41 76 460 99 77",
+  },
 } as const;
+
+/** Anschrift als mehrzeiliger Text für Impressum und Datenschutz. */
+export const operatorAddress = [
+  site.operator.name,
+  site.operator.street,
+  `${site.operator.postalCode} ${site.operator.city}`,
+  site.operator.country,
+].join("\n");
 
 /**
  * True, sobald ein echter Telegram-Name hinterlegt ist. Ist das Feld leer

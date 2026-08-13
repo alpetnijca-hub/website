@@ -50,23 +50,3 @@ export function FinanceDisclaimer() {
   );
 }
 
-/**
- * Kennzeichnung für Rechtstexte, die noch nicht ausgefüllt sind.
- * Verhindert, dass Platzhalter versehentlich für geprüfte Texte gehalten werden.
- */
-export function PlaceholderNotice({ topic }: { topic: string }) {
-  return (
-    <div className="rounded-lg border-2 border-dashed border-warning/50 bg-warning-soft p-4 text-sm leading-relaxed text-text-muted">
-      <p className="mb-1 font-semibold text-warning">
-        Platzhalter – noch nicht rechtsverbindlich
-      </p>
-      <p>
-        Dieser {topic} ist ein unverbindlicher Entwurf und noch nicht
-        ausgefüllt. Er muss vor der Veröffentlichung der Website durch eine
-        fachkundige Person – zum Beispiel eine Anwältin oder einen Anwalt für
-        IT-Recht – erstellt beziehungsweise geprüft werden. Der Text hier
-        erhebt keinen Anspruch auf Vollständigkeit oder Rechtskonformität.
-      </p>
-    </div>
-  );
-}

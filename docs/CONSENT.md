@@ -58,26 +58,70 @@ Diese Lösung ist deshalb als **technische Grundlage** zu verstehen: Sie sorgt
 dafür, dass die Architektur stimmt und nichts ohne Zustimmung lädt. Vor dem
 Livegang mit echter Werbung ersetzt du sie durch eine zertifizierte CMP.
 
-### Eine zertifizierte CMP einbinden
+### Eine zertifizierte CMP einbinden – Schritt für Schritt
 
-Verbreitete Optionen sind Googles eigenes Datenschutz- und Nachrichtentool
-(kostenlos, direkt im AdSense-Konto), Cookiebot, Usercentrics oder Consentmanager.
+Der einfachste Weg führt über **Googles eigenes Tool**. Es ist kostenlos,
+zertifiziert, direkt im AdSense-Konto enthalten und du musst keinen zweiten
+Anbieter verwalten.
 
-Vorgehen:
+**1. Im AdSense-Konto aktivieren**
 
-1. CMP-Konto anlegen und Domain hinterlegen.
-2. Das CMP-Skript so früh wie möglich einbinden – in `src/app/layout.tsx`
-   im `<head>`, vor allen anderen Skripten.
-3. `<ConsentManager />` aus dem Layout entfernen, damit nicht zwei Banner
-   gleichzeitig erscheinen.
-4. `src/components/consent/useConsent.ts` auf die API der CMP umstellen.
-   Alle Werbe- und Analysekomponenten fragen ausschliesslich über diesen Hook
-   ab – es ist die einzige Stelle, die du anpassen musst.
-5. `src/lib/gtag.ts` kann entfallen: Zertifizierte CMPs setzen die
-   Consent-Mode-Signale selbst.
+Melde dich bei <https://adsense.google.com> an und gehe zu
+**Datenschutz und Messaging → Europäische Vorschriften**. Dort legst du eine
+Nachricht an. Google fragt dabei ab:
 
-Der Rest der Website bleibt unverändert. Genau dafür ist der Hook als einzige
-Schnittstelle ausgelegt.
+- für welche Website die Nachricht gilt
+- welche Sprachen sie unterstützen soll (Deutsch, sinnvollerweise auch Englisch)
+- ob die Ablehnen-Schaltfläche direkt sichtbar sein soll –
+  **hier unbedingt „Ja“ wählen.** Eine versteckte Ablehnung ist ein Dark
+  Pattern und in der EU angreifbar.
+
+Danach auf **Veröffentlichen** klicken.
+
+**2. Nichts weiter einbauen**
+
+Die Nachricht wird über das AdSense-Skript ausgeliefert, das bereits
+eingebunden ist. Es ist also kein zusätzlicher Skript-Tag nötig. Wichtig ist
+nur, dass `NEXT_PUBLIC_ADS_CLIENT_ID` gesetzt ist.
+
+**3. Das eigene Banner abschalten**
+
+Sonst erscheinen zwei Banner übereinander. Entferne dazu in
+`src/app/layout.tsx` die Zeile mit `<ConsentManager />` und den zugehörigen
+Import.
+
+Danach musst du eine Entscheidung treffen, wie es mit dem Rest der Website
+weitergeht – denn alle Werbe- und Analysekomponenten fragen über
+`useConsent()` ab, ob eine Einwilligung vorliegt:
+
+- **Variante A (einfach):** Lass `AdScripts.tsx` das Skript unbedingt laden,
+  also ohne die Consent-Prüfung. Googles CMP übernimmt dann die
+  Einwilligungssteuerung selbst und liefert ohne Zustimmung nur nicht
+  personalisierte oder gar keine Anzeigen aus. Das ist der von Google
+  vorgesehene Ablauf.
+- **Variante B (strenger):** Behalte die Prüfung und verbinde
+  `useConsent()` mit der TCF-API der CMP (`window.__tcfapi`). Dann lädt das
+  Skript erst nach ausdrücklicher Zustimmung. Aufwändiger, aber
+  datensparsamer.
+
+In beiden Fällen ist `src/components/consent/useConsent.ts` die einzige
+Datei, die du anfassen musst – alle Werbekomponenten hängen daran.
+
+**4. Testen**
+
+Ruf die Seite in einem privaten Fenster auf. Es darf nur ein Banner
+erscheinen, „Ablehnen“ muss gleich sichtbar sein wie „Zustimmen“, und nach
+einer Ablehnung dürfen in den Entwicklertools unter „Netzwerk“ keine
+personalisierten Anzeigenanfragen mehr auftauchen.
+
+### Alternative Anbieter
+
+Wenn du mehr Einstellmöglichkeiten brauchst – etwa weil du später weitere
+Dienste einbindest – sind Cookiebot, Usercentrics und Consentmanager
+verbreitete zertifizierte Alternativen. Sie sind ab einer bestimmten
+Seitenzahl kostenpflichtig und werden als eigenes Skript im `<head>` von
+`src/app/layout.tsx` eingebunden, so früh wie möglich und vor allen anderen
+Skripten.
 
 ## Webanalyse ergänzen
 

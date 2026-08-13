@@ -5,8 +5,9 @@ import { absoluteUrl } from "@/config/site";
  * robots.txt – wird von Next.js unter /robots.txt ausgeliefert.
  *
  * Es gibt nichts zu verstecken: Alle Inhalte dürfen indexiert werden.
- * Ausgenommen sind lediglich die Rechtstexte, solange sie Platzhalter sind
- * (sie tragen zusätzlich ein noindex im Seiten-Metadatensatz).
+ * Impressum und Datenschutzerklärung sind vollständig ausgefüllt und deshalb
+ * ebenfalls freigegeben – sie gehören zu den Seiten, die Google bei der
+ * AdSense-Prüfung ausdrücklich erwartet.
  */
 export default function robots(): MetadataRoute.Robots {
   return {
@@ -14,7 +15,6 @@ export default function robots(): MetadataRoute.Robots {
       {
         userAgent: "*",
         allow: "/",
-        disallow: ["/impressum", "/datenschutz"],
       },
     ],
     sitemap: absoluteUrl("/sitemap.xml"),
