@@ -59,7 +59,25 @@ NEXT_PUBLIC_ADS_CLIENT_ID=ca-pub-DEINE_ECHTE_ID
 Auf Vercel dieselbe Variable unter **Settings → Environment Variables**
 anlegen und anschliessend neu deployen.
 
-### 4. Anzeigenblöcke anlegen
+### 4. ads.txt prüfen
+
+Die Datei wird automatisch aus derselben Variable erzeugt und ist unter
+`https://deine-domain.de/ads.txt` erreichbar. Inhalt:
+
+```
+google.com, pub-DEINE_ID, DIRECT, f08c47fec0942fa0
+```
+
+Sie bestätigt Google, dass dein Konto berechtigt ist, Werbeflächen dieser
+Domain zu verkaufen. **Ohne sie zeigt AdSense die Warnung „Erhebliche
+Anzeigenumsätze gefährdet" und ein Teil der Einnahmen entfällt.** Nach dem
+Deployment einmal im Browser aufrufen und prüfen, dass die Zeile erscheint.
+Google liest die Datei automatisch neu ein, das kann einige Tage dauern.
+
+Ist keine Publisher-ID gesetzt, liefert die Route bewusst einen 404 – besser
+als eine Datei mit ungültiger ID.
+
+### 5. Anzeigenblöcke anlegen
 
 Lege im AdSense-Konto pro Platzierung einen Anzeigenblock an (Typ „Display“,
 responsiv). Jeder Block bekommt eine Slot-ID aus zehn Ziffern. Diese trägst du
@@ -73,7 +91,7 @@ NEXT_PUBLIC_AD_SLOT_SIDEBAR=1234567893
 NEXT_PUBLIC_AD_SLOT_STICKY=1234567894
 ```
 
-### 5. Was der Code dann tut
+### 6. Was der Code dann tut
 
 Sobald eine Publisher-ID gesetzt ist:
 
@@ -87,7 +105,7 @@ Die Adresse des Skripts steht an genau einer Stelle: in
 `src/components/ads/AdScripts.tsx`. Für ein anderes Werbenetzwerk tauschst du
 dort den `src` aus.
 
-### 6. Alles wieder abschalten
+### 7. Alles wieder abschalten
 
 ```bash
 NEXT_PUBLIC_ADS_ENABLED=false

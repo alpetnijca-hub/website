@@ -90,6 +90,8 @@ Voraussetzung für den Livegang, alles Weitere folgt danach.
 - [ ] Nach dem Aktivieren erneut PageSpeed messen – Anzeigen kosten Ladezeit
 - [ ] Prüfen, dass Anzeigen auf dem Handy keinen Inhalt verdecken
 - [ ] Beschriftung „Anzeige“ überall vorhanden
+- [ ] `https://deine-domain.de/ads.txt` aufrufen und prüfen, dass die Zeile
+      mit deiner Publisher-ID erscheint
 - [ ] Interstitial: bewusst entscheiden, ob es an soll. Empfehlung: zunächst
       aus lassen (Begründung in `docs/ADSENSE.md`)
 - [ ] Niemals selbst auf die eigenen Anzeigen klicken
