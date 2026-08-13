@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import { PageShell } from "@/components/layout/PageShell";
 import { CalculatorCard } from "@/components/ui/Card";
 import { CalculatorSearch } from "@/components/search/CalculatorSearch";
@@ -25,8 +26,16 @@ export default function Page() {
       breadcrumbs={[{ name: "Alle Rechner" }]}
       wide
     >
-      <div className="max-w-2xl">
-        <CalculatorSearch limit={8} />
+      <div className="flex flex-col gap-3 sm:flex-row sm:items-center">
+        <div className="max-w-2xl flex-1">
+          <CalculatorSearch limit={8} />
+        </div>
+        <Link
+          href="/rechner/a-z"
+          className="shrink-0 rounded-xl border-2 border-brand px-5 py-3.5 text-center font-semibold text-brand transition-colors hover:bg-brand-soft"
+        >
+          Verzeichnis A–Z
+        </Link>
       </div>
 
       <AdSlot placement="after-intro" />

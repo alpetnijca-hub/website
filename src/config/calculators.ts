@@ -166,49 +166,339 @@ export const calculators: CalculatorMeta[] = [
     },
   },
 
-  // --- Geplante Rechner: erscheinen als Vorschau ohne Link ---
+  // === Mathematik ===
+  {
+    id: "prozent",
+    name: "Prozentrechner",
+    category: "mathematik",
+    href: "/mathematik/prozentrechner",
+    description:
+      "Prozentwert, Prozentsatz, Grundwert und prozentuale Veränderung – alle vier Varianten in einem Rechner.",
+    icon: "calculator",
+    related: ["dreisatz", "mehrwertsteuer", "zinseszins"],
+    keywords: [
+      "prozent",
+      "prozentrechnung",
+      "prozentsatz",
+      "prozentwert",
+      "prozentuale veränderung",
+      "rabatt",
+    ],
+    status: "aktiv",
+    seo: {
+      title: "Prozentrechner – Prozente online berechnen",
+      description:
+        "Prozentwert, Prozentsatz, Grundwert und prozentuale Veränderung berechnen. Mit ausgeschriebenem Rechenweg und Beispielen aus dem Alltag.",
+    },
+  },
+  {
+    id: "dreisatz",
+    name: "Dreisatz-Rechner",
+    category: "mathematik",
+    href: "/mathematik/dreisatz-rechner",
+    description:
+      "Proportionale und umgekehrt proportionale Zuordnungen lösen – mit vollständigem Rechenweg.",
+    icon: "calculator",
+    related: ["prozent", "mehrwertsteuer"],
+    keywords: ["dreisatz", "proportional", "verhältnis", "umgekehrter dreisatz"],
+    status: "geplant",
+    seo: {
+      title: "Dreisatz-Rechner",
+      description: "Dreisatz online lösen. In Vorbereitung.",
+    },
+  },
+
+  // === Finanzen ===
+  {
+    id: "zinseszins",
+    name: "Zinseszinsrechner",
+    category: "finanzen",
+    href: "/finanzen/zinseszinsrechner",
+    description:
+      "Startkapital und Sparrate über die Jahre entwickeln – mit Aufteilung in Einzahlungen und Zinsertrag.",
+    icon: "chart",
+    related: ["kredit", "prozent", "sparplan"],
+    keywords: [
+      "zinseszins",
+      "zinsrechner",
+      "sparrechner",
+      "sparplan",
+      "kapitalentwicklung",
+      "etf sparplan",
+    ],
+    status: "aktiv",
+    seo: {
+      title: "Zinseszinsrechner – Sparplan und Kapitalentwicklung",
+      description:
+        "Zinseszins für Einmalanlage und Sparplan berechnen: Endkapital, eingezahlte Summe und Zinsertrag je Jahr. Formel und Grenzen werden erklärt.",
+    },
+  },
+  {
+    id: "kredit",
+    name: "Kreditrechner",
+    category: "finanzen",
+    href: "/finanzen/kreditrechner",
+    description:
+      "Monatliche Rate, Zinsanteil und Restschuld eines Annuitätendarlehens – inklusive Tilgungsverlauf.",
+    icon: "wallet",
+    related: ["zinseszins", "prozent"],
+    keywords: [
+      "kreditrechner",
+      "darlehensrechner",
+      "annuitätendarlehen",
+      "tilgungsrechner",
+      "ratenrechner",
+      "baufinanzierung",
+    ],
+    status: "aktiv",
+    seo: {
+      title: "Kreditrechner – Rate, Zinsen und Restschuld berechnen",
+      description:
+        "Annuitätendarlehen berechnen: monatliche Rate aus Zins und Tilgung, Zinsanteil, Restschuld nach der Zinsbindung und Gesamtlaufzeit.",
+    },
+  },
+  {
+    id: "sparplan",
+    name: "ETF-Sparplan-Rechner",
+    category: "finanzen",
+    href: "/finanzen/etf-sparplan-rechner",
+    description:
+      "Sparplan mit Kosten und unterschiedlichen Renditeszenarien durchrechnen.",
+    icon: "chart",
+    related: ["zinseszins"],
+    keywords: ["etf sparplan", "sparplanrechner", "vermögensaufbau"],
+    status: "geplant",
+    seo: {
+      title: "ETF-Sparplan-Rechner",
+      description: "Sparplan mit Renditeszenarien berechnen. In Vorbereitung.",
+    },
+  },
+  {
+    id: "inflation",
+    name: "Inflationsrechner",
+    category: "finanzen",
+    href: "/finanzen/inflationsrechner",
+    description:
+      "Kaufkraftverlust über die Jahre und die nötige Rendite zum Werterhalt.",
+    icon: "trend-down",
+    related: ["zinseszins"],
+    keywords: ["inflation", "kaufkraft", "kaufkraftverlust", "geldentwertung"],
+    status: "geplant",
+    seo: {
+      title: "Inflationsrechner",
+      description: "Kaufkraftverlust berechnen. In Vorbereitung.",
+    },
+  },
+
+  // === Alltag ===
+  {
+    id: "spritkosten",
+    name: "Spritkosten-Rechner",
+    category: "alltag",
+    href: "/alltag/spritkosten-rechner",
+    description:
+      "Kosten einer Fahrt aus Strecke, Verbrauch und Preis – auch für Elektroautos und geteilt auf mehrere Personen.",
+    icon: "activity",
+    related: ["stromkosten", "mehrwertsteuer", "prozent"],
+    keywords: [
+      "spritkosten",
+      "benzinkosten",
+      "fahrtkosten",
+      "kraftstoffkosten",
+      "benzinverbrauch",
+      "spritrechner",
+    ],
+    status: "aktiv",
+    seo: {
+      title: "Spritkosten-Rechner – Kosten einer Fahrt berechnen",
+      description:
+        "Spritkosten für eine Strecke berechnen: Verbrauch, Preis je Liter oder kWh, Kosten je Person und je Kilometer. Auch für Elektroautos.",
+    },
+  },
+  {
+    id: "stromkosten",
+    name: "Stromkosten-Rechner",
+    category: "alltag",
+    href: "/alltag/stromkosten-rechner",
+    description:
+      "Was ein Gerät pro Tag, Monat und Jahr an Strom kostet – aus Watt, Laufzeit und Strompreis.",
+    icon: "activity",
+    related: ["spritkosten", "mehrwertsteuer", "prozent"],
+    keywords: [
+      "stromkosten",
+      "stromverbrauch",
+      "kwh berechnen",
+      "watt in kwh",
+      "energiekosten",
+    ],
+    status: "aktiv",
+    seo: {
+      title: "Stromkosten-Rechner – Verbrauch in Euro umrechnen",
+      description:
+        "Stromkosten eines Geräts berechnen: aus Watt, Betriebsdauer und Preis je Kilowattstunde die Kosten pro Tag, Monat und Jahr.",
+    },
+  },
+  {
+    id: "mehrwertsteuer",
+    name: "Mehrwertsteuer-Rechner",
+    category: "alltag",
+    href: "/alltag/mehrwertsteuer-rechner",
+    description:
+      "Mehrwertsteuer hinzurechnen oder herausrechnen – mit frei wählbarem Steuersatz.",
+    icon: "calculator",
+    related: ["prozent", "stromkosten", "spritkosten"],
+    keywords: [
+      "mehrwertsteuer",
+      "umsatzsteuer",
+      "mwst",
+      "netto brutto",
+      "steuer herausrechnen",
+      "19 prozent",
+    ],
+    status: "aktiv",
+    seo: {
+      title: "Mehrwertsteuer-Rechner – netto und brutto umrechnen",
+      description:
+        "Mehrwertsteuer aufschlagen oder herausrechnen. Steuersatz frei wählbar, mit Schnellauswahl für Deutschland, Österreich und die Schweiz.",
+    },
+  },
+  {
+    id: "rabatt",
+    name: "Rabattrechner",
+    category: "alltag",
+    href: "/alltag/rabattrechner",
+    description: "Endpreis nach Rabatt und die tatsächliche Ersparnis.",
+    icon: "calculator",
+    related: ["prozent", "mehrwertsteuer"],
+    keywords: ["rabatt", "preisnachlass", "sale", "prozent abziehen"],
+    status: "geplant",
+    seo: {
+      title: "Rabattrechner",
+      description: "Rabatt und Ersparnis berechnen. In Vorbereitung.",
+    },
+  },
+  {
+    id: "datumsrechner",
+    name: "Datumsrechner",
+    category: "alltag",
+    href: "/alltag/datumsrechner",
+    description: "Tage zwischen zwei Daten und Datum plus oder minus X Tage.",
+    icon: "calculator",
+    related: [],
+    keywords: ["datumsrechner", "tage berechnen", "zeitspanne", "tagezähler"],
+    status: "geplant",
+    seo: {
+      title: "Datumsrechner",
+      description: "Tage zwischen zwei Daten berechnen. In Vorbereitung.",
+    },
+  },
+  {
+    id: "altersrechner",
+    name: "Altersrechner",
+    category: "alltag",
+    href: "/alltag/altersrechner",
+    description: "Alter auf Jahre, Monate und Tage genau aus dem Geburtsdatum.",
+    icon: "calculator",
+    related: [],
+    keywords: ["altersrechner", "alter berechnen", "geburtstag"],
+    status: "geplant",
+    seo: {
+      title: "Altersrechner",
+      description: "Alter genau berechnen. In Vorbereitung.",
+    },
+  },
+  {
+    id: "kalenderwoche",
+    name: "Kalenderwochen-Rechner",
+    category: "alltag",
+    href: "/alltag/kalenderwochen-rechner",
+    description: "Kalenderwoche zu einem Datum und umgekehrt, nach ISO 8601.",
+    icon: "calculator",
+    related: [],
+    keywords: ["kalenderwoche", "kw berechnen", "iso 8601"],
+    status: "geplant",
+    seo: {
+      title: "Kalenderwochen-Rechner",
+      description: "Kalenderwoche bestimmen. In Vorbereitung.",
+    },
+  },
+  {
+    id: "zufallszahl",
+    name: "Zufallsgenerator (Zahlen)",
+    category: "alltag",
+    href: "/alltag/zufallsgenerator",
+    description: "Zufallszahlen in einem frei wählbaren Bereich erzeugen.",
+    icon: "calculator",
+    related: [],
+    keywords: ["zufallsgenerator", "zufallszahl", "losentscheid"],
+    status: "geplant",
+    seo: {
+      title: "Zufallsgenerator",
+      description: "Zufallszahlen erzeugen. In Vorbereitung.",
+    },
+  },
+
+  // === Arbeit & Gehalt ===
+  {
+    id: "stundenlohn",
+    name: "Stundenlohnrechner",
+    category: "arbeit",
+    href: "/arbeit/stundenlohnrechner",
+    description:
+      "Stundenlohn aus Monatsgehalt und Wochenarbeitszeit – und umgekehrt.",
+    icon: "briefcase",
+    related: ["arbeitszeit", "prozent"],
+    keywords: ["stundenlohn", "stundensatz", "monatsgehalt", "jahresgehalt"],
+    status: "geplant",
+    seo: {
+      title: "Stundenlohnrechner",
+      description: "Stundenlohn aus dem Gehalt berechnen. In Vorbereitung.",
+    },
+  },
+  {
+    id: "arbeitszeit",
+    name: "Arbeitszeit-Rechner",
+    category: "arbeit",
+    href: "/arbeit/arbeitszeit-rechner",
+    description:
+      "Tägliche Arbeitszeit mit gesetzlichen Pausenzeiten korrekt erfassen.",
+    icon: "briefcase",
+    related: ["stundenlohn"],
+    keywords: ["arbeitszeit", "pausenzeiten", "gleitzeit", "stundenrechner"],
+    status: "geplant",
+    seo: {
+      title: "Arbeitszeit-Rechner",
+      description: "Arbeitszeit mit Pausen berechnen. In Vorbereitung.",
+    },
+  },
   {
     id: "brutto-netto",
     name: "Brutto-Netto-Rechner",
     category: "arbeit",
     href: "/arbeit/brutto-netto-rechner",
     description:
-      "Nettogehalt aus dem Bruttolohn abschätzen. Befindet sich in Vorbereitung.",
+      "Nettogehalt aus dem Bruttolohn. Braucht jährlich gepflegte Steuertabellen und Beitragssätze – deshalb noch in Vorbereitung.",
     icon: "briefcase",
-    related: [],
-    keywords: ["brutto netto", "nettogehalt", "lohnrechner"],
+    related: ["stundenlohn"],
+    keywords: ["brutto netto", "nettogehalt", "lohnrechner", "gehaltsrechner"],
     status: "geplant",
     seo: {
       title: "Brutto-Netto-Rechner",
-      description: "Nettogehalt aus dem Bruttolohn abschätzen. In Vorbereitung.",
+      description: "Nettogehalt berechnen. In Vorbereitung.",
     },
   },
-  {
-    id: "zinsrechner",
-    name: "Zinsrechner",
-    category: "finanzen",
-    href: "/finanzen/zinsrechner",
-    description:
-      "Zinsen und Zinseszins über einen frei wählbaren Zeitraum berechnen. In Vorbereitung.",
-    icon: "wallet",
-    related: [],
-    keywords: ["zinsen", "zinseszins", "sparrechner"],
-    status: "geplant",
-    seo: {
-      title: "Zinsrechner",
-      description: "Zinsen und Zinseszins berechnen. In Vorbereitung.",
-    },
-  },
+
+  // === Währungen und Krypto ===
   {
     id: "waehrungsrechner",
     name: "Währungsrechner",
     category: "waehrungen",
     href: "/waehrungen/waehrungsrechner",
     description:
-      "Währungen mit tagesaktuellen Kursen umrechnen. In Vorbereitung – Kursanbieter noch nicht angebunden.",
+      "Währungen mit tagesaktuellen Kursen umrechnen. Wartet auf die Anbindung eines seriösen Kursanbieters.",
     icon: "coins",
     related: [],
-    keywords: ["währungsrechner", "euro dollar", "wechselkurs"],
+    keywords: ["währungsrechner", "euro dollar", "wechselkurs", "devisen"],
     status: "geplant",
     seo: {
       title: "Währungsrechner",
@@ -216,19 +506,19 @@ export const calculators: CalculatorMeta[] = [
     },
   },
   {
-    id: "prozentrechner",
-    name: "Prozentrechner",
-    category: "mathematik",
-    href: "/mathematik/prozentrechner",
+    id: "kryptorechner",
+    name: "Krypto-Umrechner",
+    category: "krypto",
+    href: "/krypto/krypto-umrechner",
     description:
-      "Prozentwerte, Grundwerte und prozentuale Veränderungen berechnen. In Vorbereitung.",
-    icon: "calculator",
+      "Kryptowährungen in Euro umrechnen. Wartet auf die Anbindung eines Kursanbieters.",
+    icon: "chart",
     related: [],
-    keywords: ["prozent", "prozentrechnung", "prozentsatz"],
+    keywords: ["bitcoin rechner", "krypto umrechner", "eth euro"],
     status: "geplant",
     seo: {
-      title: "Prozentrechner",
-      description: "Prozentrechnung online. In Vorbereitung.",
+      title: "Krypto-Umrechner",
+      description: "Kryptowährungen umrechnen. In Vorbereitung.",
     },
   },
 ];

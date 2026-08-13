@@ -28,6 +28,29 @@ export function HealthDisclaimer() {
 }
 
 /**
+ * Hinweis für Finanz- und Steuerrechner.
+ * Keine Anlageberatung, keine Steuerberatung – und keine Zusicherung, dass
+ * die Zahlen zu einem konkreten Angebot passen.
+ */
+export function FinanceDisclaimer() {
+  return (
+    <aside className="rounded-lg border border-border bg-surface-muted p-4 text-sm leading-relaxed text-text-muted">
+      <h2 className="mb-1 font-semibold text-text">Wichtiger Hinweis</h2>
+      <p>
+        Dieser Rechner liefert eine Modellrechnung auf Basis der von dir
+        eingegebenen Werte. Er ist keine Anlage-, Finanzierungs- oder
+        Steuerberatung und berücksichtigt weder Gebühren und Steuern noch die
+        Bedingungen eines konkreten Angebots. Reale Verträge enthalten
+        zusätzliche Kosten und Regelungen, die das Ergebnis deutlich verändern
+        können. Vergangene Renditen sind kein Hinweis auf künftige
+        Entwicklungen. Prüfe verbindliche Zahlen immer anhand der Unterlagen
+        deines Anbieters.
+      </p>
+    </aside>
+  );
+}
+
+/**
  * Kennzeichnung für Rechtstexte, die noch nicht ausgefüllt sind.
  * Verhindert, dass Platzhalter versehentlich für geprüfte Texte gehalten werden.
  */

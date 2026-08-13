@@ -28,10 +28,10 @@ export const categories: Category[] = [
     slug: "finanzen",
     name: "Finanzen",
     description:
-      "Zins-, Kredit- und Sparrechner. In Vorbereitung.",
+      "Zinsen, Sparpläne und Kredite berechnen – mit nachvollziehbarem Rechenweg.",
     href: "/finanzen",
     icon: "wallet",
-    status: "geplant",
+    status: "aktiv",
   },
   {
     slug: "waehrungen",
@@ -55,19 +55,19 @@ export const categories: Category[] = [
     slug: "mathematik",
     name: "Mathematik",
     description:
-      "Prozent-, Dreisatz- und Bruchrechner. In Vorbereitung.",
+      "Prozentrechnung und Dreisatz – die Klassiker, sauber erklärt.",
     href: "/mathematik",
     icon: "calculator",
-    status: "geplant",
+    status: "aktiv",
   },
   {
     slug: "alltag",
     name: "Alltag",
     description:
-      "Praktische Rechner für Haushalt, Reise und Freizeit. In Vorbereitung.",
+      "Spritkosten, Stromkosten und Mehrwertsteuer für den Alltag.",
     href: "/alltag",
     icon: "home",
-    status: "geplant",
+    status: "aktiv",
   },
 ];
 

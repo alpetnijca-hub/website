@@ -56,6 +56,14 @@ export function Footer() {
                   Alle Rechner ansehen
                 </Link>
               </li>
+              <li>
+                <Link
+                  href="/rechner/a-z"
+                  className="font-medium text-brand hover:underline"
+                >
+                  Verzeichnis A–Z
+                </Link>
+              </li>
             </ul>
           </nav>
 

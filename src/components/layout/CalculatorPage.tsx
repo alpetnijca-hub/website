@@ -6,7 +6,7 @@ import { Section } from "@/components/layout/PageShell";
 import { AdSlot } from "@/components/ads/AdSlot";
 import { Faq } from "@/components/ui/Faq";
 import { SourceList } from "@/components/ui/SourceList";
-import { HealthDisclaimer } from "@/components/ui/Disclaimer";
+import { FinanceDisclaimer, HealthDisclaimer } from "@/components/ui/Disclaimer";
 import { JsonLd } from "@/components/ui/JsonLd";
 import { Icon } from "@/components/ui/Icon";
 import { faqSchema, type FaqItem } from "@/lib/schema";
@@ -34,7 +34,8 @@ export function CalculatorPage({
   interpretation,
   limits,
   faq,
-  sources,
+  sources = [],
+  disclaimer = "gesundheit",
 }: {
   calculatorId: string;
   /** Kurze Einleitung, 2–4 Sätze. */
@@ -46,7 +47,15 @@ export function CalculatorPage({
   interpretation: ReactNode;
   limits: ReactNode;
   faq: FaqItem[];
-  sources: readonly SourceId[];
+  /** Quellen der verwendeten Formel. Leer lassen, wenn es sich um
+   *  allgemein bekannte Rechenregeln handelt (z. B. Prozentrechnung). */
+  sources?: readonly SourceId[];
+  /**
+   * Welcher Haftungshinweis unter der Seite steht. "gesundheit" für alle
+   * Rechner mit Bezug zu Ernährung und Training, "finanzen" für Geldthemen,
+   * "keiner" für reine Rechenwerkzeuge ohne Beratungsbezug.
+   */
+  disclaimer?: "gesundheit" | "finanzen" | "keiner";
 }) {
   const meta = getCalculator(calculatorId);
   if (!meta) {
@@ -123,13 +132,21 @@ export function CalculatorPage({
             </Section>
           )}
 
-          <Section title="Quellen" id="quellen">
-            <SourceList ids={sources} />
-          </Section>
+          {sources.length > 0 && (
+            <Section title="Quellen" id="quellen">
+              <SourceList ids={sources} />
+            </Section>
+          )}
 
-          <div className="mt-10">
-            <HealthDisclaimer />
-          </div>
+          {disclaimer !== "keiner" && (
+            <div className="mt-10">
+              {disclaimer === "finanzen" ? (
+                <FinanceDisclaimer />
+              ) : (
+                <HealthDisclaimer />
+              )}
+            </div>
+          )}
         </div>
 
         {/* Sidebar nur ab Desktop-Breite – auf Mobilgeräten würde sie den
