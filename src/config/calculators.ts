@@ -367,14 +367,16 @@ export const calculators: CalculatorMeta[] = [
     name: "Rabattrechner",
     category: "alltag",
     href: "/alltag/rabattrechner",
-    description: "Endpreis nach Rabatt und die tatsächliche Ersparnis.",
+    description:
+      "Endpreis nach Rabatt, die tatsächliche Ersparnis und der Originalpreis zurückgerechnet.",
     icon: "calculator",
     related: ["prozent", "mehrwertsteuer"],
     keywords: ["rabatt", "preisnachlass", "sale", "prozent abziehen"],
-    status: "geplant",
+    status: "aktiv",
     seo: {
-      title: "Rabattrechner",
-      description: "Rabatt und Ersparnis berechnen. In Vorbereitung.",
+      title: "Rabattrechner – Endpreis und Ersparnis berechnen",
+      description:
+        "Rabatt in Prozent abziehen, die Ersparnis sehen oder den Originalpreis zurückrechnen. Auch für zwei Rabatte hintereinander, die sich nicht einfach addieren.",
     },
   },
   {
@@ -427,14 +429,16 @@ export const calculators: CalculatorMeta[] = [
     name: "Zufallsgenerator (Zahlen)",
     category: "alltag",
     href: "/alltag/zufallsgenerator",
-    description: "Zufallszahlen in einem frei wählbaren Bereich erzeugen.",
+    description:
+      "Zufallszahlen in einem frei wählbaren Bereich – mit oder ohne Wiederholung.",
     icon: "calculator",
-    related: [],
-    keywords: ["zufallsgenerator", "zufallszahl", "losentscheid"],
-    status: "geplant",
+    related: ["rabatt"],
+    keywords: ["zufallsgenerator", "zufallszahl", "losentscheid", "lottozahlen"],
+    status: "aktiv",
     seo: {
-      title: "Zufallsgenerator",
-      description: "Zufallszahlen erzeugen. In Vorbereitung.",
+      title: "Zufallsgenerator – Zufallszahlen erzeugen",
+      description:
+        "Zufallszahlen in einem frei wählbaren Bereich ziehen, mit oder ohne Wiederholung. Gleichverteilt über die Zufallsquelle des Browsers, ohne Übertragung an einen Server.",
     },
   },
 
@@ -449,10 +453,11 @@ export const calculators: CalculatorMeta[] = [
     icon: "briefcase",
     related: ["arbeitszeit", "prozent"],
     keywords: ["stundenlohn", "stundensatz", "monatsgehalt", "jahresgehalt"],
-    status: "geplant",
+    status: "aktiv",
     seo: {
-      title: "Stundenlohnrechner",
-      description: "Stundenlohn aus dem Gehalt berechnen. In Vorbereitung.",
+      title: "Stundenlohnrechner – Gehalt in Stundenlohn umrechnen",
+      description:
+        "Stundenlohn aus Monatsgehalt und Wochenarbeitszeit berechnen – und umgekehrt. Mit 13. und 14. Monatsgehalt sowie Tages-, Wochen- und Jahresverdienst.",
     },
   },
   {
@@ -465,10 +470,11 @@ export const calculators: CalculatorMeta[] = [
     icon: "briefcase",
     related: ["stundenlohn"],
     keywords: ["arbeitszeit", "pausenzeiten", "gleitzeit", "stundenrechner"],
-    status: "geplant",
+    status: "aktiv",
     seo: {
-      title: "Arbeitszeit-Rechner",
-      description: "Arbeitszeit mit Pausen berechnen. In Vorbereitung.",
+      title: "Arbeitszeit-Rechner – Arbeitszeit mit Pausen berechnen",
+      description:
+        "Arbeitszeit aus Kommen, Gehen und Pausen berechnen, mit Dezimalstunden für die Zeiterfassung, Über- und Minusstunden und einer Prüfung der Pausenvorgaben.",
     },
   },
   {
@@ -495,14 +501,15 @@ export const calculators: CalculatorMeta[] = [
     category: "waehrungen",
     href: "/waehrungen/waehrungsrechner",
     description:
-      "Währungen mit tagesaktuellen Kursen umrechnen. Wartet auf die Anbindung eines seriösen Kursanbieters.",
+      "30 Währungen umrechnen – mit den amtlichen Referenzkursen der Europäischen Zentralbank.",
     icon: "coins",
     related: [],
     keywords: ["währungsrechner", "euro dollar", "wechselkurs", "devisen"],
-    status: "geplant",
+    status: "aktiv",
     seo: {
-      title: "Währungsrechner",
-      description: "Währungen umrechnen. In Vorbereitung.",
+      title: "Währungsrechner – EZB-Referenzkurse",
+      description:
+        "Euro, Dollar, Franken und 28 weitere Währungen umrechnen. Grundlage sind die täglich veröffentlichten Referenzkurse der Europäischen Zentralbank.",
     },
   },
   {

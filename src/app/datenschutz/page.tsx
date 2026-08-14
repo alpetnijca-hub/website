@@ -125,6 +125,17 @@ Telefon: ${site.operator.phone}`}
           beziehen könnten, etwa Gewicht, Körpergrösse oder Alter im
           BMI-Rechner. Wir erheben solche Daten nicht.
         </p>
+        <p>
+          Eine Besonderheit gilt für den{" "}
+          <Link href="/waehrungen/waehrungsrechner">Währungsrechner</Link>: Er
+          braucht aktuelle Wechselkurse. Diese Kurstabelle wird{" "}
+          <strong>von unserem Server</strong> bei der Europäischen Zentralbank
+          abgerufen und in die Seite eingebaut, mehrmals täglich und unabhängig
+          davon, ob und was jemand eingibt. Dein Browser nimmt dabei keine
+          Verbindung zur EZB auf, es werden keine Daten über dich übermittelt,
+          und die Umrechnung selbst läuft wie bei allen anderen Rechnern lokal
+          auf deinem Gerät.
+        </p>
       </Section>
 
       <Section title="Hosting und Server-Logdateien">

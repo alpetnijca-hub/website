@@ -19,10 +19,10 @@ export const categories: Category[] = [
     slug: "arbeit",
     name: "Arbeit & Gehalt",
     description:
-      "Rechner für Stundenlohn, Arbeitszeit und Gehaltsbestandteile. In Vorbereitung.",
+      "Stundenlohn aus dem Gehalt, Arbeitszeit mit Pausen und Überstunden – nachvollziehbar gerechnet.",
     href: "/arbeit",
     icon: "briefcase",
-    status: "geplant",
+    status: "aktiv",
   },
   {
     slug: "finanzen",
@@ -37,10 +37,10 @@ export const categories: Category[] = [
     slug: "waehrungen",
     name: "Währungen",
     description:
-      "Währungsumrechnung mit tagesaktuellen Kursen eines externen Anbieters. In Vorbereitung.",
+      "Währungen umrechnen mit den täglich veröffentlichten Referenzkursen der Europäischen Zentralbank.",
     href: "/waehrungen",
     icon: "coins",
-    status: "geplant",
+    status: "aktiv",
   },
   {
     slug: "krypto",

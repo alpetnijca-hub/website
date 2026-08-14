@@ -132,6 +132,52 @@ export function NumberField({
   );
 }
 
+/**
+ * Uhrzeit-Feld. `type="time"` bringt auf Mobilgeräten die passende Tastatur
+ * und auf dem Desktop eine Eingabemaske mit; der Wert ist immer "HH:MM".
+ */
+export function TimeField({
+  label,
+  value,
+  onChange,
+  hint,
+  error,
+}: {
+  label: string;
+  value: string;
+  onChange: (value: string) => void;
+  hint?: string;
+  error?: string;
+}) {
+  const id = useId();
+  const hintId = `${id}-hint`;
+  const errorId = `${id}-error`;
+  const describedBy =
+    [hint ? hintId : null, error ? errorId : null].filter(Boolean).join(" ") ||
+    undefined;
+
+  return (
+    <FieldShell
+      label={label}
+      hint={hint}
+      error={error}
+      htmlFor={id}
+      hintId={hintId}
+      errorId={errorId}
+    >
+      <input
+        id={id}
+        type="time"
+        value={value}
+        onChange={(event) => onChange(event.target.value)}
+        aria-invalid={error ? true : undefined}
+        aria-describedby={describedBy}
+        className={`${inputClasses} ${borderClasses(Boolean(error))}`}
+      />
+    </FieldShell>
+  );
+}
+
 export interface SelectOption {
   value: string;
   label: string;

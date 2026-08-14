@@ -21,6 +21,13 @@
 | `/gesundheit/wasserbedarf-rechner` | Rechner | static | Basisbedarf + Trainingszuschlag |
 | `/gesundheit/kalorienverbrauch-rechner` | Rechner | static | MET-basiert |
 | `/gesundheit/makronaehrstoff-rechner` | Rechner | static | Protein/Fett/KH in g und % |
+| `/alltag/rabattrechner` | Rechner | static | Endpreis, Ersparnis, Originalpreis rückwärts |
+| `/alltag/zufallsgenerator` | Rechner | static | Zufallszahlen, gleichverteilt per Verwerfung |
+| `/arbeit` | Kategorie | static | Einstieg „Arbeit & Gehalt“ |
+| `/arbeit/stundenlohnrechner` | Rechner | static | Gehalt ↔ Stundenlohn über 52 ÷ 12 |
+| `/arbeit/arbeitszeit-rechner` | Rechner | static | Arbeitszeit, Pausenprüfung nach ArbZG |
+| `/waehrungen` | Kategorie | static | Einstieg „Währungen“ |
+| `/waehrungen/waehrungsrechner` | Rechner | ISR (6 h) | EZB-Referenzkurse, Umrechnung im Browser |
 | `/ueber-uns` | Inhalt | static | Betreiber, Anspruch, keine Beratung |
 | `/kontakt` | Formular | server action | Kontakt, Demo-Modus klar gekennzeichnet |
 | `/impressum` | Recht | static | **Platzhalter** |
@@ -51,14 +58,14 @@
 
 ## B. Technische Entscheidungen (Kurzbegründung)
 
-- **Next.js App Router, alles statisch (SSG)** – Rechnerseiten sind reiner Content, statisch = beste Core Web Vitals und billigstes Hosting. Interaktivität nur in kleinen `"use client"`-Inseln.
+- **Next.js App Router, praktisch alles statisch (SSG)** – Rechnerseiten sind reiner Content, statisch = beste Core Web Vitals und billigstes Hosting. Interaktivität nur in kleinen `"use client"`-Inseln. Einzige Ausnahme ist `/waehrungen/waehrungsrechner`: Die Seite holt die EZB-Referenzkurse serverseitig und wird alle sechs Stunden neu erzeugt (`export const revalidate`). Die Umrechnung selbst läuft trotzdem im Browser.
 - **Berechnung strikt in `src/lib/calculators/*`** – reine Funktionen ohne React, dadurch mit Vitest testbar und in jeder UI wiederverwendbar. UI ruft nur `calc(input) → result`.
 - **Zentrale Registry `src/config/calculators.ts`** – eine Datenquelle für Navigation, Übersichtsseiten, verwandte Rechner, Sitemap und SEO-Metadaten. Neue Kategorien (Finanzen, Krypto …) brauchen später nur neue Registry-Einträge.
 - **Site-Name in `src/config/site.ts`** – Umbenennung an genau einer Stelle.
 - **Kein CSS-Framework außer Tailwind, keine UI-Library** – wenig Abhängigkeiten, kleines JS-Bundle.
 - **Consent zuerst, Werbung danach** – kein Ad-/Analytics-Skript wird ohne Einwilligung geladen. Google Consent Mode v2 wird über `dataLayer`-Defaults (`denied`) vorbereitet; erst nach Zustimmung folgt ein `consent update`.
 - **AdSlot reserviert immer feste Höhe** – verhindert CLS, auch im Platzhaltermodus.
-- **Keine Health-Daten an den Server** – alle Formulare außer Kontakt laufen ohne Netzwerkzugriff; `localStorage` nur für Consent, Theme und optionales „Werte merken“ (opt-in).
+- **Keine Nutzereingaben an den Server** – alle Formulare außer Kontakt laufen ohne Netzwerkzugriff. Auch beim Währungsrechner wird nur die Kurstabelle serverseitig geholt, unabhängig von jeder Eingabe; `localStorage` nur für Consent, Theme und optionales „Werte merken“ (opt-in).
 - **Dark Mode über `class`-Strategie**, Auswahl in `localStorage`, ohne Flash via kleines Inline-Skript.
 
 ## C. Verzeichnisstruktur

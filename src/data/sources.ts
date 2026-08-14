@@ -113,6 +113,20 @@ export const sources = {
     publication: "The National Academies Press, Washington DC",
     url: "https://doi.org/10.17226/10490",
   },
+  ecb: {
+    id: "ecb",
+    citation: "Europäische Zentralbank",
+    title: "Euro foreign exchange reference rates",
+    publication: "EZB, Frankfurt am Main – täglich veröffentlichte Referenzkurse",
+    url: "https://www.ecb.europa.eu/stats/policy_and_exchange_rates/euro_reference_exchange_rates/html/index.en.html",
+  },
+  arbzg: {
+    id: "arbzg",
+    citation: "Bundesrepublik Deutschland",
+    title: "Arbeitszeitgesetz (ArbZG), insbesondere § 3 und § 4",
+    publication: "Bundesministerium der Justiz, Gesetze im Internet",
+    url: "https://www.gesetze-im-internet.de/arbzg/",
+  },
 } as const satisfies Record<string, Source>;
 
 export type SourceId = keyof typeof sources;
