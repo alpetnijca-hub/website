@@ -159,7 +159,7 @@ export function Analytics() {
 3. In `.env.local` eintragen:
    `NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION=dein_wert`
 4. Neu deployen, dann in der Search Console bestätigen.
-5. Sitemap einreichen: `https://deine-domain.de/sitemap.xml`
+5. Sitemap einreichen: `https://rechnerliste.de/sitemap.xml`
 
 Das Meta-Tag wird nur ausgegeben, wenn die Variable gesetzt ist – die
 Verifizierung ist technisch notwendig und benötigt keine Einwilligung.

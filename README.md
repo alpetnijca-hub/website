@@ -1,4 +1,4 @@
-# RechnerPilot
+# Rechnerliste
 
 Ein Portal für Online-Rechner. Version 1 umfasst acht Rechner rund um
 Ernährung, Gewicht und Training. Die Architektur ist darauf ausgelegt, später

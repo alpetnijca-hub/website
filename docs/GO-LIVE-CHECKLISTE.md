@@ -73,8 +73,8 @@ Voraussetzung für den Livegang, alles Weitere folgt danach.
 
 ## 4. SEO
 
-- [ ] `https://deine-domain.de/robots.txt` erreichbar und plausibel
-- [ ] `https://deine-domain.de/sitemap.xml` erreichbar und enthält alle Rechner
+- [ ] `https://rechnerliste.de/robots.txt` erreichbar und plausibel
+- [ ] `https://rechnerliste.de/sitemap.xml` erreichbar und enthält alle Rechner
 - [ ] Google Search Console eingerichtet und Sitemap eingereicht
       (siehe `docs/CONSENT.md`, Abschnitt Search Console)
 - [ ] Meta-Titles und Descriptions stichprobenartig prüfen – jede Seite hat
@@ -90,7 +90,7 @@ Voraussetzung für den Livegang, alles Weitere folgt danach.
 - [ ] Nach dem Aktivieren erneut PageSpeed messen – Anzeigen kosten Ladezeit
 - [ ] Prüfen, dass Anzeigen auf dem Handy keinen Inhalt verdecken
 - [ ] Beschriftung „Anzeige“ überall vorhanden
-- [ ] `https://deine-domain.de/ads.txt` aufrufen und prüfen, dass die Zeile
+- [ ] `https://rechnerliste.de/ads.txt` aufrufen und prüfen, dass die Zeile
       mit deiner Publisher-ID erscheint
 - [ ] Interstitial: bewusst entscheiden, ob es an soll. Empfehlung: zunächst
       aus lassen (Begründung in `docs/ADSENSE.md`)

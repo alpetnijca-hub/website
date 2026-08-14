@@ -8,14 +8,14 @@
 
 export const site = {
   /** Markenname. Zum Umbenennen nur diesen Wert ändern. */
-  name: "RechnerPilot",
+  name: "Rechnerliste",
   /** Kurzer Claim für Hero und Open Graph. */
-  tagline: "Kostenlose Rechner für Fitness, Ernährung und Alltag",
+  tagline: "Kostenlose Rechner für Gesundheit, Finanzen und Alltag",
   /**
    * Beschreibung der Website (Startseite, Fallback-Meta-Description).
    */
   description:
-    "Kostenlose, werbefinanzierte Online-Rechner für Kalorienbedarf, BMI, Makronährstoffe und mehr. Alle Berechnungen laufen direkt im Browser – ohne Anmeldung.",
+    "Kostenlose Online-Rechner für Kalorienbedarf, BMI, Zinsen, Prozent, Spritkosten und mehr. Jede Formel offengelegt, alle Berechnungen laufen direkt im Browser – ohne Anmeldung.",
   /**
    * Produktions-URL ohne abschliessenden Schrägstrich.
    * Auf Vercel als NEXT_PUBLIC_SITE_URL setzen, sonst greift der lokale Fallback.

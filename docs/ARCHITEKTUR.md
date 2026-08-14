@@ -1,4 +1,4 @@
-# RechnerPilot – Architektur & Umsetzungsplan (Phase A–E)
+# Rechnerliste – Architektur & Umsetzungsplan (Phase A–E)
 
 > Arbeitsstand: Planungsphase. Noch kein Anwendungscode im Repo.
 > Alle Rechts-, Datenschutz- und Impressumstexte werden als **Platzhalter** angelegt

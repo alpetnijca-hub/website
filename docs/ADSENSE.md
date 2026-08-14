@@ -33,9 +33,9 @@ Die Konfiguration steht in `src/config/ads.ts`.
 
 Bevor du dich bei AdSense bewirbst, sollte die Seite Folgendes haben:
 
-- ein vollständig ausgefülltes Impressum (aktuell Platzhalter)
-- eine vollständige Datenschutzerklärung (aktuell Platzhalter)
-- eine funktionierende Kontaktmöglichkeit
+- ein vollständig ausgefülltes Impressum (erledigt)
+- eine vollständige Datenschutzerklärung (erledigt)
+- eine funktionierende Kontaktmöglichkeit (erledigt)
 - eine eigene Domain und ausreichend eigenständige Inhalte
 
 Bewerbungen mit Platzhaltertexten in den Rechtsseiten werden regelmässig
@@ -62,7 +62,7 @@ anlegen und anschliessend neu deployen.
 ### 4. ads.txt prüfen
 
 Die Datei wird automatisch aus derselben Variable erzeugt und ist unter
-`https://deine-domain.de/ads.txt` erreichbar. Inhalt:
+`https://rechnerliste.de/ads.txt` erreichbar. Inhalt:
 
 ```
 google.com, pub-DEINE_ID, DIRECT, f08c47fec0942fa0

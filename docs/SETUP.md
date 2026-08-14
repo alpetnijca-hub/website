@@ -94,8 +94,8 @@ In derselben Datei stehen auch:
 
 - `tagline` – der Untertitel im Hero-Bereich
 - `contactEmail` – die Kontaktadresse
-- `telegram` – **dein Telegram-Benutzername ohne @** (aktuell ein Platzhalter)
-- `operator` – dein Name fürs Impressum
+- `telegram` – der Telegram-Benutzername ohne @
+- `operator` – Name und Anschrift für Impressum und Datenschutzerklärung
 
 ## 8. Einen neuen Rechner hinzufügen
 
@@ -116,7 +116,7 @@ Drei Schritte, immer in dieser Reihenfolge:
 3. Vercel erkennt Next.js automatisch – die Voreinstellungen passen.
 4. Unter **Settings → Environment Variables** die Werte aus `.env.example`
    eintragen, mindestens `NEXT_PUBLIC_SITE_URL` mit deiner echten Domain
-   (zum Beispiel `https://rechnerpilot.de`, ohne Schrägstrich am Ende).
+   (zum Beispiel `https://rechnerliste.de`, ohne Schrägstrich am Ende).
 5. Auf „Deploy“ klicken.
 
 Nach jedem Push auf den Hauptbranch baut Vercel automatisch neu.
