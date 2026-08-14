@@ -2,96 +2,99 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { PageShell, Section } from "@/components/layout/PageShell";
 import { ConsentSettingsLink } from "@/components/consent/ConsentSettingsLink";
-import { ConsentStatus } from "@/components/consent/ConsentStatus";
+import { Callout } from "@/components/ui/Callout";
 import { pageMetadata } from "@/lib/seo";
-import { consentCategoryInfo, type ConsentCategory } from "@/types/consent";
 
 export const metadata: Metadata = pageMetadata({
   title: "Cookie-Einstellungen",
   description:
-    "Deine Einwilligung einsehen, ändern oder vollständig widerrufen. Übersicht aller Kategorien und was sie jeweils bedeuten.",
+    "Deine Einwilligung in Werbe-Cookies einsehen, ändern oder widerrufen. Übersicht darüber, was ohne Zustimmung passiert und was nicht.",
   path: "/cookie-einstellungen",
 });
 
 export default function Page() {
-  const categories = Object.keys(consentCategoryInfo) as ConsentCategory[];
-
   return (
     <PageShell
       title="Cookie-Einstellungen"
-      intro="Hier siehst du, wofür du deine Zustimmung gegeben hast, und kannst sie jederzeit ändern oder widerrufen."
+      intro="Hier kannst du deine Einwilligung jederzeit ändern oder vollständig widerrufen."
       breadcrumbs={[{ name: "Cookie-Einstellungen" }]}
     >
-      <div className="not-prose">
-        <ConsentStatus />
-      </div>
+      <p className="not-prose">
+        <ConsentSettingsLink className="rounded-lg bg-brand px-5 py-3 font-semibold text-on-brand hover:bg-brand-strong">
+          Einwilligung ändern oder widerrufen
+        </ConsentSettingsLink>
+      </p>
 
-      <Section title="Die Kategorien im Einzelnen">
-        <dl className="not-prose mt-4 space-y-4">
-          {categories.map((key) => {
-            const info = consentCategoryInfo[key];
-            return (
-              <div
-                key={key}
-                className="rounded-lg border border-border bg-surface p-4"
-              >
-                <dt className="font-semibold text-text">
-                  {info.title}
-                  {info.required && (
-                    <span className="ml-2 text-xs font-normal text-text-subtle">
-                      nicht abwählbar
-                    </span>
-                  )}
-                </dt>
-                <dd className="mt-1 text-sm leading-relaxed text-text-muted">
-                  {info.description}
-                </dd>
-              </div>
-            );
-          })}
-        </dl>
-      </Section>
-
-      <Section title="Was gespeichert wird">
+      <Section title="Wer die Abfrage stellt">
         <p>
-          Deine Entscheidung liegt ausschliesslich in deinem Browser, im
-          sogenannten localStorage, unter dem Schlüssel{" "}
-          <code>rp_consent</code>. Gespeichert werden die gewählten Kategorien,
-          ein Zeitstempel und eine Versionsnummer – keine Kennung, die dich
-          identifizieren könnte.
+          Die Einwilligungsabfrage stammt von einer zertifizierten
+          Consent-Management-Plattform unseres Werbepartners Google. Sie
+          erscheint beim ersten Besuch und fragt, ob deine Daten für Werbung
+          verwendet werden dürfen.
         </p>
         <p>
-          Zusätzlich merkt sich der Browser unter <code>rp_theme</code>, ob du
-          das helle oder dunkle Design gewählt hast. Beide Einträge kannst du
-          jederzeit über die Einstellungen deines Browsers löschen. Danach
-          erscheint der Einwilligungsdialog beim nächsten Besuch erneut.
+          Über die Schaltfläche oben öffnest du dieselbe Abfrage erneut. Deine
+          bisherige Auswahl ist dort vorbelegt, und du kannst sie beliebig oft
+          ändern. Ein Widerruf wirkt für die Zukunft – Daten, die während einer
+          früheren Sitzung bereits verarbeitet wurden, lassen sich damit nicht
+          rückwirkend zurückholen.
         </p>
       </Section>
 
-      <Section title="Widerruf">
+      <Section title="Was ohne deine Zustimmung passiert">
         <p>
-          Ein Widerruf wirkt für die Zukunft. Skripte, die während einer früheren
-          Sitzung bereits geladen wurden, lassen sich rückwirkend nicht
-          entfernen – nach dem Widerruf werden sie aber nicht mehr geladen.
+          Kurz gesagt: fast nichts. <strong>Alle Rechner funktionieren
+          vollständig</strong>, sämtliche Texte sind lesbar, es gibt keine
+          Funktion, die hinter einer Zustimmung liegt.
         </p>
-        <p className="not-prose mt-4">
-          <ConsentSettingsLink className="rounded-lg bg-brand px-5 py-3 font-semibold text-on-brand hover:bg-brand-strong">
-            Einstellungen öffnen
-          </ConsentSettingsLink>
+        <p>
+          Deine Eingaben in den Rechnern – Gewicht, Körpergrösse, Einkommen,
+          Kreditsummen – werden ohnehin nie übertragen. Sie werden ausschliesslich
+          in deinem Browser verarbeitet, unabhängig davon, was du im
+          Cookie-Dialog wählst.
+        </p>
+        <p>
+          Lehnst du ab, werden dir keine personalisierten Anzeigen ausgespielt.
+          Es können weiterhin nicht personalisierte Anzeigen erscheinen – also
+          Werbung, die sich nicht an deinem Verhalten orientiert.
         </p>
       </Section>
 
-      <Section title="Und wenn ich alles ablehne?">
+      <Section title="Was diese Website selbst speichert">
         <p>
-          Dann funktioniert die Website vollständig. Alle Rechner, alle Texte,
-          alle Funktionen bleiben nutzbar – die Werbeflächen bleiben lediglich
-          leer. Es gibt keine Inhalte, die hinter einer Zustimmung liegen.
+          Unabhängig von der Werbe-Einwilligung legt die Seite genau einen
+          Eintrag im lokalen Speicher deines Browsers ab:
         </p>
+        <ul>
+          <li>
+            <code>rp_theme</code> – ob du das helle oder das dunkle Design
+            gewählt hast.
+          </li>
+        </ul>
         <p>
-          Details dazu, welche Daten überhaupt anfallen, stehen in der{" "}
+          Dieser Eintrag wird nicht übertragen und enthält keine Kennung, mit
+          der sich eine Person identifizieren liesse. Du kannst ihn jederzeit
+          über die Einstellungen deines Browsers löschen.
+        </p>
+      </Section>
+
+      <Section title="Wenn sich die Abfrage nicht öffnen lässt">
+        <p>
+          Die Schaltfläche oben braucht das Skript unseres Werbepartners. Wenn
+          du einen Werbeblocker verwendest, wird es blockiert und die Abfrage
+          kann nicht erscheinen. In dem Fall lässt sich deine Einwilligung
+          zurücksetzen, indem du im Browser die Cookies und Website-Daten für
+          diese Seite löschst.
+        </p>
+      </Section>
+
+      <div className="mt-10">
+        <Callout tone="info" title="Mehr zum Umgang mit Daten">
+          Welche Daten überhaupt anfallen und auf welcher Rechtsgrundlage,
+          steht in der{" "}
           <Link href="/datenschutz">Datenschutzerklärung</Link>.
-        </p>
-      </Section>
+        </Callout>
+      </div>
     </PageShell>
   );
 }

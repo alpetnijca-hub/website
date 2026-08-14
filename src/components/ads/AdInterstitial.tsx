@@ -3,7 +3,6 @@
 import { usePathname } from "next/navigation";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { adsConfigured, interstitial } from "@/config/ads";
-import { useConsent } from "@/components/consent/useConsent";
 
 const SHOWN_KEY = "rp_interstitial_last";
 const VIEWS_KEY = "rp_pageviews";
@@ -25,13 +24,11 @@ const GRACE_MS = 3000;
  *  - schliessbar per Escape und per Klick auf den Hintergrund
  *  - Fokus wandert beim Öffnen in den Dialog und beim Schliessen zurück
  *  - Fokus bleibt im Dialog gefangen (Tab-Zyklus), role="dialog" + aria-modal
- *  - erscheint nicht, solange noch keine Cookie-Entscheidung getroffen wurde
  *  - keine automatische Weiterleitung, keine irreführenden Schaltflächen:
  *    es gibt genau eine Aktion – schliessen
  */
 export function AdInterstitial() {
   const pathname = usePathname();
-  const { consent, ready } = useConsent();
   const [open, setOpen] = useState(false);
   const dialogRef = useRef<HTMLDivElement | null>(null);
   const closeButtonRef = useRef<HTMLButtonElement | null>(null);
@@ -77,9 +74,6 @@ export function AdInterstitial() {
   // Auslöser: zweite Seite ODER 30 Sekunden Verweildauer.
   useEffect(() => {
     if (!interstitial.enabled) return;
-    // Erst nach einer Cookie-Entscheidung, damit sich Banner und Popup
-    // nicht gleichzeitig öffnen.
-    if (!ready || consent === null) return;
     if (open) return;
 
     // Auch beim Seiten-Auslöser gibt es eine kurze Wartezeit: Das Popup
@@ -91,7 +85,7 @@ export function AdInterstitial() {
 
     const timer = window.setTimeout(show, delayMs);
     return () => window.clearTimeout(timer);
-  }, [ready, consent, pathname, open, show]);
+  }, [pathname, open, show]);
 
   const close = useCallback(() => {
     setOpen(false);

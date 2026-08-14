@@ -3,7 +3,6 @@ import "./globals.css";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { ThemeScript } from "@/components/layout/ThemeScript";
-import { ConsentManager } from "@/components/consent/ConsentManager";
 import { AdScripts } from "@/components/ads/AdScripts";
 import { StickyAd } from "@/components/ads/StickyAd";
 import { AdInterstitial } from "@/components/ads/AdInterstitial";
@@ -62,9 +61,9 @@ export default function RootLayout({
         </main>
         <Footer />
 
-        {/* Einwilligung zuerst – Werbe- und Analyseskripte werden erst
-            danach und nur bei erteilter Zustimmung geladen. */}
-        <ConsentManager />
+        {/* Die Einwilligungsabfrage liefert die zertifizierte
+            Consent-Management-Plattform von Google aus – sie kommt mit dem
+            Werbeskript. Ohne Publisher-ID wird nichts geladen. */}
         <AdScripts />
         <StickyAd />
         <AdInterstitial />

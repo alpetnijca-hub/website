@@ -28,7 +28,7 @@ Voraussetzung für den Livegang, alles Weitere folgt danach.
 - [ ] `NEXT_PUBLIC_SITE_URL` auf die echte Domain setzen – ohne Schrägstrich am
       Ende. **Ohne diesen Schritt zeigen alle Canonical-URLs und die Sitemap
       auf localhost.**
-- [ ] Favicon in `src/app/` ersetzen.
+- [x] Favicon ersetzt (`src/app/icon.svg`, erzeugt aus dem Logo).
 - [ ] Open-Graph-Bild prüfen: Es wird beim Build automatisch aus
       `src/app/opengraph-image.tsx` erzeugt und zeigt Name und Untertitel aus
       `site.ts`. Aufrufbar unter `/opengraph-image`. Wenn du lieber ein eigenes
@@ -48,16 +48,14 @@ Voraussetzung für den Livegang, alles Weitere folgt danach.
 
 ## 2. Datenschutz und Einwilligung
 
-- [ ] Banner erscheint beim ersten Besuch
-- [ ] „Ablehnen“ funktioniert und lädt keine externen Skripte
-      (im Browser prüfen: Entwicklertools → Netzwerk → nach „googlesyndication“
-      suchen, es darf kein Treffer erscheinen)
+- [ ] Banner erscheint beim ersten Besuch (in einem privaten Fenster testen)
+- [ ] Es erscheint nur **ein** Banner, nicht zwei
+- [ ] „Ablehnen“ ist gleich sichtbar wie „Zustimmen“
 - [ ] Entscheidung überlebt einen Seitenwechsel und einen Neustart des Browsers
-- [ ] Footer-Link „Cookie-Einstellungen“ öffnet den Dialog
+- [ ] Footer-Link „Cookie-Einstellungen“ öffnet die Abfrage erneut
 - [ ] Widerruf auf `/cookie-einstellungen` funktioniert
-- [ ] **Zertifizierte CMP eingebunden**, falls du AdSense mit Nutzern aus dem
-      EWR betreiben willst – siehe `docs/CONSENT.md`. Die Eigenentwicklung
-      reicht dafür nicht aus.
+- [x] **Zertifizierte CMP eingebunden** – Googles Consent-Plattform, mit
+      sichtbarer Ablehnen-Schaltfläche für alle Länder. Siehe `docs/CONSENT.md`.
 
 ## 3. Barrierefreiheit und Bedienung
 

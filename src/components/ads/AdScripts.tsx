@@ -1,26 +1,24 @@
-"use client";
-
 import Script from "next/script";
 import { adsClientId, adsConfigured } from "@/config/ads";
-import { useConsent } from "@/components/consent/useConsent";
 
 /**
- * Lädt das Skript des Werbenetzwerks – und zwar erst dann, wenn
- *   1. eine Publisher-ID über die Environment gesetzt ist und
- *   2. der Nutzer in die Kategorie "Marketing" eingewilligt hat.
+ * Lädt das Skript des Werbenetzwerks.
  *
- * Solange keine ID hinterlegt ist, wird überhaupt nichts geladen; die
- * Werbeflächen zeigen dann nur Platzhalter. Damit sind auf einer frisch
- * geklonten Installation keine externen Werbeaufrufe möglich.
+ * Es wird nur geladen, wenn eine Publisher-ID über die Environment gesetzt
+ * ist. Ohne ID findet kein externer Aufruf statt und die Werbeflächen zeigen
+ * nur Platzhalter.
+ *
+ * Die Einwilligung steuert seit der Umstellung die von Google zertifizierte
+ * Consent-Management-Plattform, die über genau dieses Skript ausgeliefert
+ * wird. Sie zeigt die Abfrage an und entscheidet, ob personalisierte,
+ * nicht personalisierte oder gar keine Anzeigen ausgeliefert werden.
+ * Eine zusätzliche eigene Sperre wäre an dieser Stelle nicht nur überflüssig,
+ * sie würde die Einwilligungsabfrage selbst verhindern.
  *
  * Die Adresse des Skripts steht bewusst nur an dieser einen Stelle.
- * Wenn du ein anderes Werbenetzwerk einsetzt, tauschst du hier den src aus.
  */
 export function AdScripts() {
-  const { consent } = useConsent();
-  const allowed = consent?.choices.marketing === true;
-
-  if (!adsConfigured || !allowed) return null;
+  if (!adsConfigured) return null;
 
   return (
     <Script

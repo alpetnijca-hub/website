@@ -2,7 +2,6 @@
 
 import { useState } from "react";
 import { adSlots, adsConfigured, stickyAdEnabled } from "@/config/ads";
-import { useConsent } from "@/components/consent/useConsent";
 import { useClientValue } from "@/lib/useClient";
 
 const CLOSED_KEY = "rp_sticky_closed";
@@ -22,22 +21,17 @@ function readClosed(): boolean {
  *  - standardmässig deaktiviert (NEXT_PUBLIC_STICKY_AD_ENABLED)
  *  - niedrige Bauhöhe, damit auf Mobilgeräten kein Inhalt verdeckt wird
  *  - jederzeit schliessbar; die Entscheidung gilt für die laufende Sitzung
- *  - erscheint nicht, solange das Cookie-Banner offen ist (der Banner liegt
- *    darüber und wird erst nach einer Entscheidung ausgeblendet)
  *  - schiebt den Seiteninhalt am Ende nicht zusammen, sondern reserviert
  *    über einen Platzhalter im Fluss die eigene Höhe
  */
 export function StickyAd() {
-  const { consent, ready } = useConsent();
   // Beim Laden aus sessionStorage gelesen, danach über den lokalen Zustand.
   const closedInSession = useClientValue(readClosed, false);
   const [closedNow, setClosedNow] = useState(false);
   const closed = closedInSession || closedNow;
 
   if (!stickyAdEnabled) return null;
-  // Ohne Entscheidung nichts einblenden, damit Banner und Leiste sich nicht
-  // gegenseitig überlagern.
-  if (!ready || consent === null || closed) return null;
+  if (closed) return null;
 
   const config = adSlots["sticky-bottom"];
 

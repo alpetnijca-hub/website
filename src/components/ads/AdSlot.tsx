@@ -2,7 +2,6 @@
 
 import { useEffect, useRef } from "react";
 import { adSlots, adsClientId, adsConfigured, type AdPlacement } from "@/config/ads";
-import { useConsent } from "@/components/consent/useConsent";
 
 /**
  * Wiederverwendbarer Werbeplatz.
@@ -11,9 +10,10 @@ import { useConsent } from "@/components/consent/useConsent";
  *  - Ohne Publisher-ID (NEXT_PUBLIC_ADS_CLIENT_ID leer) wird ausschliesslich
  *    ein deutlich markierter Entwicklungs-Platzhalter angezeigt. Es wird kein
  *    externes Skript geladen.
- *  - Mit Publisher-ID wird die Anzeige erst nach Einwilligung in die
- *    Kategorie "Marketing" angefordert. Ohne Einwilligung bleibt die Fläche
- *    leer, behält aber ihre Höhe.
+ *  - Mit Publisher-ID wird eine Anzeige angefordert. Ob und in welcher Form
+ *    sie ausgeliefert wird, entscheidet die zertifizierte Consent-Lösung von
+ *    Google: Ohne Einwilligung erscheinen keine personalisierten Anzeigen.
+ *    Die Einwilligungsabfrage selbst kommt ebenfalls von dort.
  *  - Die Fläche reserviert immer ihre Mindesthöhe, damit beim Nachladen kein
  *    Layout-Shift (CLS) entsteht.
  *  - Werbung ist gemäss Trennungsgebot sichtbar als "Anzeige" gekennzeichnet.
@@ -26,16 +26,14 @@ export function AdSlot({
   className?: string;
 }) {
   const config = adSlots[placement];
-  const { consent, ready } = useConsent();
-  const allowed = consent?.choices.marketing === true;
   const insRef = useRef<HTMLModElement | null>(null);
   const pushed = useRef(false);
 
   useEffect(() => {
-    if (!adsConfigured || !allowed || pushed.current) return;
+    if (!adsConfigured || pushed.current) return;
     if (!insRef.current) return;
     // Anzeigenanforderung an das Werbenetzwerk übergeben. Das Skript selbst
-    // wird zentral in AdScripts.tsx geladen – ebenfalls erst nach Einwilligung.
+    // wird zentral in AdScripts.tsx geladen.
     const globalWithAds = window as typeof window & {
       adsbygoogle?: unknown[];
     };
@@ -46,7 +44,7 @@ export function AdSlot({
     } catch {
       // Anzeige konnte nicht angefordert werden – die Fläche bleibt leer.
     }
-  }, [allowed]);
+  }, []);
 
   /**
    * Beide Mindesthöhen als CSS-Variablen. Die Umschaltung übernimmt die
@@ -76,10 +74,6 @@ export function AdSlot({
             <span className="opacity-70">
               Aktiv, sobald eine Publisher-ID hinterlegt ist
             </span>
-          </span>
-        ) : !ready || !allowed ? (
-          <span className="px-4 py-6 text-center text-xs text-text-subtle">
-            Für Werbung ist deine Einwilligung erforderlich.
           </span>
         ) : (
           <ins

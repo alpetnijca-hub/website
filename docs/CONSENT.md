@@ -1,127 +1,50 @@
-# Einwilligung, Consent Mode und Webanalyse
+# Einwilligung und Webanalyse
 
-## Was umgesetzt ist
+## Aktueller Stand: zertifizierte CMP von Google
 
-Die Einwilligungsverwaltung ist eine Eigenentwicklung
-(`src/components/consent/ConsentManager.tsx`). Umgesetzt sind:
+Die Einwilligung wird von der **Consent-Management-Plattform von Google**
+verwaltet, eingerichtet im AdSense-Konto unter *Datenschutz und Messaging →
+Europäische Vorschriften*. Sie ist von Google zertifiziert und damit
+Voraussetzung dafür, Werbung an Nutzer im EWR und in UK auszuliefern.
 
-- **Drei gleichwertige Schaltflächen:** „Alle akzeptieren“, „Ablehnen“ und
-  „Einstellungen“ – gleiche Grösse, gleiche Position, keine versteckte
-  Ablehnung.
-- **Vier Kategorien:** notwendig (nicht abwählbar), Statistik, Marketing,
-  personalisierte Werbung.
-- **Keine Vorauswahl.** Alle optionalen Kategorien starten auf „aus“.
-- **Blockade vor Zustimmung.** Ohne Einwilligung wird kein Werbe- oder
-  Analyseskript geladen. Die Prüfung sitzt in den Komponenten selbst, nicht
-  nur in der Anzeige-Logik.
-- **Speicherung mit Zeitstempel** unter `rp_consent` im localStorage, samt
-  Versionsnummer für spätere Änderungen.
-- **Widerruf jederzeit** über den Footer-Link und über
-  `/cookie-einstellungen`.
-- **Google Consent Mode v2** technisch vorbereitet (`src/lib/gtag.ts`).
+Wichtige Einstellungen dieser Nachricht:
 
-## Wie der Consent Mode v2 vorbereitet ist
+- Ablehnen-Schaltfläche für **alle Länder** aktiviert – gleichwertig sichtbar
+  neben der Zustimmung, kein Dark Pattern
+- Standardsprache Deutsch
+- Datenschutzerklärung verlinkt
 
-Beim Laden schreibt `setDefaultConsent()` folgende Standardwerte in den
-`dataLayer`, **bevor** irgendein Tag geladen wird:
+### Wie die Website damit zusammenspielt
 
-```
-ad_storage: denied
-ad_user_data: denied
-ad_personalization: denied
-analytics_storage: denied
-functionality_storage: granted
-security_storage: granted
-```
+Die CMP wird über das AdSense-Skript ausgeliefert. Deshalb lädt
+`AdScripts.tsx` das Skript **ohne eigene vorgeschaltete Sperre**, sobald eine
+Publisher-ID gesetzt ist. Eine zusätzliche Sperre würde die
+Einwilligungsabfrage selbst verhindern – die Seite könnte dann gar nicht mehr
+fragen.
 
-Nach der Entscheidung des Nutzers folgt ein `consent update` mit den
-tatsächlichen Werten. Die Zuordnung:
+Die Steuerung, ob personalisierte, nicht personalisierte oder keine Anzeigen
+ausgeliefert werden, übernimmt vollständig die CMP.
 
-| Kategorie im Banner | Consent-Mode-Signal |
-| --- | --- |
-| Statistik | `analytics_storage` |
-| Marketing | `ad_storage` |
-| Personalisierte Werbung | `ad_user_data`, `ad_personalization` |
+**Widerruf:** `ConsentSettingsLink` ruft `googlefc.showRevocationMessage()`
+auf. Diese Funktion stellt die CMP bereit; darüber öffnet der Footer-Link
+„Cookie-Einstellungen“ die Abfrage erneut. Steht sie nicht zur Verfügung –
+etwa wegen eines Werbeblockers –, erklärt ein Hinweis, wie sich die
+Einwilligung über den Browser zurücksetzen lässt.
 
-Es wird **kein Google-Skript geladen**. Sobald du gtag.js oder den Google Tag
-Manager einbindest, liest dieses die bereits gesetzten Werte aus.
+### Ohne Publisher-ID
 
-## Wichtig: Das reicht für AdSense im EWR nicht
+Ist `NEXT_PUBLIC_ADS_CLIENT_ID` leer, wird kein Skript geladen, es erscheint
+keine Abfrage, und die Werbeflächen zeigen nur Platzhalter. Eine frisch
+geklonte Installation sendet also nichts an Dritte.
 
-Google verlangt für Werbeauslieferung an Nutzer im Europäischen
-Wirtschaftsraum und im Vereinigten Königreich eine **von Google zertifizierte
-Consent-Management-Plattform**, die dem IAB TCF entspricht. Eine
-Eigenentwicklung erfüllt diese Anforderung unabhängig von ihrer technischen
-Qualität nicht.
+### Was ersetzt wurde
 
-Diese Lösung ist deshalb als **technische Grundlage** zu verstehen: Sie sorgt
-dafür, dass die Architektur stimmt und nichts ohne Zustimmung lädt. Vor dem
-Livegang mit echter Werbung ersetzt du sie durch eine zertifizierte CMP.
-
-### Eine zertifizierte CMP einbinden – Schritt für Schritt
-
-Der einfachste Weg führt über **Googles eigenes Tool**. Es ist kostenlos,
-zertifiziert, direkt im AdSense-Konto enthalten und du musst keinen zweiten
-Anbieter verwalten.
-
-**1. Im AdSense-Konto aktivieren**
-
-Melde dich bei <https://adsense.google.com> an und gehe zu
-**Datenschutz und Messaging → Europäische Vorschriften**. Dort legst du eine
-Nachricht an. Google fragt dabei ab:
-
-- für welche Website die Nachricht gilt
-- welche Sprachen sie unterstützen soll (Deutsch, sinnvollerweise auch Englisch)
-- ob die Ablehnen-Schaltfläche direkt sichtbar sein soll –
-  **hier unbedingt „Ja“ wählen.** Eine versteckte Ablehnung ist ein Dark
-  Pattern und in der EU angreifbar.
-
-Danach auf **Veröffentlichen** klicken.
-
-**2. Nichts weiter einbauen**
-
-Die Nachricht wird über das AdSense-Skript ausgeliefert, das bereits
-eingebunden ist. Es ist also kein zusätzlicher Skript-Tag nötig. Wichtig ist
-nur, dass `NEXT_PUBLIC_ADS_CLIENT_ID` gesetzt ist.
-
-**3. Das eigene Banner abschalten**
-
-Sonst erscheinen zwei Banner übereinander. Entferne dazu in
-`src/app/layout.tsx` die Zeile mit `<ConsentManager />` und den zugehörigen
-Import.
-
-Danach musst du eine Entscheidung treffen, wie es mit dem Rest der Website
-weitergeht – denn alle Werbe- und Analysekomponenten fragen über
-`useConsent()` ab, ob eine Einwilligung vorliegt:
-
-- **Variante A (einfach):** Lass `AdScripts.tsx` das Skript unbedingt laden,
-  also ohne die Consent-Prüfung. Googles CMP übernimmt dann die
-  Einwilligungssteuerung selbst und liefert ohne Zustimmung nur nicht
-  personalisierte oder gar keine Anzeigen aus. Das ist der von Google
-  vorgesehene Ablauf.
-- **Variante B (strenger):** Behalte die Prüfung und verbinde
-  `useConsent()` mit der TCF-API der CMP (`window.__tcfapi`). Dann lädt das
-  Skript erst nach ausdrücklicher Zustimmung. Aufwändiger, aber
-  datensparsamer.
-
-In beiden Fällen ist `src/components/consent/useConsent.ts` die einzige
-Datei, die du anfassen musst – alle Werbekomponenten hängen daran.
-
-**4. Testen**
-
-Ruf die Seite in einem privaten Fenster auf. Es darf nur ein Banner
-erscheinen, „Ablehnen“ muss gleich sichtbar sein wie „Zustimmen“, und nach
-einer Ablehnung dürfen in den Entwicklertools unter „Netzwerk“ keine
-personalisierten Anzeigenanfragen mehr auftauchen.
-
-### Alternative Anbieter
-
-Wenn du mehr Einstellmöglichkeiten brauchst – etwa weil du später weitere
-Dienste einbindest – sind Cookiebot, Usercentrics und Consentmanager
-verbreitete zertifizierte Alternativen. Sie sind ab einer bestimmten
-Seitenzahl kostenpflichtig und werden als eigenes Skript im `<head>` von
-`src/app/layout.tsx` eingebunden, so früh wie möglich und vor allen anderen
-Skripten.
+Bis zur Umstellung enthielt das Projekt eine eigene Einwilligungslösung mit
+vier Kategorien (`ConsentManager`, `useConsent`, `lib/consent.ts`,
+`lib/gtag.ts`). Sie wurde entfernt, weil zwei Banner übereinander erschienen
+wären und eine Eigenentwicklung die Google-Anforderung ohnehin nicht erfüllt.
+Der Code liegt weiterhin in der Git-Historie, falls er als Ausgangspunkt für
+eine andere Lösung gebraucht wird.
 
 ## Webanalyse ergänzen
 

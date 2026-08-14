@@ -8,7 +8,7 @@ import { operatorAddress, site } from "@/config/site";
 
 export const metadata: Metadata = pageMetadata({
   title: "Datenschutzerklärung",
-  description: `Welche Daten ${site.name} verarbeitet und welche nicht. Alle Berechnungen laufen lokal im Browser, Werbe- und Analyseskripte erst nach Einwilligung.`,
+  description: `Welche Daten ${site.name} verarbeitet und welche nicht. Alle Berechnungen laufen lokal im Browser, deine Eingaben werden nicht übertragen.`,
   path: "/datenschutz",
 });
 
@@ -23,8 +23,9 @@ export default function Page() {
         Alle Rechner auf dieser Website arbeiten ausschliesslich in deinem
         Browser. Gewicht, Körpergrösse, Alter, Einkommen, Kreditsummen und alle
         anderen Eingaben werden <strong>nicht an einen Server übertragen</strong>{" "}
-        und nicht gespeichert. Ohne deine Einwilligung wird ausserdem kein
-        Werbe- oder Analyseskript geladen.
+        und nicht gespeichert. Für Werbung fragen wir dich vorher um
+        Einwilligung – ohne deine Zustimmung erfolgt keine personalisierte
+        Werbung.
       </Callout>
 
       <Section title="Verantwortliche Stelle">
@@ -49,9 +50,9 @@ Telefon: ${site.operator.phone}`}
         </p>
         <p>
           <strong>Zwecke:</strong> Bereitstellung des Onlineangebots,
-          Sicherheit des Betriebs, Beantwortung von Kontaktanfragen,
-          Reichweitenmessung und Werbung – die beiden letzten ausschliesslich
-          auf Grundlage deiner Einwilligung.
+          Sicherheit des Betriebs, Beantwortung von Kontaktanfragen und
+          Werbung – letztere auf Grundlage deiner Einwilligung. Eine eigene
+          Webanalyse setzen wir derzeit nicht ein.
         </p>
         <p>
           <strong>Nicht verarbeitet werden:</strong> Zahlungsdaten,
@@ -71,9 +72,9 @@ Telefon: ${site.operator.phone}`}
         <ul>
           <li>
             <strong>Einwilligung</strong> (Art. 6 Abs. 1 lit. a DSGVO) – für
-            Statistik, Werbung und personalisierte Werbung. Diese Einwilligung
-            holen wir über das Einwilligungsbanner ein und du kannst sie
-            jederzeit widerrufen.
+            Werbung und personalisierte Werbung. Die Einwilligung holen wir
+            über die Consent-Plattform ein, und du kannst sie jederzeit
+            widerrufen.
           </li>
           <li>
             <strong>Berechtigte Interessen</strong> (Art. 6 Abs. 1 lit. f
@@ -90,26 +91,24 @@ Telefon: ${site.operator.phone}`}
 
       <Section title="Was lokal in deinem Browser gespeichert wird">
         <p>
-          Zwei Angaben legt die Website im lokalen Speicher deines Browsers ab.
-          Beide werden <strong>nicht an einen Server übertragen</strong> und
-          enthalten keine Kennung, mit der sich eine Person identifizieren
-          liesse:
+          Diese Website selbst legt genau einen Eintrag im lokalen Speicher
+          deines Browsers ab:
         </p>
         <ul>
-          <li>
-            <code>rp_consent</code> – deine Cookie-Entscheidung mit Zeitstempel
-            und Versionsnummer. Sie dient dem Nachweis der Einwilligung und
-            verhindert, dass du bei jedem Besuch erneut gefragt wirst.
-          </li>
           <li>
             <code>rp_theme</code> – ob du das helle oder dunkle Design gewählt
             hast.
           </li>
         </ul>
         <p>
-          Beide Einträge kannst du jederzeit über die Einstellungen deines
-          Browsers löschen. Danach erscheint das Einwilligungsbanner beim
-          nächsten Besuch erneut.
+          Er wird <strong>nicht an einen Server übertragen</strong> und enthält
+          keine Kennung, mit der sich eine Person identifizieren liesse. Du
+          kannst ihn jederzeit über die Einstellungen deines Browsers löschen.
+        </p>
+        <p>
+          Zusätzlich speichert die Consent-Plattform deine
+          Einwilligungsentscheidung, damit du nicht bei jedem Besuch erneut
+          gefragt wirst.
         </p>
       </Section>
 
@@ -153,34 +152,29 @@ Telefon: ${site.operator.phone}`}
       <Section title="Cookies und Einwilligungsverwaltung">
         <p>
           Cookies sind kleine Dateien, die auf deinem Gerät gespeichert werden.
-          Wir unterscheiden vier Kategorien:
+          Für Werbezwecke setzen wir sie nur mit deiner Einwilligung ein.
         </p>
-        <ul>
-          <li>
-            <strong>Notwendig</strong> – technisch erforderlich, etwa um deine
-            Cookie-Entscheidung und die Designauswahl zu speichern. Nicht
-            abwählbar, da ohne sie der Betrieb nicht möglich wäre.
-          </li>
-          <li>
-            <strong>Statistik</strong> – Reichweitenmessung, um zu verstehen,
-            welche Rechner genutzt werden. Nur mit deiner Einwilligung.
-          </li>
-          <li>
-            <strong>Marketing</strong> – Ausspielung von Werbeanzeigen, über die
-            sich diese Website finanziert. Nur mit deiner Einwilligung.
-          </li>
-          <li>
-            <strong>Personalisierte Werbung</strong> – Auswahl von Anzeigen auf
-            Basis deines Nutzungsverhaltens. Nur mit deiner Einwilligung.
-            Lehnst du ab, können weiterhin nicht personalisierte Anzeigen
-            erscheinen.
-          </li>
-        </ul>
         <p>
-          Optionale Kategorien sind standardmässig deaktiviert und nicht
-          vorausgewählt. Solange keine Einwilligung vorliegt, werden keine
-          Skripte Dritter geladen – es findet also auch kein Verbindungsaufbau
-          zu deren Servern statt.
+          Die Einwilligung wird über eine <strong>von Google zertifizierte
+          Consent-Management-Plattform</strong> eingeholt. Sie erscheint beim
+          ersten Besuch, bietet Zustimmung und Ablehnung als gleichwertig
+          sichtbare Schaltflächen an und speichert deine Entscheidung, damit du
+          nicht bei jedem Besuch erneut gefragt wirst. Über den Link
+          „Cookie-Einstellungen“ im Footer lässt sich die Abfrage jederzeit
+          erneut öffnen und die Einwilligung mit Wirkung für die Zukunft
+          widerrufen.
+        </p>
+        <p>
+          Die Plattform wird zusammen mit dem Werbeskript geladen. Das ist
+          technisch notwendig, damit die Abfrage überhaupt angezeigt werden
+          kann. Ohne deine Zustimmung erfolgt keine personalisierte Werbung und
+          keine auf deinem Verhalten beruhende Auswertung.
+        </p>
+        <p>
+          Unabhängig davon speichert diese Website einen einzigen eigenen
+          Eintrag in deinem Browser: <code>rp_theme</code> für die Auswahl
+          zwischen hellem und dunklem Design. Er wird nicht übertragen und
+          enthält keine Kennung, mit der sich eine Person identifizieren liesse.
         </p>
         <p className="not-prose mt-4">
           <ConsentSettingsLink className="rounded-lg bg-brand px-5 py-3 font-semibold text-on-brand hover:bg-brand-strong">
@@ -191,21 +185,23 @@ Telefon: ${site.operator.phone}`}
 
       <Section title="Werbung">
         <p>
-          Diese Website finanziert sich über Werbeanzeigen. Wenn du in die
-          Kategorie „Marketing“ einwilligst, wird das Skript des Werbenetzwerks
-          geladen. Der Anbieter kann dabei Cookies setzen und deine IP-Adresse,
-          Geräteinformationen sowie Angaben zu den aufgerufenen Seiten
-          verarbeiten, um Anzeigen auszuliefern und deren Wirkung zu messen.
+          Diese Website finanziert sich über Werbeanzeigen von Google AdSense,
+          betrieben von Google Ireland Limited, Gordon House, Barrow Street,
+          Dublin 4, Irland. Dabei kann der Anbieter Cookies setzen und deine
+          IP-Adresse, Geräteinformationen sowie Angaben zu den aufgerufenen
+          Seiten verarbeiten, um Anzeigen auszuliefern und deren Wirkung zu
+          messen.
         </p>
         <p>
-          Willigst du zusätzlich in personalisierte Werbung ein, kann der
-          Anbieter Anzeigen auf Grundlage deines Nutzungsverhaltens auswählen.
-          Ohne diese Einwilligung erfolgt keine solche Auswertung.
+          Stimmst du personalisierter Werbung zu, kann der Anbieter Anzeigen
+          auf Grundlage deines Nutzungsverhaltens auswählen. Lehnst du ab,
+          erfolgt keine solche Auswertung; es können weiterhin nicht
+          personalisierte Anzeigen erscheinen.
         </p>
         <p>
-          Rechtsgrundlage ist in beiden Fällen ausschliesslich deine
-          Einwilligung (Art. 6 Abs. 1 lit. a DSGVO). Du kannst sie jederzeit mit
-          Wirkung für die Zukunft über die Cookie-Einstellungen widerrufen.
+          Rechtsgrundlage für die einwilligungspflichtigen Verarbeitungen ist
+          deine Einwilligung (Art. 6 Abs. 1 lit. a DSGVO), die du jederzeit mit
+          Wirkung für die Zukunft widerrufen kannst.
         </p>
       </Section>
 

@@ -83,9 +83,9 @@ export default function Page() {
       <Section title="Wie sich die Seite finanziert">
         <p>
           Über Werbung. Auf den Seiten sind Werbeflächen eingeplant, die als
-          „Anzeige“ gekennzeichnet sind. Werbe- und Analyseskripte werden erst
-          geladen, nachdem du im Cookie-Banner zugestimmt hast – lehnst du ab,
-          bleiben die Flächen leer und alle Rechner funktionieren trotzdem
+          „Anzeige“ gekennzeichnet sind. Vorher wirst du gefragt, ob deine
+          Daten dafür verwendet werden dürfen – lehnst du ab, bekommst du keine
+          personalisierte Werbung, und alle Rechner funktionieren unverändert
           vollständig.
         </p>
         <p>

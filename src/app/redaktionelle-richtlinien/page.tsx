@@ -67,9 +67,9 @@ export default function Page() {
           nimmt Einfluss darauf, was in einem Text steht.
         </p>
         <p>
-          Werbe- und Analyseskripte werden erst nach deiner Einwilligung
-          geladen. Ohne Zustimmung bleiben die Flächen leer – die Rechner
-          funktionieren trotzdem vollständig.
+          Vor der Auslieferung von Werbung fragen wir dich um Einwilligung.
+          Lehnst du ab, erhältst du keine personalisierte Werbung – und alle
+          Rechner funktionieren unverändert vollständig.
         </p>
       </Section>
 
