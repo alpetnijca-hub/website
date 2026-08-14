@@ -82,22 +82,23 @@ export function requiredBreak(workMinutes: number): number {
 export interface WorkTimeResult {
   /** Zeit zwischen Kommen und Gehen, in Minuten. */
   presenceMinutes: number;
-  /** Anwesenheit abzüglich Pausen, in Minuten. */
+  /** Anwesenheit abzüglich aller Pausen, in Minuten. */
   workMinutes: number;
   /** Arbeitszeit als Dezimalzahl, wie sie Zeiterfassungssysteme verlangen. */
   workHoursDecimal: number;
+  /** Summe aller eingetragenen Pausen. */
   breakMinutes: number;
-  /** Durchschnittliche Länge einer einzelnen Pause, null bei 0 Pausen. */
-  breakLength: number | null;
+  /**
+   * Summe der Pausen, die nach § 4 Satz 2 ArbZG als Ruhepause zählen –
+   * also nur der Teile mit mindestens 15 Minuten.
+   */
+  countedBreakMinutes: number;
+  /** Zahl der eingetragenen Pausen, die kürzer als 15 Minuten sind. */
+  shortBreakCount: number;
   /** Vorgeschriebene Mindestpause nach § 4 ArbZG. */
   requiredBreakMinutes: number;
   /** Fehlende Pausenminuten; 0, wenn die Vorgabe erfüllt ist. */
   missingBreakMinutes: number;
-  /**
-   * Wahr, wenn die Pause aufgeteilt wurde und mindestens ein Teil kürzer als
-   * 15 Minuten ist – solche Teile zählen nicht als Ruhepause.
-   */
-  breakPartsTooShort: boolean;
   /** Die Schicht geht über Mitternacht hinaus. */
   overnight: boolean;
   /** Abweichung von der Sollarbeitszeit in Minuten; negativ = Minusstunden. */
@@ -115,22 +116,34 @@ export interface WorkTimeInput {
   arrival: number;
   /** Gehen, in Minuten seit Mitternacht. */
   departure: number;
-  /** Gesamte Pausendauer in Minuten. */
-  breakMinutes: number;
-  /** Zahl der genommenen Pausen, für die Prüfung nach § 4 Satz 2 ArbZG. */
-  breakCount: number;
+  /**
+   * Die einzelnen Pausen in Minuten. Jede Pause steht für sich, weil das
+   * Gesetz an die Länge der einzelnen Pause anknüpft und nicht an die Summe.
+   */
+  breaks: readonly number[];
   /** Sollarbeitszeit des Tages in Stunden. */
   targetHours: number;
 }
 
 export function calculateWorkTime(input: WorkTimeInput): WorkTimeResult | null {
-  const { arrival, departure, breakMinutes, breakCount, targetHours } = input;
+  const { arrival, departure, breaks, targetHours } = input;
 
   if (!Number.isFinite(arrival) || !Number.isFinite(departure)) return null;
   if (arrival < 0 || arrival >= MINUTES_PER_DAY) return null;
   if (departure < 0 || departure >= MINUTES_PER_DAY) return null;
-  if (breakMinutes < 0 || breakCount < 0) return null;
+  if (breaks.some((b) => !Number.isFinite(b) || b < 0)) return null;
   if (targetHours < 0 || targetHours > 24) return null;
+
+  const breakMinutes = breaks.reduce((sum, b) => sum + b, 0);
+  // Pausen unter 15 Minuten sind keine Ruhepausen im Sinne des Gesetzes.
+  // Sie werden von der Arbeitszeit trotzdem abgezogen – man hat ja nicht
+  // gearbeitet –, zählen aber nicht auf die Mindestpause an.
+  const countedBreakMinutes = breaks
+    .filter((b) => b >= MIN_BREAK_PART)
+    .reduce((sum, b) => sum + b, 0);
+  const shortBreakCount = breaks.filter(
+    (b) => b > 0 && b < MIN_BREAK_PART,
+  ).length;
 
   // Liegt das Gehen vor dem Kommen, wird von einer Schicht über Mitternacht
   // ausgegangen – der häufigste Fall bei Nacht- und Schichtarbeit.
@@ -146,21 +159,15 @@ export function calculateWorkTime(input: WorkTimeInput): WorkTimeResult | null {
   const required = requiredBreak(workMinutes);
   const targetMinutes = targetHours * 60;
 
-  const breakLength = breakCount > 0 ? breakMinutes / breakCount : null;
-
   return {
     presenceMinutes,
     workMinutes,
     workHoursDecimal: round(workMinutes / 60, 2),
     breakMinutes,
-    breakLength: breakLength === null ? null : round(breakLength, 1),
+    countedBreakMinutes,
+    shortBreakCount,
     requiredBreakMinutes: required,
-    missingBreakMinutes: Math.max(0, required - breakMinutes),
-    breakPartsTooShort:
-      required > 0 &&
-      breakCount > 1 &&
-      breakLength !== null &&
-      breakLength < MIN_BREAK_PART,
+    missingBreakMinutes: Math.max(0, required - countedBreakMinutes),
     overnight,
     balanceMinutes: round(workMinutes - targetMinutes),
     // Bis zur Sollzeit fehlt die Differenz; die Pausen liegen dazwischen und

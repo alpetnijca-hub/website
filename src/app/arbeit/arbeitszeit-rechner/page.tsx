@@ -20,18 +20,18 @@ export default function Page() {
       sources={["arbzg"]}
       intro={
         <p>
-          Kommen, Gehen und Pausen eintragen – der Rechner zeigt die
-          Arbeitszeit, die Abweichung von der Sollzeit und die Dezimalstunden
-          für die Zeiterfassung. Zusätzlich prüft er, ob die Pause den
-          gesetzlichen Mindestvorgaben entspricht.
+          Arbeitsbeginn, Arbeitsende und die einzelnen Pausen eintragen – der
+          Rechner zeigt die Arbeitszeit, die Abweichung von der Sollzeit und die
+          Dezimalstunden für die Zeiterfassung. Zusätzlich prüft er, ob die
+          Pausen den gesetzlichen Mindestvorgaben entsprechen.
         </p>
       }
       calculator={<WorkTimeCalculator />}
       formula={
         <>
           <div className="mt-2 space-y-2 rounded-lg border border-border bg-surface-muted/60 p-4 font-mono text-sm text-text">
-            <p>Anwesenheit = Gehen − Kommen</p>
-            <p>Arbeitszeit = Anwesenheit − Pausen</p>
+            <p>Anwesenheit = Arbeitsende − Arbeitsbeginn</p>
+            <p>Arbeitszeit = Anwesenheit − alle Pausen</p>
             <p>Dezimalstunden = Arbeitszeit in Minuten ÷ 60</p>
             <p>Saldo = Arbeitszeit − Sollarbeitszeit</p>
           </div>
@@ -49,8 +49,14 @@ export default function Page() {
           <div className="mt-4 space-y-2 rounded-lg border border-border bg-surface-muted/60 p-4 font-mono text-sm text-text">
             <p>mehr als 6 Stunden → mindestens 30 Minuten Pause</p>
             <p>mehr als 9 Stunden → mindestens 45 Minuten Pause</p>
-            <p>aufgeteilte Pausen: jeder Teil mindestens 15 Minuten</p>
+            <p>jede einzelne Pause: mindestens 15 Minuten, sonst zählt sie nicht</p>
           </div>
+          <p>
+            Deshalb werden die Pausen einzeln eingetragen und nicht als Summe:
+            Dreimal zehn Minuten sind keine halbe Stunde Ruhepause, sondern
+            null. Von der Arbeitszeit abgezogen werden solche Kurzpausen
+            trotzdem – gearbeitet wurde in dieser Zeit ja nicht.
+          </p>
           <p>
             Nach § 3 ArbZG beträgt die werktägliche Höchstarbeitszeit
             8 Stunden. Sie darf auf bis zu 10 Stunden verlängert werden, wenn im
@@ -61,8 +67,8 @@ export default function Page() {
       example={
         <>
           <p>
-            <strong>Ein normaler Bürotag: 08:00 gekommen, 17:00 gegangen,
-            30 Minuten Mittagspause.</strong>
+            <strong>Ein normaler Bürotag: 08:00 bis 17:00, eine Mittagspause
+            von 30 Minuten.</strong>
           </p>
           <ol>
             <li>Anwesenheit: 17:00 − 08:00 = 9 Stunden</li>
@@ -87,8 +93,15 @@ export default function Page() {
             überschreitet die Grenze von 10 Stunden.
           </p>
           <p>
+            <strong>Drei kurze Pausen: 08:00 bis 17:00, dreimal 10 Minuten.</strong>{" "}
+            Die Anwesenheit beträgt 9 Stunden, abgezogen werden alle
+            30 Minuten, die Arbeitszeit liegt bei 8 h 30 min. Angerechnet wird
+            davon aber <em>keine</em> Minute, weil jede Pause unter 15 Minuten
+            liegt – es fehlt die komplette halbe Stunde Ruhepause.
+          </p>
+          <p>
             <strong>Nachtschicht: 22:00 bis 06:00 mit 45 Minuten Pause.</strong>{" "}
-            Weil das Gehen vor dem Kommen liegt, rechnet der Rechner über
+            Weil das Ende vor dem Beginn liegt, rechnet der Rechner über
             Mitternacht: 8 Stunden Anwesenheit, 7 h 15 min Arbeitszeit.
           </p>
         </>
@@ -142,6 +155,12 @@ export default function Page() {
               die Gewerkschaft oder eine Fachanwältin für Arbeitsrecht weiter.
             </li>
             <li>
+              <strong>Drei Pausen, nicht mehr.</strong> Wer den Tag noch feiner
+              aufteilt, trägt die längeren Pausen einzeln ein und rechnet die
+              ganz kurzen zusammen – für die Mindestpause zählen sie ohnehin
+              nicht.
+            </li>
+            <li>
               <strong>Minutengenau, aber nicht sekundengenau.</strong> Gerechnet
               wird in vollen Minuten.
             </li>
@@ -157,7 +176,12 @@ export default function Page() {
         {
           question: "Ab wann muss ich Pause machen?",
           answer:
-            "Nach § 4 Arbeitszeitgesetz bei mehr als 6 Stunden Arbeitszeit mindestens 30 Minuten, bei mehr als 9 Stunden mindestens 45 Minuten. Bei genau 6 Stunden ist noch keine Pause vorgeschrieben. Die Pause darf aufgeteilt werden, jeder Teil muss aber mindestens 15 Minuten dauern.",
+            "Nach § 4 Arbeitszeitgesetz bei mehr als 6 Stunden Arbeitszeit mindestens 30 Minuten, bei mehr als 9 Stunden mindestens 45 Minuten. Bei genau 6 Stunden ist noch keine Pause vorgeschrieben. Die Pause darf aufgeteilt werden, jeder Teil muss aber mindestens 15 Minuten dauern – deshalb trägst du die Pausen hier einzeln ein.",
+        },
+        {
+          question: "Warum zählt meine 10-Minuten-Pause nicht?",
+          answer:
+            "Weil § 4 Satz 2 Arbeitszeitgesetz eine Untergrenze setzt: Eine aufgeteilte Ruhepause zählt nur in Abschnitten von mindestens 15 Minuten. Kürzere Unterbrechungen sind rechtlich keine Ruhepause. Von deiner Arbeitszeit zieht der Rechner sie trotzdem ab, weil du in dieser Zeit nicht gearbeitet hast.",
         },
         {
           question: "Zählt die Pause zur Arbeitszeit?",
@@ -167,7 +191,7 @@ export default function Page() {
         {
           question: "Wie erfasse ich eine Nachtschicht über Mitternacht?",
           answer:
-            "Ganz normal: 22:00 als Kommen, 06:00 als Gehen. Weil die zweite Zeit vor der ersten liegt, rechnet der Rechner automatisch über Mitternacht und weist darauf hin.",
+            "Ganz normal: 22:00 als Arbeitsbeginn, 06:00 als Arbeitsende. Weil die zweite Zeit vor der ersten liegt, rechnet der Rechner automatisch über Mitternacht und weist darauf hin.",
         },
         {
           question: "Sind 10 Stunden Arbeitszeit erlaubt?",

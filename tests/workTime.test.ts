@@ -60,8 +60,7 @@ describe("calculateWorkTime", () => {
   const base = {
     arrival: 8 * 60,
     departure: 17 * 60,
-    breakMinutes: 30,
-    breakCount: 1,
+    breaks: [30],
     targetHours: 8,
   };
 
@@ -92,7 +91,7 @@ describe("calculateWorkTime", () => {
   });
 
   it("erkennt eine fehlende Pflichtpause", () => {
-    const result = calculateWorkTime({ ...base, breakMinutes: 0, breakCount: 0 })!;
+    const result = calculateWorkTime({ ...base, breaks: [] })!;
     expect(result.requiredBreakMinutes).toBe(30);
     expect(result.missingBreakMinutes).toBe(30);
   });
@@ -100,7 +99,7 @@ describe("calculateWorkTime", () => {
   it("meldet keine fehlende Pause, wenn genug pausiert wurde", () => {
     expect(calculateWorkTime(base)!.missingBreakMinutes).toBe(0);
     expect(
-      calculateWorkTime({ ...base, breakMinutes: 60 })!.missingBreakMinutes,
+      calculateWorkTime({ ...base, breaks: [60] })!.missingBreakMinutes,
     ).toBe(0);
   });
 
@@ -108,7 +107,7 @@ describe("calculateWorkTime", () => {
     const result = calculateWorkTime({
       ...base,
       departure: 18 * 60 + 30,
-      breakMinutes: 30,
+      breaks: [30],
     })!;
     expect(result.workMinutes).toBe(600);
     expect(result.requiredBreakMinutes).toBe(45);
@@ -118,33 +117,45 @@ describe("calculateWorkTime", () => {
   it("erkennt zu kurz aufgeteilte Pausen", () => {
     // Dreimal 10 Minuten erfüllen die Vorgabe nicht, weil jeder Teil
     // mindestens 15 Minuten dauern muss.
-    const result = calculateWorkTime({
-      ...base,
-      breakMinutes: 30,
-      breakCount: 3,
-    })!;
-    expect(result.breakLength).toBe(10);
-    expect(result.breakPartsTooShort).toBe(true);
+    const result = calculateWorkTime({ ...base, breaks: [10, 10, 10] })!;
+    expect(result.breakMinutes).toBe(30);
+    expect(result.countedBreakMinutes).toBe(0);
+    expect(result.shortBreakCount).toBe(3);
+    expect(result.missingBreakMinutes).toBe(30);
   });
 
   it("beanstandet zwei Pausen zu je 15 Minuten nicht", () => {
-    const result = calculateWorkTime({
-      ...base,
-      breakMinutes: 30,
-      breakCount: 2,
-    })!;
-    expect(result.breakPartsTooShort).toBe(false);
+    const result = calculateWorkTime({ ...base, breaks: [15, 15] })!;
+    expect(result.countedBreakMinutes).toBe(30);
+    expect(result.shortBreakCount).toBe(0);
+    expect(result.missingBreakMinutes).toBe(0);
   });
 
   it("prüft die Teile nur, wenn überhaupt eine Pause vorgeschrieben ist", () => {
     const result = calculateWorkTime({
       ...base,
       departure: 13 * 60,
-      breakMinutes: 20,
-      breakCount: 4,
+      breaks: [5, 5, 5, 5],
     })!;
     expect(result.requiredBreakMinutes).toBe(0);
-    expect(result.breakPartsTooShort).toBe(false);
+    expect(result.missingBreakMinutes).toBe(0);
+  });
+
+  it("zieht auch zu kurze Pausen von der Arbeitszeit ab", () => {
+    // Wer 10 Minuten weg war, hat in dieser Zeit nicht gearbeitet – auch
+    // wenn die Pause rechtlich nicht als Ruhepause zählt.
+    const result = calculateWorkTime({ ...base, breaks: [30, 10] })!;
+    expect(result.breakMinutes).toBe(40);
+    expect(result.workMinutes).toBe(500);
+    expect(result.countedBreakMinutes).toBe(30);
+    expect(result.missingBreakMinutes).toBe(0);
+  });
+
+  it("summiert mehrere Pausen zur Gesamtpause", () => {
+    const result = calculateWorkTime({ ...base, breaks: [20, 15, 25] })!;
+    expect(result.breakMinutes).toBe(60);
+    expect(result.countedBreakMinutes).toBe(60);
+    expect(result.workMinutes).toBe(480);
   });
 
   it("behandelt ein Gehen vor dem Kommen als Nachtschicht", () => {
@@ -166,7 +177,7 @@ describe("calculateWorkTime", () => {
     const long = calculateWorkTime({
       ...base,
       departure: 19 * 60,
-      breakMinutes: 45,
+      breaks: [45],
     })!;
     expect(long.workMinutes).toBe(615);
     expect(long.exceedsAbsoluteMax).toBe(true);
@@ -175,10 +186,10 @@ describe("calculateWorkTime", () => {
   it("lehnt ungültige Eingaben ab", () => {
     expect(calculateWorkTime({ ...base, arrival: -1 })).toBeNull();
     expect(calculateWorkTime({ ...base, departure: 1440 })).toBeNull();
-    expect(calculateWorkTime({ ...base, breakMinutes: -10 })).toBeNull();
+    expect(calculateWorkTime({ ...base, breaks: [-10] })).toBeNull();
     // Kommen und Gehen identisch: keine erfassbare Arbeitszeit.
     expect(calculateWorkTime({ ...base, departure: base.arrival })).toBeNull();
     // Pause länger als die Anwesenheit ergäbe negative Arbeitszeit.
-    expect(calculateWorkTime({ ...base, breakMinutes: 600 })).toBeNull();
+    expect(calculateWorkTime({ ...base, breaks: [300, 300] })).toBeNull();
   });
 });
