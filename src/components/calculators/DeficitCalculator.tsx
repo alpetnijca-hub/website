@@ -70,7 +70,7 @@ export function DeficitCalculator() {
                   aria-pressed={deficit.raw === preset.value}
                   className={`rounded-lg border px-3 py-2 text-sm font-medium transition-colors ${
                     deficit.raw === preset.value
-                      ? "border-brand bg-brand-soft text-brand-strong"
+                      ? "border-accent bg-accent-soft text-accent"
                       : "border-border text-text-muted hover:border-text-subtle"
                   }`}
                 >
@@ -129,7 +129,7 @@ export function DeficitCalculator() {
               />
             </ResultGrid>
 
-            <div className="mt-5 border-t border-brand/30 pt-5">
+            <div className="mt-5 border-t border-accent/30 pt-5">
               <ResultValue
                 label="Geschätzte Abnahme in 30 Tagen"
                 value={`${formatNumber(result.monthlyChangeKg, 2)} kg`}

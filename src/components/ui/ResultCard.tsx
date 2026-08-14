@@ -16,9 +16,9 @@ export function ResultCard({
   return (
     <section
       aria-live="polite"
-      className="rounded-xl border-2 border-brand bg-brand-soft/50 p-5 sm:p-6"
+      className="rounded-2xl border-2 border-accent bg-accent-soft/60 p-5 shadow-sm sm:p-6"
     >
-      <h3 className="text-sm font-semibold uppercase tracking-wide text-brand-strong">
+      <h3 className="text-sm font-semibold uppercase tracking-wide text-accent">
         {title}
       </h3>
       <div className="mt-3">{children}</div>

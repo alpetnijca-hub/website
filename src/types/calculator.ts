@@ -41,6 +41,11 @@ export interface Category {
   slug: CategorySlug;
   /** Anzeigename, z. B. "Gesundheit & Fitness". */
   name: string;
+  /**
+   * Kurzform für die Hauptnavigation. Ohne diese Angabe würden lange Namen
+   * in der Kopfzeile umbrechen. Fehlt sie, wird `name` verwendet.
+   */
+  shortName?: string;
   /** Kurzbeschreibung für Übersichtsseiten und Meta-Description. */
   description: string;
   /** Pfad der Kategorieseite, z. B. "/gesundheit". */

@@ -9,6 +9,7 @@ export const categories: Category[] = [
   {
     slug: "gesundheit",
     name: "Gesundheit & Fitness",
+    shortName: "Gesundheit",
     description:
       "Kalorienbedarf, BMI, Makronährstoffe und weitere Rechner rund um Ernährung und Training.",
     href: "/gesundheit",
@@ -18,6 +19,7 @@ export const categories: Category[] = [
   {
     slug: "arbeit",
     name: "Arbeit & Gehalt",
+    shortName: "Arbeit",
     description:
       "Stundenlohn aus dem Gehalt, Arbeitszeit mit Pausen und Überstunden – nachvollziehbar gerechnet.",
     href: "/arbeit",
@@ -45,6 +47,7 @@ export const categories: Category[] = [
   {
     slug: "krypto",
     name: "Kryptowährungen",
+    shortName: "Krypto",
     description:
       "Umrechnung und Renditerechner für Kryptowährungen. In Vorbereitung.",
     href: "/krypto",

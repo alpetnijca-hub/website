@@ -82,7 +82,7 @@ export function WaterCalculator() {
               emphasis
             />
 
-            <dl className="mt-5 grid gap-3 border-t border-brand/30 pt-5 sm:grid-cols-2">
+            <dl className="mt-5 grid gap-3 border-t border-accent/30 pt-5 sm:grid-cols-2">
               <div>
                 <dt className="text-sm text-text-muted">Grundbedarf</dt>
                 <dd className="text-lg font-semibold text-text">

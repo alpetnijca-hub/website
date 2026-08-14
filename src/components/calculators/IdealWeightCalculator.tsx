@@ -60,7 +60,7 @@ export function IdealWeightCalculator() {
                   Ergebnisse der einzelnen Formeln
                 </caption>
                 <thead>
-                  <tr className="border-b border-brand/30 text-left text-text-muted">
+                  <tr className="border-b border-accent/30 text-left text-text-muted">
                     <th scope="col" className="py-2 pr-4 font-medium">
                       Formel
                     </th>

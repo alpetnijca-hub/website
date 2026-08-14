@@ -28,7 +28,7 @@ function formatDuration(months: number): string {
 
 export function LoanCalculator() {
   const amount = useNumericField("300000", limits.amount);
-  const rate = useNumericField("3,5", limits.rate);
+  const rate = useNumericField("3.5", limits.rate);
   const repayment = useNumericField("2", limits.repayment);
   const fixedYears = useNumericField("10", limits.years);
 
@@ -109,7 +109,7 @@ export function LoanCalculator() {
               />
             </ResultGrid>
 
-            <div className="mt-5 grid gap-5 border-t border-brand/30 pt-5 sm:grid-cols-3">
+            <div className="mt-5 grid gap-5 border-t border-accent/30 pt-5 sm:grid-cols-3">
               <ResultValue
                 label="Gezahlte Zinsen"
                 value={euro(result.interestPaid)}
@@ -129,7 +129,7 @@ export function LoanCalculator() {
               />
             </div>
 
-            <div className="mt-6 border-t border-brand/30 pt-5">
+            <div className="mt-6 border-t border-accent/30 pt-5">
               <p className="text-sm font-medium text-text">
                 Verlauf während der Zinsbindung
               </p>

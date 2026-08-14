@@ -41,6 +41,7 @@ export function CategoryPage({
       intro={intro}
       breadcrumbs={[{ name: category.name }]}
       wide
+      accent={slug}
     >
       <AdSlot placement="after-intro" />
 

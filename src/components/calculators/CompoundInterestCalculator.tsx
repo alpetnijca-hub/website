@@ -114,13 +114,13 @@ export function CompoundInterestCalculator() {
             />
 
             <ResultGrid>
-              <div className="mt-5 border-t border-brand/30 pt-5">
+              <div className="mt-5 border-t border-accent/30 pt-5">
                 <ResultValue
                   label="Davon eingezahlt"
                   value={euro(result.totalDeposits)}
                 />
               </div>
-              <div className="mt-0 border-brand/30 pt-5 sm:mt-5 sm:border-t">
+              <div className="mt-0 border-accent/30 pt-5 sm:mt-5 sm:border-t">
                 <ResultValue
                   label={result.totalInterest < 0 ? "Verlust durch Negativzins" : "Davon Zinsertrag"}
                   value={euro(result.totalInterest)}
@@ -137,7 +137,7 @@ export function CompoundInterestCalculator() {
             </ResultGrid>
 
             {/* Verlauf: Balken je Jahr, Einzahlungen gegen Zinsen */}
-            <div className="mt-6 border-t border-brand/30 pt-5">
+            <div className="mt-6 border-t border-accent/30 pt-5">
               <p className="text-sm font-medium text-text">
                 Entwicklung über die Jahre
               </p>

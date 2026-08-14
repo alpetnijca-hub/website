@@ -82,7 +82,7 @@ export function CurrencyCalculator({
                 aria-pressed={amount.raw === String(value)}
                 className={`rounded-lg border px-3 py-2 text-sm font-medium transition-colors ${
                   amount.raw === String(value)
-                    ? "border-brand bg-brand-soft text-brand-strong"
+                    ? "border-accent bg-accent-soft text-accent"
                     : "border-border text-text-muted hover:border-text-subtle"
                 }`}
               >
@@ -126,7 +126,7 @@ export function CurrencyCalculator({
             emphasis
           />
 
-          <div className="mt-5 grid gap-5 border-t border-brand/30 pt-5 sm:grid-cols-2">
+          <div className="mt-5 grid gap-5 border-t border-accent/30 pt-5 sm:grid-cols-2">
             <ResultValue
               label="Kurs"
               value={`1 ${result.from} = ${formatNumber(result.rate, 4)} ${result.to}`}

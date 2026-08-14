@@ -136,7 +136,7 @@ export function HourlyWageCalculator() {
             />
           </ResultGrid>
 
-          <div className="mt-5 grid gap-5 border-t border-brand/30 pt-5 sm:grid-cols-2">
+          <div className="mt-5 grid gap-5 border-t border-accent/30 pt-5 sm:grid-cols-2">
             <ResultValue label="Pro Tag" value={euro(result.dailyWage)} />
             <ResultValue label="Pro Woche" value={euro(result.weeklyWage)} />
             <ResultValue

@@ -72,7 +72,9 @@ export function VatCalculator() {
             <p className="text-sm font-medium text-text">Gebräuchliche Sätze</p>
             <div className="mt-2 flex flex-wrap gap-2">
               {commonVatRates.map((preset) => {
-                const value = String(preset.rate).replace(".", ",");
+                // Punkt statt Komma: Ein Zahlenfeld zeigt einen Wert mit
+                // Komma gar nicht erst an und bliebe leer.
+                const value = String(preset.rate);
                 const active = rate.raw === value;
                 return (
                   <button
@@ -82,7 +84,7 @@ export function VatCalculator() {
                     aria-pressed={active}
                     className={`rounded-lg border px-3 py-2 text-sm font-medium transition-colors ${
                       active
-                        ? "border-brand bg-brand-soft text-brand-strong"
+                        ? "border-accent bg-accent-soft text-accent"
                         : "border-border text-text-muted hover:border-text-subtle"
                     }`}
                   >
@@ -102,7 +104,7 @@ export function VatCalculator() {
             <ResultValue label="Brutto" value={euro(result.gross)} emphasis />
           </ResultGrid>
 
-          <div className="mt-5 border-t border-brand/30 pt-5">
+          <div className="mt-5 border-t border-accent/30 pt-5">
             <ResultValue
               label={`Steuerbetrag (${formatNumber(result.rate, 1)} %)`}
               value={euro(result.tax)}

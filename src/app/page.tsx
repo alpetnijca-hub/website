@@ -43,16 +43,17 @@ export default function HomePage() {
   return (
     <>
       {/* Hero */}
-      <section className="border-b border-border bg-surface">
-        <Container className="py-12 sm:py-20">
+      <section className="hero-surface border-b border-border">
+        <Container className="py-14 sm:py-20">
           <div className="mx-auto max-w-2xl text-center">
-            <p className="text-sm font-semibold uppercase tracking-widest text-brand">
-              {totalActive} kostenlose Rechner
+            <p className="inline-flex items-center gap-2 rounded-full border border-border bg-surface/80 px-3.5 py-1.5 text-sm font-medium text-text-muted shadow-sm">
+              <span className="h-2 w-2 rounded-full bg-brand" aria-hidden="true" />
+              {totalActive} Rechner · kostenlos · ohne Anmeldung
             </p>
-            <h1 className="mt-3 text-4xl font-bold tracking-tight text-text sm:text-5xl">
-              Rechnen statt raten
+            <h1 className="mt-5 text-4xl font-bold tracking-tight text-text sm:text-6xl">
+              Rechnen statt <span className="text-gradient">raten</span>
             </h1>
-            <p className="mt-4 text-lg leading-relaxed text-text-muted">
+            <p className="mt-5 text-lg leading-relaxed text-text-muted sm:text-xl">
               {site.name} bündelt verständliche Rechner für Gesundheit,
               Finanzen und Alltag. Zahlen eingeben, Ergebnis ablesen – und
               darunter nachlesen, wie es berechnet wurde.
@@ -70,20 +71,45 @@ export default function HomePage() {
               </Link>
               {", "}
               <Link
-                href="/gesundheit/bmi-rechner"
+                href="/waehrungen/waehrungsrechner"
                 className="text-brand underline underline-offset-2"
               >
-                BMI
+                Währungen
               </Link>
               {", "}
               <Link
-                href="/gesundheit/makronaehrstoff-rechner"
+                href="/arbeit/stundenlohnrechner"
                 className="text-brand underline underline-offset-2"
               >
-                Makronährstoffe
+                Stundenlohn
               </Link>
             </p>
           </div>
+
+          {/* Kennzahlen: kurz, überprüfbar, keine Werbeversprechen. */}
+          <dl className="mx-auto mt-12 grid max-w-3xl grid-cols-2 gap-3 sm:grid-cols-4">
+            {[
+              { value: String(totalActive), label: "Rechner" },
+              { value: "0 €", label: "Kosten" },
+              { value: "100 %", label: "im Browser gerechnet" },
+              { value: "Alle", label: "Formeln offengelegt" },
+            ].map((stat) => (
+              <div
+                key={stat.label}
+                className="rounded-xl border border-border bg-surface/70 px-4 py-3 text-center backdrop-blur-sm"
+              >
+                <dt className="sr-only">{stat.label}</dt>
+                <dd>
+                  <span className="block text-2xl font-bold tracking-tight text-text">
+                    {stat.value}
+                  </span>
+                  <span className="mt-0.5 block text-xs leading-snug text-text-subtle">
+                    {stat.label}
+                  </span>
+                </dd>
+              </div>
+            ))}
+          </dl>
         </Container>
       </section>
 
@@ -95,7 +121,7 @@ export default function HomePage() {
           <div className="flex items-end justify-between gap-4">
             <h2
               id="beliebt"
-              className="text-2xl font-bold tracking-tight text-text"
+              className="heading-accent text-2xl font-bold tracking-tight text-text"
             >
               Häufig genutzte Rechner
             </h2>
@@ -119,14 +145,15 @@ export default function HomePage() {
         <section aria-labelledby="kategorien" className="mt-14">
           <h2
             id="kategorien"
-            className="text-2xl font-bold tracking-tight text-text"
+            className="heading-accent text-2xl font-bold tracking-tight text-text"
           >
             Kategorien
           </h2>
           <p className="mt-2 max-w-2xl text-text-muted">
-            Wir starten mit Gesundheit und Fitness. Weitere Bereiche sind in
-            Arbeit – sie erscheinen hier, sobald die Rechner fertig und geprüft
-            sind.
+            Jeder Bereich hat seine eigene Farbe – so siehst du in gemischten
+            Listen sofort, woher ein Rechner stammt. Was noch nicht fertig ist,
+            steht als Vorschau da und wird erst verlinkt, wenn Formel,
+            Erklärung und Tests stehen.
           </p>
           <ul className="mt-5 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
             {categories.map((category) => {
@@ -137,34 +164,38 @@ export default function HomePage() {
               const body = (
                 <>
                   <span
-                    className={`inline-flex rounded-lg p-2 ${
+                    className={`flex h-11 w-11 items-center justify-center rounded-xl ${
                       isActive
-                        ? "bg-brand-soft text-brand-strong"
+                        ? "bg-accent-soft text-accent"
                         : "bg-surface-muted text-text-subtle"
                     }`}
                   >
-                    <Icon name={category.icon} className="h-5 w-5" />
+                    <Icon name={category.icon} className="h-5.5 w-5.5" />
                   </span>
-                  <h3 className="mt-3 font-semibold text-text">
+                  <h3 className="mt-3.5 font-semibold text-text">
                     {category.name}
                   </h3>
                   <p className="mt-1 text-sm leading-relaxed text-text-muted">
                     {category.description}
                   </p>
-                  {isActive && (
-                    <p className="mt-2 text-sm font-medium text-brand">
-                      {count} Rechner ansehen
-                    </p>
-                  )}
+                  <p
+                    className={`mt-3 text-sm font-medium ${
+                      isActive ? "text-accent" : "text-text-subtle"
+                    }`}
+                  >
+                    {isActive
+                      ? `${count} Rechner ansehen →`
+                      : "In Vorbereitung"}
+                  </p>
                 </>
               );
 
               return (
-                <li key={category.slug}>
+                <li key={category.slug} data-accent={category.slug}>
                   {isActive ? (
                     <Link
                       href={category.href}
-                      className="block h-full rounded-xl border border-border bg-surface p-5 shadow-sm transition-colors hover:border-brand"
+                      className="card-lift block h-full rounded-xl border border-border bg-surface p-5 shadow-sm hover:border-accent"
                     >
                       {body}
                     </Link>
@@ -185,7 +216,7 @@ export default function HomePage() {
         <section aria-labelledby="vorteile" className="mt-4">
           <h2
             id="vorteile"
-            className="text-2xl font-bold tracking-tight text-text"
+            className="heading-accent text-2xl font-bold tracking-tight text-text"
           >
             Warum {site.name}
           </h2>
@@ -211,7 +242,7 @@ export default function HomePage() {
         >
           <h2
             id="genauigkeit"
-            className="text-2xl font-bold tracking-tight text-text"
+            className="heading-accent text-2xl font-bold tracking-tight text-text"
           >
             Wie genau sind diese Rechner?
           </h2>
@@ -246,7 +277,7 @@ export default function HomePage() {
         <section aria-labelledby="alle-gesundheit" className="mt-14">
           <h2
             id="alle-gesundheit"
-            className="text-2xl font-bold tracking-tight text-text"
+            className="heading-accent text-2xl font-bold tracking-tight text-text"
           >
             Alle Rechner für Gesundheit &amp; Fitness
           </h2>

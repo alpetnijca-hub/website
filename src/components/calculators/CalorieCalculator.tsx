@@ -132,7 +132,7 @@ export function CalorieCalculator() {
               />
             </ResultGrid>
 
-            <div className="mt-5 border-t border-brand/30 pt-5">
+            <div className="mt-5 border-t border-accent/30 pt-5">
               <ResultValue
                 label={`Empfohlene Zufuhr zum Ziel „${goalLabels[goal]}“`}
                 value={formatKcal(result.targetCalories)}

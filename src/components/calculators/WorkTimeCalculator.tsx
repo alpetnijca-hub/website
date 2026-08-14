@@ -108,7 +108,7 @@ export function WorkTimeCalculator() {
               />
             </ResultGrid>
 
-            <div className="mt-5 grid gap-5 border-t border-brand/30 pt-5 sm:grid-cols-2">
+            <div className="mt-5 grid gap-5 border-t border-accent/30 pt-5 sm:grid-cols-2">
               <ResultValue
                 label="Anwesend"
                 value={formatDuration(result.presenceMinutes)}

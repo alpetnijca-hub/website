@@ -9,11 +9,20 @@ import { LogoMark } from "@/components/layout/Logo";
 import { site } from "@/config/site";
 import { activeCategories } from "@/config/categories";
 
+/**
+ * In der Kopfzeile stehen die Kurznamen der Kategorien. Mit den vollen Namen
+ * („Gesundheit & Fitness“, „Arbeit & Gehalt“) reicht die Breite nicht, und
+ * die Einträge brechen mitten im Wort um.
+ */
 const mainNav = [
-  { href: "/rechner", label: "Alle Rechner" },
-  ...activeCategories().map((c) => ({ href: c.href, label: c.name })),
-  { href: "/ueber-uns", label: "Über uns" },
-  { href: "/kontakt", label: "Kontakt" },
+  { href: "/rechner", label: "Alle Rechner", accent: undefined },
+  ...activeCategories().map((c) => ({
+    href: c.href,
+    label: c.shortName ?? c.name,
+    accent: c.slug,
+  })),
+  { href: "/ueber-uns", label: "Über uns", accent: undefined },
+  { href: "/kontakt", label: "Kontakt", accent: undefined },
 ];
 
 export function Header() {
@@ -28,19 +37,21 @@ export function Header() {
   const setOpen = (next: boolean) => setOpenedOn(next ? pathname : null);
 
   return (
-    <header className="sticky top-0 z-40 border-b border-border bg-surface/95 backdrop-blur">
+    <header className="sticky top-0 z-40 border-b border-border bg-surface/80 backdrop-blur-md">
       <Container>
         <div className="flex h-16 items-center justify-between gap-4">
           <Link
             href="/"
-            className="flex items-center gap-2 text-lg font-bold tracking-tight text-text"
+            className="flex shrink-0 items-center gap-2.5 text-lg font-bold tracking-tight text-text"
           >
-            <LogoMark className="h-8 w-8 text-brand" />
+            {/* Die Bildmarke bringt ihre eigene Fläche mit – sie darf deshalb
+                nicht in einen farbigen Kasten gesetzt werden. */}
+            <LogoMark className="h-9 w-9 text-brand" />
             {site.name}
           </Link>
 
           <nav aria-label="Hauptnavigation" className="hidden lg:block">
-            <ul className="flex items-center gap-1">
+            <ul className="flex items-center gap-0.5">
               {mainNav.map((item) => {
                 const active =
                   pathname === item.href || pathname.startsWith(`${item.href}/`);
@@ -48,10 +59,11 @@ export function Header() {
                   <li key={item.href}>
                     <Link
                       href={item.href}
+                      data-accent={item.accent}
                       aria-current={active ? "page" : undefined}
-                      className={`rounded-lg px-3 py-2 text-sm font-medium transition-colors ${
+                      className={`block whitespace-nowrap rounded-lg px-2.5 py-2 text-sm font-medium transition-colors xl:px-3 ${
                         active
-                          ? "bg-brand-soft text-brand-strong"
+                          ? "bg-accent-soft text-accent"
                           : "text-text-muted hover:bg-surface-muted hover:text-text"
                       }`}
                     >
@@ -101,16 +113,26 @@ export function Header() {
             className="border-t border-border py-3 lg:hidden"
           >
             <ul className="space-y-1">
-              {mainNav.map((item) => (
-                <li key={item.href}>
-                  <Link
-                    href={item.href}
-                    className="block rounded-lg px-3 py-2.5 text-sm font-medium text-text-muted hover:bg-surface-muted hover:text-text"
-                  >
-                    {item.label}
-                  </Link>
-                </li>
-              ))}
+              {mainNav.map((item) => {
+                const active =
+                  pathname === item.href || pathname.startsWith(`${item.href}/`);
+                return (
+                  <li key={item.href}>
+                    <Link
+                      href={item.href}
+                      data-accent={item.accent}
+                      aria-current={active ? "page" : undefined}
+                      className={`block rounded-lg px-3 py-2.5 text-sm font-medium ${
+                        active
+                          ? "bg-accent-soft text-accent"
+                          : "text-text-muted hover:bg-surface-muted hover:text-text"
+                      }`}
+                    >
+                      {item.label}
+                    </Link>
+                  </li>
+                );
+              })}
             </ul>
           </nav>
         )}

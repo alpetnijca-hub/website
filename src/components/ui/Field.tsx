@@ -276,7 +276,7 @@ export function RadioGroupField({
                  eigentliche Radio-Element visuell versteckt ist. */
               className={`flex cursor-pointer items-center justify-center rounded-lg border px-3 py-2.5 text-center text-sm font-medium transition-colors has-[:focus-visible]:outline has-[:focus-visible]:outline-[3px] has-[:focus-visible]:outline-offset-2 has-[:focus-visible]:outline-focus ${
                 checked
-                  ? "border-brand bg-brand-soft text-brand-strong"
+                  ? "border-accent bg-accent-soft text-accent"
                   : "border-border bg-surface text-text-muted hover:border-text-subtle"
               }`}
             >

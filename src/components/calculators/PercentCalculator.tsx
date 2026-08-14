@@ -114,7 +114,7 @@ export function PercentCalculator() {
             emphasis
           />
 
-          <div className="mt-5 border-t border-brand/30 pt-4">
+          <div className="mt-5 border-t border-accent/30 pt-4">
             <p className="text-sm font-medium text-text">Rechenweg</p>
             <ul className="mt-1.5 space-y-1 font-mono text-sm text-text-muted">
               {result.steps.map((step) => (

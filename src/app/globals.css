@@ -30,6 +30,46 @@
   --color-info-soft: #e0f2fe;
 
   --color-focus: #0d9488;
+
+  /* Akzentfarbe: Voreinstellung ist die Markenfarbe. Seitenbereiche mit
+     data-accent überschreiben sie – siehe unten. */
+  --color-accent: #0f766e;
+  --color-accent-soft: #ccfbf1;
+}
+
+/*
+ * Jede Kategorie bekommt eine eigene Farbe. Das ist keine Dekoration:
+ * Auf Übersichtsseiten mit vielen Karten erkennt man am Farbton sofort,
+ * aus welchem Bereich ein Rechner stammt. Die Farbe wird nie als einziges
+ * Unterscheidungsmerkmal eingesetzt – Name und Symbol stehen immer dabei.
+ */
+[data-accent="gesundheit"] {
+  --color-accent: #0f766e;
+  --color-accent-soft: #ccfbf1;
+}
+[data-accent="arbeit"] {
+  --color-accent: #4338ca;
+  --color-accent-soft: #e0e7ff;
+}
+[data-accent="finanzen"] {
+  --color-accent: #a16207;
+  --color-accent-soft: #fef3c7;
+}
+[data-accent="waehrungen"] {
+  --color-accent: #0369a1;
+  --color-accent-soft: #e0f2fe;
+}
+[data-accent="krypto"] {
+  --color-accent: #6d28d9;
+  --color-accent-soft: #ede9fe;
+}
+[data-accent="mathematik"] {
+  --color-accent: #be123c;
+  --color-accent-soft: #ffe4e6;
+}
+[data-accent="alltag"] {
+  --color-accent: #c2410c;
+  --color-accent-soft: #ffedd5;
 }
 
 .dark {
@@ -54,6 +94,40 @@
   --color-info-soft: #10263a;
 
   --color-focus: #5eead4;
+
+  --color-accent: #2dd4bf;
+  --color-accent-soft: #10312f;
+}
+
+/* Im Dunkelmodus sind die Farbrollen vertauscht: heller Ton als Farbe,
+   sehr dunkler Ton als Fläche. */
+.dark [data-accent="gesundheit"] {
+  --color-accent: #2dd4bf;
+  --color-accent-soft: #10312f;
+}
+.dark [data-accent="arbeit"] {
+  --color-accent: #a5b4fc;
+  --color-accent-soft: #1e1b4b;
+}
+.dark [data-accent="finanzen"] {
+  --color-accent: #fcd34d;
+  --color-accent-soft: #33260a;
+}
+.dark [data-accent="waehrungen"] {
+  --color-accent: #7dd3fc;
+  --color-accent-soft: #0c2b41;
+}
+.dark [data-accent="krypto"] {
+  --color-accent: #c4b5fd;
+  --color-accent-soft: #241a45;
+}
+.dark [data-accent="mathematik"] {
+  --color-accent: #fda4af;
+  --color-accent-soft: #3f1120;
+}
+.dark [data-accent="alltag"] {
+  --color-accent: #fdba74;
+  --color-accent-soft: #38200c;
 }
 
 @theme inline {
@@ -74,6 +148,8 @@
   --color-danger-soft: var(--color-danger-soft);
   --color-info-soft: var(--color-info-soft);
   --color-focus: var(--color-focus);
+  --color-accent: var(--color-accent);
+  --color-accent-soft: var(--color-accent-soft);
 
   --font-sans:
     ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue",
@@ -134,6 +210,92 @@
     .ad-slot-box {
       min-height: var(--ad-min-desktop, 250px);
     }
+  }
+
+  /*
+   * Karte, die beim Überfahren leicht angehoben wird. Bewusst dezent:
+   * zwei Pixel und ein weicher Schatten. Wer „Bewegung reduzieren“
+   * eingestellt hat, sieht nur den Farbwechsel – dafür sorgt die
+   * globale Regel weiter oben.
+   */
+  .card-lift {
+    transition:
+      transform 150ms ease,
+      box-shadow 150ms ease,
+      border-color 150ms ease;
+  }
+  .card-lift:hover {
+    transform: translateY(-2px);
+    box-shadow:
+      0 10px 24px -12px rgb(15 23 42 / 0.18),
+      0 2px 6px -2px rgb(15 23 42 / 0.08);
+  }
+  .dark .card-lift:hover {
+    box-shadow: 0 12px 28px -14px rgb(0 0 0 / 0.7);
+  }
+
+  /*
+   * Hintergrund für den Kopfbereich der Startseite: zwei weiche Farbverläufe
+   * plus ein feines Punktraster. Rein dekorativ und ohne Bilddatei, damit
+   * nichts nachgeladen werden muss.
+   */
+  .hero-surface {
+    position: relative;
+    isolation: isolate;
+    overflow: hidden;
+    background:
+      radial-gradient(
+        60rem 30rem at 15% -10%,
+        color-mix(in srgb, var(--color-brand) 16%, transparent),
+        transparent 70%
+      ),
+      radial-gradient(
+        45rem 25rem at 90% 0%,
+        color-mix(in srgb, #6366f1 14%, transparent),
+        transparent 70%
+      ),
+      var(--color-surface);
+  }
+  .hero-surface::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background-image: radial-gradient(
+      color-mix(in srgb, var(--color-text) 12%, transparent) 1px,
+      transparent 1px
+    );
+    background-size: 22px 22px;
+    /* Das Raster verliert sich nach unten, damit es den Text nicht stört. */
+    mask-image: linear-gradient(to bottom, black, transparent 65%);
+  }
+
+  /* Farbverlauf im Text – nur für einzelne hervorgehobene Wörter. */
+  .text-gradient {
+    background: linear-gradient(
+      100deg,
+      var(--color-brand) 10%,
+      color-mix(in srgb, var(--color-brand) 45%, #6366f1) 90%
+    );
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  /* Abschnittsüberschrift mit kurzem Farbbalken davor. */
+  .heading-accent {
+    position: relative;
+    padding-left: 0.875rem;
+  }
+  .heading-accent::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0.15em;
+    bottom: 0.15em;
+    width: 4px;
+    border-radius: 999px;
+    background: var(--color-accent);
   }
 
   /* Fliesstext in den Erklärungsabschnitten der Rechnerseiten. */

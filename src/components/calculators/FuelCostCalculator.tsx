@@ -22,8 +22,8 @@ const limits = {
 export function FuelCostCalculator() {
   const [unit, setUnit] = useState<FuelUnit>("liter");
   const distance = useNumericField("500", limits.distance);
-  const consumption = useNumericField("7,5", limits.consumption);
-  const price = useNumericField("1,75", limits.price);
+  const consumption = useNumericField("7.5", limits.consumption);
+  const price = useNumericField("1.75", limits.price);
   const people = useNumericField("1", limits.people);
 
   const complete =
@@ -127,7 +127,7 @@ export function FuelCostCalculator() {
               />
             </ResultGrid>
 
-            <div className="mt-5 grid gap-5 border-t border-brand/30 pt-5 sm:grid-cols-2">
+            <div className="mt-5 grid gap-5 border-t border-accent/30 pt-5 sm:grid-cols-2">
               <ResultValue
                 label="Hin- und Rückfahrt"
                 value={euro(result.roundTripCost)}

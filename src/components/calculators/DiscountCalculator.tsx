@@ -117,7 +117,7 @@ export function DiscountCalculator() {
                         aria-pressed={active}
                         className={`rounded-lg border px-3 py-2 text-sm font-medium transition-colors ${
                           active
-                            ? "border-brand bg-brand-soft text-brand-strong"
+                            ? "border-accent bg-accent-soft text-accent"
                             : "border-border text-text-muted hover:border-text-subtle"
                         }`}
                       >
@@ -158,7 +158,7 @@ export function DiscountCalculator() {
             />
           </ResultGrid>
 
-          <div className="mt-5 border-t border-brand/30 pt-5">
+          <div className="mt-5 border-t border-accent/30 pt-5">
             <ResultValue
               label="Originalpreis"
               value={euro(result.originalPrice)}
@@ -166,7 +166,7 @@ export function DiscountCalculator() {
           </div>
 
           {combined !== null && combinedResult !== null && (
-            <div className="mt-5 border-t border-brand/30 pt-5">
+            <div className="mt-5 border-t border-accent/30 pt-5">
               <ResultValue
                 label="Mit beiden Rabatten nacheinander"
                 value={euro(combinedResult.finalPrice)}

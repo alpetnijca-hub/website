@@ -13,6 +13,7 @@ export function PageShell({
   breadcrumbs,
   children,
   wide = false,
+  accent,
 }: {
   title: string;
   intro?: string;
@@ -20,9 +21,11 @@ export function PageShell({
   children: ReactNode;
   /** Breites Layout für Übersichtsseiten mit Kartenraster. */
   wide?: boolean;
+  /** Kategorie-Slug, dessen Farbe für die ganze Seite gilt. */
+  accent?: string;
 }) {
   return (
-    <Container className="py-8 sm:py-12">
+    <Container className="py-8 sm:py-12" data-accent={accent}>
       {breadcrumbs && <Breadcrumbs items={breadcrumbs} />}
       <header className={`mt-4 ${wide ? "" : "max-w-3xl"}`}>
         <h1 className="text-3xl font-bold tracking-tight text-text sm:text-4xl">
@@ -51,7 +54,7 @@ export function Section({
 }) {
   return (
     <section id={id} className={`mt-10 scroll-mt-24 ${className}`}>
-      <h2 className="text-xl font-semibold tracking-tight text-text sm:text-2xl">
+      <h2 className="heading-accent text-xl font-semibold tracking-tight text-text sm:text-2xl">
         {title}
       </h2>
       <div className="mt-3 prose-rp">{children}</div>

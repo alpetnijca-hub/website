@@ -67,7 +67,7 @@ export function CalculatorPage({
   const related = relatedCalculators(calculatorId);
 
   return (
-    <Container className="py-8 sm:py-12">
+    <Container className="py-8 sm:py-12" data-accent={meta.category}>
       <Breadcrumbs
         items={[
           ...(category ? [{ name: category.name, href: category.href }] : []),
@@ -77,7 +77,16 @@ export function CalculatorPage({
 
       <div className="mt-4 gap-10 lg:flex">
         <div className="min-w-0 lg:max-w-3xl lg:flex-1">
-          <h1 className="text-3xl font-bold tracking-tight text-text sm:text-4xl">
+          {category && (
+            <Link
+              href={category.href}
+              className="inline-flex items-center gap-2 rounded-full bg-accent-soft px-3 py-1 text-sm font-medium text-accent"
+            >
+              <Icon name={category.icon} className="h-4 w-4" />
+              {category.name}
+            </Link>
+          )}
+          <h1 className="mt-3 text-3xl font-bold tracking-tight text-text sm:text-4xl">
             {meta.name}
           </h1>
           <div className="mt-3 text-lg leading-relaxed text-text-muted">
