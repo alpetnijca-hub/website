@@ -64,8 +64,10 @@ jeweils **nur die Adresse** ein, sonst nichts:
 | `NEXT_PUBLIC_CRYPTO_SOL` | Solana | Solana |
 | `NEXT_PUBLIC_CRYPTO_USDT_TRC20` | Tether | TRON (TRC-20) |
 
-Die Seite zeigt die Adresse im Klartext, einen Knopf zum Kopieren und – bei
-Bitcoin und Ethereum – einen Link, der die Wallet-App öffnet. Kein Widget,
+Auf der Seite steht „Kryptowährung“ als eine Zahlungsart neben PayPal und den
+übrigen. Ein Klick öffnet ein Fenster mit der Auswahl der Währung, und erst im
+zweiten Schritt erscheint die Adresse – im Klartext, mit Kopierknopf und, bei
+Bitcoin und Ethereum, mit einem Link, der die Wallet-App öffnet. Kein Widget,
 kein Dienst dazwischen, keine Datenübertragung.
 
 **Die Adresse wird auf ihr Format geprüft.** Passt sie nicht zur jeweiligen
