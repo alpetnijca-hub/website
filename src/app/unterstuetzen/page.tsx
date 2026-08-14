@@ -3,10 +3,16 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { PageShell, Section } from "@/components/layout/PageShell";
 import { TipJar } from "@/components/support/TipJar";
+import { CryptoTips } from "@/components/support/CryptoTips";
 import { Callout } from "@/components/ui/Callout";
 import { pageMetadata } from "@/lib/seo";
 import { site } from "@/config/site";
-import { supportEnabled, supportPurpose } from "@/config/support";
+import {
+  cryptoOptions,
+  supportEnabled,
+  supportOptions,
+  supportPurpose,
+} from "@/config/support";
 import { activeCalculators } from "@/config/calculators";
 
 export const metadata: Metadata = pageMetadata({
@@ -26,9 +32,24 @@ export default function Page() {
       intro="Alle Rechner sind kostenlos und bleiben es. Wenn dir die Seite geholfen hat, kannst du freiwillig ein Trinkgeld dalassen."
       breadcrumbs={[{ name: "Unterstützen" }]}
     >
-      <div className="rounded-xl border border-border bg-surface p-5 sm:p-6">
-        <TipJar />
-      </div>
+      {supportOptions.length > 0 && (
+        <div className="rounded-xl border border-border bg-surface p-5 sm:p-6">
+          <TipJar />
+        </div>
+      )}
+
+      {cryptoOptions.length > 0 && (
+        <Section title="Mit Kryptowährung" id="krypto">
+          <p>
+            Diese Adressen gehören zu meinen Wallets. Es gibt hier keinen
+            Zahlungsdienst dazwischen – du sendest direkt, und ich sehe nur die
+            Transaktion in der Blockchain.
+          </p>
+          <div className="not-prose mt-4">
+            <CryptoTips />
+          </div>
+        </Section>
+      )}
 
       <Section title="Warum es diese Seite gibt">
         <p>

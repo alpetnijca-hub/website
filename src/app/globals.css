@@ -342,4 +342,10 @@
     list-style: none;
     padding-left: 0;
   }
+  /* Links in solchen Bereichen sind Karten und Schaltflächen – sie sollen
+     nicht wie Fliesstext-Links unterstrichen werden. */
+  .prose-rp .not-prose a {
+    color: inherit;
+    text-decoration: none;
+  }
 }

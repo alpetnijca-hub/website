@@ -52,6 +52,41 @@ was found at this location.“ Der Code schneidet ein führendes @ und eine
 versehentlich eingefügte ganze Adresse inzwischen selbst ab – trag den Namen
 trotzdem sauber ein.
 
+## Kryptowährungen
+
+Zusätzlich oder stattdessen kannst du Wallet-Adressen anzeigen lassen. Trag
+jeweils **nur die Adresse** ein, sonst nichts:
+
+| Variable | Währung | Netzwerk |
+|---|---|---|
+| `NEXT_PUBLIC_CRYPTO_BTC` | Bitcoin | Bitcoin |
+| `NEXT_PUBLIC_CRYPTO_ETH` | Ethereum | Ethereum (ERC-20) |
+| `NEXT_PUBLIC_CRYPTO_SOL` | Solana | Solana |
+| `NEXT_PUBLIC_CRYPTO_USDT_TRC20` | Tether | TRON (TRC-20) |
+
+Die Seite zeigt die Adresse im Klartext, einen Knopf zum Kopieren und – bei
+Bitcoin und Ethereum – einen Link, der die Wallet-App öffnet. Kein Widget,
+kein Dienst dazwischen, keine Datenübertragung.
+
+**Die Adresse wird auf ihr Format geprüft.** Passt sie nicht zur jeweiligen
+Kette, erscheint sie gar nicht erst. Der Grund ist hart: Eine Krypto-Zahlung
+an eine falsche Adresse ist endgültig verloren, und niemand kann sie
+zurückholen. Lieber gar kein Knopf als ein Knopf, der Geld vernichtet.
+
+Diese Prüfung erkennt allerdings **nur offensichtliche Fehler** – zu kurz,
+falsches Netzwerk, mitkopierter Text. Einen Tippfehler mitten in einer sonst
+gültigen Adresse erkennt sie nicht. Deshalb gilt:
+
+1. Adresse immer aus der Wallet **kopieren**, nie abtippen.
+2. Nach dem Deployment die Adresse auf der Seite mit der in deiner Wallet
+   vergleichen – am besten die ersten und die letzten sechs Zeichen.
+3. **Eine Testzahlung mit einem Kleinstbetrag an dich selbst machen**, bevor
+   du die Seite bewirbst. Kommt sie an, stimmt die Adresse.
+
+Ein zusätzlicher Hinweis: Krypto-Zuwendungen sind steuerlich nicht dasselbe
+wie ein Euro-Betrag auf dem Konto. Kursgewinne zwischen Zufluss und Verkauf
+können relevant sein. Auch das gehört zur Steuerberatung, nicht hierher.
+
 ## Schritt 3: Prüfen
 
 - `https://rechnerliste.de/unterstuetzen` aufrufen – die Seite muss da sein

@@ -155,6 +155,14 @@ Telefon: ${site.operator.phone}`}
           Einflusses. Eine Zahlung ist zu keiner Zeit nötig, um die Rechner zu
           nutzen.
         </p>
+        <p>
+          Werden dort <strong>Krypto-Adressen</strong> angezeigt, sind das
+          reine Textangaben. Es wird dafür keine Verbindung zu einem Dienst
+          aufgebaut, weder beim Aufruf der Seite noch beim Kopieren der
+          Adresse. Eine Krypto-Zahlung findet ausschliesslich zwischen deiner
+          Wallet und dem jeweiligen Netzwerk statt; wir erfahren davon nur,
+          was ohnehin öffentlich in der Blockchain steht.
+        </p>
       </Section>
 
       <Section title="Hosting und Server-Logdateien">

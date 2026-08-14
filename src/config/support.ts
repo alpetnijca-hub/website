@@ -104,8 +104,107 @@ export const supportOptions: SupportOption[] = [
 /** Vorgeschlagene Beträge in Euro. Bewusst niedrig gehalten. */
 export const supportAmounts = [2, 5, 10];
 
+// ---------------------------------------------------------------------------
+// Kryptowährungen
+// ---------------------------------------------------------------------------
+
+export interface CryptoOption {
+  id: string;
+  /** Kürzel der Währung, z. B. "BTC". */
+  symbol: string;
+  /** Ausgeschriebener Name. */
+  name: string;
+  /**
+   * Das Netzwerk, über das gesendet werden muss. Diese Angabe ist keine
+   * Nebensache: Wer USDT über das falsche Netzwerk schickt, verliert den
+   * Betrag – deshalb steht sie überall gross dabei.
+   */
+  network: string;
+  address: string;
+  /** Adresse als Wallet-Link (öffnet die App), sofern es dafür ein Schema gibt. */
+  uri: string | null;
+}
+
+interface CryptoSpec {
+  id: string;
+  symbol: string;
+  name: string;
+  network: string;
+  env: string | undefined;
+  /**
+   * Formatprüfung. Sie erkennt keine Tippfehler innerhalb einer sonst
+   * gültigen Adresse – dafür braucht es die Prüfsumme der jeweiligen Kette –,
+   * aber sie fängt die häufigen Fehler ab: abgeschnittene Adressen,
+   * mitkopierte Leerzeichen, versehentlich eingefügter Text.
+   */
+  pattern: RegExp;
+  /** Baut den Wallet-Link, falls die Kette ein Schema hat. */
+  uri?: (address: string) => string;
+}
+
+const cryptoSpecs: CryptoSpec[] = [
+  {
+    id: "btc",
+    symbol: "BTC",
+    name: "Bitcoin",
+    network: "Bitcoin",
+    env: process.env.NEXT_PUBLIC_CRYPTO_BTC,
+    pattern: /^(bc1[a-z0-9]{25,71}|[13][a-km-zA-HJ-NP-Z1-9]{25,34})$/,
+    uri: (address) => `bitcoin:${address}`,
+  },
+  {
+    id: "eth",
+    symbol: "ETH",
+    name: "Ethereum",
+    network: "Ethereum (ERC-20)",
+    env: process.env.NEXT_PUBLIC_CRYPTO_ETH,
+    pattern: /^0x[a-fA-F0-9]{40}$/,
+    uri: (address) => `ethereum:${address}`,
+  },
+  {
+    id: "sol",
+    symbol: "SOL",
+    name: "Solana",
+    network: "Solana",
+    env: process.env.NEXT_PUBLIC_CRYPTO_SOL,
+    pattern: /^[1-9A-HJ-NP-Za-km-z]{32,44}$/,
+  },
+  {
+    id: "usdt-trc20",
+    symbol: "USDT",
+    name: "Tether",
+    network: "TRON (TRC-20)",
+    env: process.env.NEXT_PUBLIC_CRYPTO_USDT_TRC20,
+    pattern: /^T[1-9A-HJ-NP-Za-km-z]{33}$/,
+  },
+];
+
+/**
+ * Nur Adressen, die zum Format der jeweiligen Kette passen, werden angezeigt.
+ *
+ * Das ist Absicht und der wichtigste Teil dieser Datei: Eine Krypto-Zahlung
+ * ist endgültig. Geht sie an eine falsche Adresse, ist sie weg – niemand kann
+ * sie zurückholen. Lieber gar kein Knopf als ein Knopf mit einer kaputten
+ * Adresse.
+ */
+export const cryptoOptions: CryptoOption[] = cryptoSpecs
+  .map((spec) => {
+    const address = clean(spec.env).replace(/\s+/g, "");
+    if (!address || !spec.pattern.test(address)) return null;
+    return {
+      id: spec.id,
+      symbol: spec.symbol,
+      name: spec.name,
+      network: spec.network,
+      address,
+      uri: spec.uri ? spec.uri(address) : null,
+    };
+  })
+  .filter((option): option is CryptoOption => option !== null);
+
 /** Wahr, sobald mindestens ein Zahlungsweg eingerichtet ist. */
-export const supportEnabled = supportOptions.length > 0;
+export const supportEnabled =
+  supportOptions.length > 0 || cryptoOptions.length > 0;
 
 /**
  * Wofür das Geld verwendet wird. Dieser Satz erscheint auf der Seite und muss
