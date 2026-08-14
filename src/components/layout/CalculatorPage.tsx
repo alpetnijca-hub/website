@@ -8,6 +8,7 @@ import { Faq } from "@/components/ui/Faq";
 import { SourceList } from "@/components/ui/SourceList";
 import { FinanceDisclaimer, HealthDisclaimer } from "@/components/ui/Disclaimer";
 import { JsonLd } from "@/components/ui/JsonLd";
+import { SupportCard } from "@/components/support/SupportCard";
 import { Icon } from "@/components/ui/Icon";
 import { faqSchema, type FaqItem } from "@/lib/schema";
 import { getCalculator, relatedCalculators } from "@/config/calculators";
@@ -140,6 +141,8 @@ export function CalculatorPage({
               </ul>
             </Section>
           )}
+
+          <SupportCard className="mt-10" />
 
           {sources.length > 0 && (
             <Section title="Quellen" id="quellen">

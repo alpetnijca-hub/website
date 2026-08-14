@@ -5,6 +5,7 @@ import { CalculatorCard } from "@/components/ui/Card";
 import { Icon } from "@/components/ui/Icon";
 import { AdSlot } from "@/components/ads/AdSlot";
 import { JsonLd } from "@/components/ui/JsonLd";
+import { SupportCard } from "@/components/support/SupportCard";
 import { websiteSchema } from "@/lib/schema";
 import { site } from "@/config/site";
 import { categories } from "@/config/categories";
@@ -289,6 +290,8 @@ export default function HomePage() {
             ))}
           </ul>
         </section>
+
+        <SupportCard className="mt-14" />
 
         <div className="mt-14 rounded-xl border border-border bg-surface-muted/60 p-6 text-sm leading-relaxed text-text-muted">
           <p>

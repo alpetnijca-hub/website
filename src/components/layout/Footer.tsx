@@ -4,6 +4,7 @@ import { ConsentSettingsLink } from "@/components/consent/ConsentSettingsLink";
 import { site } from "@/config/site";
 import { activeCalculators } from "@/config/calculators";
 import { categories } from "@/config/categories";
+import { supportEnabled } from "@/config/support";
 
 const legalLinks = [
   { href: "/impressum", label: "Impressum" },
@@ -13,6 +14,8 @@ const legalLinks = [
 
 const aboutLinks = [
   { href: "/ueber-uns", label: "Über uns" },
+  // Erscheint nur, wenn ein Zahlungsweg eingerichtet ist.
+  ...(supportEnabled ? [{ href: "/unterstuetzen", label: "Unterstützen" }] : []),
   { href: "/kontakt", label: "Kontakt" },
   { href: "/redaktionelle-richtlinien", label: "Redaktionelle Richtlinien" },
   { href: "/quellen-und-methoden", label: "Quellen & Methoden" },

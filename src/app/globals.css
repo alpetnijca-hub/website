@@ -328,6 +328,11 @@
   .prose-rp li + li {
     margin-top: 0.5rem;
   }
+  /* Absatz nach einer Liste braucht denselben Abstand wie zwischen Absätzen. */
+  .prose-rp ul + p,
+  .prose-rp ol + p {
+    margin-top: 1rem;
+  }
   /* Bereiche innerhalb eines Fliesstext-Abschnitts, die keine
      Fliesstext-Formatierung erhalten sollen (z. B. Kartenlisten). */
   .prose-rp .not-prose ul,

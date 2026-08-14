@@ -2,6 +2,7 @@ import type { MetadataRoute } from "next";
 import { absoluteUrl } from "@/config/site";
 import { activeCalculators } from "@/config/calculators";
 import { activeCategories } from "@/config/categories";
+import { supportEnabled } from "@/config/support";
 
 /**
  * sitemap.xml – erzeugt aus der Rechner-Registry.
@@ -24,6 +25,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { path: "/impressum", priority: 0.2 },
     { path: "/datenschutz", priority: 0.3 },
     { path: "/rechner/a-z", priority: 0.6 },
+    // Die Seite existiert nur, wenn ein Zahlungsweg eingerichtet ist.
+    ...(supportEnabled ? [{ path: "/unterstuetzen", priority: 0.3 }] : []),
   ];
 
   return [

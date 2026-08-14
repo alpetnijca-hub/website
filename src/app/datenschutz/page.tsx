@@ -138,6 +138,25 @@ Telefon: ${site.operator.phone}`}
         </p>
       </Section>
 
+      <Section title="Freiwillige Unterstützung">
+        <p>
+          Auf der Seite{" "}
+          <Link href="/unterstuetzen">Unterstützen</Link> gibt es Links zu
+          Zahlungsdiensten, über die freiwillig ein Trinkgeld gegeben werden
+          kann. Es handelt sich um <strong>gewöhnliche Links</strong>, nicht um
+          eingebettete Bezahlfenster: Solange niemand darauf klickt, wird nichts
+          an den Zahlungsdienst übertragen, und es werden dafür keine Cookies
+          gesetzt.
+        </p>
+        <p>
+          Erst mit dem Klick verlässt du diese Website. Ab dann gilt die
+          Datenschutzerklärung des jeweiligen Anbieters; welche Daten dort für
+          die Zahlungsabwicklung verarbeitet werden, liegt ausserhalb unseres
+          Einflusses. Eine Zahlung ist zu keiner Zeit nötig, um die Rechner zu
+          nutzen.
+        </p>
+      </Section>
+
       <Section title="Hosting und Server-Logdateien">
         <p>
           Diese Website wird bei einem externen Anbieter gehostet. Beim Aufruf
