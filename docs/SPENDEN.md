@@ -89,6 +89,18 @@ Ein zusätzlicher Hinweis: Krypto-Zuwendungen sind steuerlich nicht dasselbe
 wie ein Euro-Betrag auf dem Konto. Kursgewinne zwischen Zufluss und Verkauf
 können relevant sein. Auch das gehört zur Steuerberatung, nicht hierher.
 
+### Adresse eingetragen, aber sie erscheint nicht
+
+Dann hat die Formatprüfung sie verworfen. Im **Build-Protokoll bei Vercel**
+(Deployments → das Deployment anklicken → Building) steht dann eine Zeile:
+
+```
+[support] Die Adresse in NEXT_PUBLIC_CRYPTO_BTC passt nicht zum Format von …
+```
+
+Häufigste Ursachen: beim Kopieren abgeschnitten, Adresse einer anderen Kette
+in der falschen Variablen, oder versehentlich Text mitkopiert.
+
 ## Schritt 3: Prüfen
 
 - `https://rechnerliste.de/unterstuetzen` aufrufen – die Seite muss da sein

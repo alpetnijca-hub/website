@@ -190,7 +190,20 @@ const cryptoSpecs: CryptoSpec[] = [
 export const cryptoOptions: CryptoOption[] = cryptoSpecs
   .map((spec) => {
     const address = clean(spec.env).replace(/\s+/g, "");
-    if (!address || !spec.pattern.test(address)) return null;
+    if (!address) return null;
+    if (!spec.pattern.test(address)) {
+      // Stilles Verwerfen wäre beim Suchen die Hölle: Man trägt eine Adresse
+      // ein, deployt, und auf der Seite passiert nichts. Deshalb eine
+      // deutliche Meldung im Build-Protokoll. Die Adresse selbst wird dabei
+      // nicht ausgegeben.
+      console.warn(
+        `[support] Die Adresse in NEXT_PUBLIC_CRYPTO_${spec.id.toUpperCase().replace("-", "_")} ` +
+          `passt nicht zum Format von ${spec.name} (${spec.network}) und wird nicht angezeigt. ` +
+          `Häufige Ursachen: beim Kopieren abgeschnitten, Adresse einer anderen Kette, ` +
+          `oder Text mitkopiert. Siehe docs/SPENDEN.md.`,
+      );
+      return null;
+    }
     return {
       id: spec.id,
       symbol: spec.symbol,
