@@ -8,6 +8,7 @@ import {
   type SupportOption,
 } from "@/config/support";
 import { CryptoDialog } from "@/components/support/CryptoDialog";
+import { ProviderIcon } from "@/components/support/PaymentIcon";
 
 /** Auflistung der verfügbaren Währungen, z. B. "BTC, ETH und SOL". */
 const cryptoSummary = cryptoOptions
@@ -34,7 +35,9 @@ const cryptoSummary = cryptoOptions
  * unterstützt. Sonst wird er beim Anbieter selbst gewählt.
  */
 export function TipJar() {
-  const [amount, setAmount] = useState<number | null>(supportAmounts[1] ?? null);
+  const [amount, setAmount] = useState<number | null>(
+    supportAmounts[1] ?? null,
+  );
 
   if (supportOptions.length === 0 && cryptoOptions.length === 0) return null;
 
@@ -92,9 +95,10 @@ export function TipJar() {
               href={hrefFor(option)}
               target="_blank"
               rel="noopener noreferrer"
-              className="card-lift flex h-full items-center justify-between gap-3 rounded-xl border border-border bg-surface px-4 py-3.5 hover:border-accent"
+              className="card-lift flex h-full items-center gap-3.5 rounded-xl border border-border bg-surface px-4 py-3.5 hover:border-accent"
             >
-              <span className="min-w-0">
+              <ProviderIcon id={option.id} />
+              <span className="min-w-0 flex-1">
                 <span className="block font-semibold text-text">
                   {option.name}
                 </span>
@@ -124,8 +128,9 @@ export function TipJar() {
             vier fast gleiche Einträge nebeneinander stehen. */}
         {cryptoOptions.length > 0 && (
           <li>
-            <CryptoDialog className="card-lift flex h-full w-full items-center justify-between gap-3 rounded-xl border border-border bg-surface px-4 py-3.5 text-left hover:border-accent">
-              <span className="min-w-0">
+            <CryptoDialog className="card-lift flex h-full w-full items-center gap-3.5 rounded-xl border border-border bg-surface px-4 py-3.5 text-left hover:border-accent">
+              <ProviderIcon id="crypto" />
+              <span className="min-w-0 flex-1">
                 <span className="block font-semibold text-text">
                   Kryptowährung
                 </span>

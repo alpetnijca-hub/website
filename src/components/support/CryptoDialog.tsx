@@ -2,6 +2,7 @@
 
 import { useRef, useState } from "react";
 import { cryptoOptions, type CryptoOption } from "@/config/support";
+import { CryptoIcon } from "@/components/support/PaymentIcon";
 
 /**
  * Zwei Schritte in einem Fenster: erst die Währung wählen, dann die Adresse.
@@ -72,15 +73,18 @@ export function CryptoDialog({
         className="m-auto w-[min(34rem,92vw)] rounded-2xl border border-border bg-surface p-0 text-text backdrop:bg-black/50"
       >
         <div className="flex items-start justify-between gap-4 border-b border-border p-5">
-          <div>
-            <h2 id="krypto-titel" className="text-lg font-bold text-text">
-              {selected ? selected.name : "Kryptowährung wählen"}
-            </h2>
-            <p className="mt-1 text-sm text-text-muted">
-              {selected
-                ? `Senden über das Netzwerk ${selected.network}`
-                : "Wähle die Währung, die du senden möchtest."}
-            </p>
+          <div className="flex items-start gap-3.5">
+            {selected && <CryptoIcon symbol={selected.symbol} />}
+            <div>
+              <h2 id="krypto-titel" className="text-lg font-bold text-text">
+                {selected ? selected.name : "Kryptowährung wählen"}
+              </h2>
+              <p className="mt-1 text-sm text-text-muted">
+                {selected
+                  ? `Senden über das Netzwerk ${selected.network}`
+                  : "Wähle die Währung, die du senden möchtest."}
+              </p>
+            </div>
           </div>
           <button
             type="button"
@@ -113,9 +117,10 @@ export function CryptoDialog({
                       setSelected(option);
                       setCopied(false);
                     }}
-                    className="flex w-full items-center justify-between gap-3 rounded-xl border border-border bg-surface px-4 py-3 text-left transition-colors hover:border-accent hover:bg-accent-soft/30"
+                    className="flex w-full items-center gap-3.5 rounded-xl border border-border bg-surface px-4 py-3 text-left transition-colors hover:border-accent hover:bg-accent-soft/30"
                   >
-                    <span>
+                    <CryptoIcon symbol={option.symbol} />
+                    <span className="flex-1">
                       <span className="block font-semibold text-text">
                         {option.symbol}{" "}
                         <span className="font-normal text-text-muted">
@@ -176,11 +181,11 @@ export function CryptoDialog({
                   Krypto-Zahlungen sind endgültig
                 </p>
                 <p className="mt-1">
-                  Eine gesendete Transaktion kann niemand zurückholen. Prüfe
-                  die Adresse Zeichen für Zeichen und sende ausschliesslich
-                  über das Netzwerk <strong>{selected.network}</strong> – über
-                  ein anderes Netzwerk gesendete Beträge sind verloren. Im
-                  Zweifel zuerst einen kleinen Betrag schicken.
+                  Eine gesendete Transaktion kann niemand zurückholen. Prüfe die
+                  Adresse Zeichen für Zeichen und sende ausschliesslich über das
+                  Netzwerk <strong>{selected.network}</strong> – über ein
+                  anderes Netzwerk gesendete Beträge sind verloren. Im Zweifel
+                  zuerst einen kleinen Betrag schicken.
                 </p>
               </div>
 
