@@ -35,7 +35,7 @@ selbst auf die Seite stellst. Sag Bescheid, dann bauen wir das ein.
 
 | Variable | Was hineingehört | Beispiel |
 |---|---|---|
-| `NEXT_PUBLIC_PAYPAL_ME` | Nur der Benutzername | `alvinramdedovic` |
+| `NEXT_PUBLIC_PAYPAL_ME` | Nur der Benutzername, **ohne @** | `AlvinRamdedovic` |
 | `NEXT_PUBLIC_KOFI` | Nur der Benutzername | `rechnerliste` |
 | `NEXT_PUBLIC_BUYMEACOFFEE` | Nur der Benutzername | `rechnerliste` |
 | `NEXT_PUBLIC_STRIPE_LINK` | Die vollständige Adresse | `https://buy.stripe.com/abc123` |
@@ -45,6 +45,12 @@ Bei „Environment“ alle drei Haken setzen (Production, Preview, Development).
 
 4. **Deployments → … → Redeploy.** Umgebungsvariablen wirken erst nach einem
    neuen Deployment.
+
+Häufigster Fehler: das **@** aus dem Profil mitkopieren. `@MaxMuster` wird in
+der Adresse zu `%40MaxMuster`, und PayPal zeigt „Sorry. It looks like nothing
+was found at this location.“ Der Code schneidet ein führendes @ und eine
+versehentlich eingefügte ganze Adresse inzwischen selbst ab – trag den Namen
+trotzdem sauber ein.
 
 ## Schritt 3: Prüfen
 

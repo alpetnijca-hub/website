@@ -20,14 +20,35 @@ function clean(value: string | undefined): string {
   return trimmed;
 }
 
+/**
+ * Räumt einen Benutzernamen auf, bevor er in eine Adresse eingesetzt wird.
+ *
+ * Bei allen drei Anbietern ist der Benutzername ohne Zusätze anzugeben. Wer
+ * ihn aus dem Profil kopiert, hat aber schnell ein "@" davor oder gleich die
+ * ganze Adresse in der Zwischenablage – und beides führt zu einer
+ * Fehlerseite beim Anbieter statt zu einer Zahlung. Deshalb wird hier
+ * abgeschnitten, was nicht zum Namen gehört.
+ */
+function handle(value: string | undefined): string {
+  let name = clean(value);
+  if (!name) return "";
+  // Vollständige Adresse eingetragen: nur den letzten Pfadteil behalten.
+  if (name.includes("/")) {
+    name = name.split("/").filter(Boolean).pop() ?? "";
+  }
+  // Führendes @ entfernen, Querystring abschneiden.
+  name = name.replace(/^@+/, "").split("?")[0].trim();
+  return name;
+}
+
 /** Benutzername bei PayPal.me, z. B. "alvinr" – ohne paypal.me/ davor. */
-const paypalHandle = clean(process.env.NEXT_PUBLIC_PAYPAL_ME);
+const paypalHandle = handle(process.env.NEXT_PUBLIC_PAYPAL_ME);
 
 /** Benutzername bei Ko-fi, z. B. "rechnerliste". */
-const kofiHandle = clean(process.env.NEXT_PUBLIC_KOFI);
+const kofiHandle = handle(process.env.NEXT_PUBLIC_KOFI);
 
 /** Benutzername bei Buy Me a Coffee. */
-const bmacHandle = clean(process.env.NEXT_PUBLIC_BUYMEACOFFEE);
+const bmacHandle = handle(process.env.NEXT_PUBLIC_BUYMEACOFFEE);
 
 /** Vollständige Adresse eines Stripe-Zahlungslinks. */
 const stripeLink = clean(process.env.NEXT_PUBLIC_STRIPE_LINK);
