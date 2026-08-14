@@ -81,14 +81,14 @@ export const supportOptions: SupportOption[] = [
   kofiHandle && {
     id: "kofi",
     name: "Ko-fi",
-    note: "Ohne Konto nutzbar, Betrag wird dort gewählt.",
+    note: "Ohne Ko-fi-Konto nutzbar, Betrag wird dort gewählt.",
     url: `https://ko-fi.com/${encodeURIComponent(kofiHandle)}`,
     amountUrl: null,
   },
   bmacHandle && {
     id: "bmac",
     name: "Buy Me a Coffee",
-    note: "Ohne Konto nutzbar, Betrag wird dort gewählt.",
+    note: "Ohne eigenes Konto nutzbar, Betrag wird dort gewählt.",
     url: `https://buymeacoffee.com/${encodeURIComponent(bmacHandle)}`,
     amountUrl: null,
   },

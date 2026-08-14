@@ -14,13 +14,28 @@ Du brauchst nur einen. Mehrere gehen auch – dann erscheinen mehrere Knöpfe.
 | Anbieter | Gebühren (Stand der Recherche prüfen) | Besonderheit |
 |---|---|---|
 | **PayPal.me** | Bei „Freunde & Familie“ innerhalb der EU meist kostenlos, sonst Gebühr je Zahlung | Am schnellsten eingerichtet, wenn du schon PayPal hast. Betrag lässt sich vorbelegen. |
-| **Ko-fi** | Grundversion ohne Provision, Zahlungsgebühren fallen trotzdem an | Zahlende brauchen kein Konto. Sehr verbreitet für genau diesen Zweck. |
+| **Ko-fi** | Grundversion ohne Provision, Zahlungsgebühren fallen trotzdem an | Zahlende brauchen **kein Ko-fi-Konto**. Ob sie ganz ohne Anmeldung mit Karte zahlen können, hängt davon ab, was du bei Ko-fi als Auszahlung verbindest – siehe unten. Sehr verbreitet für genau diesen Zweck. |
 | **Buy Me a Coffee** | Prozentuale Gebühr | Wie Ko-fi, andere Optik. |
 | **Stripe Payment Link** | Gebühr je Zahlung | Wirkt am professionellsten, braucht aber ein Stripe-Konto mit Identitätsprüfung. |
 
 Prüfe die aktuellen Gebühren und Bedingungen selbst auf der Seite des
 Anbieters, bevor du dich entscheidest – ich gebe hier bewusst keine Zahlen an,
 die morgen veraltet sein können.
+
+### Ko-fi: Stripe oder PayPal verbinden
+
+Bei Ko-fi verbindest du unter *Settings → Payments* einen Auszahlungsweg. Die
+Wahl entscheidet darüber, wer dir überhaupt etwas schicken kann:
+
+- **Stripe verbunden:** Zahlende geben ihre Kartendaten direkt auf der
+  Ko-fi-Seite ein. Kein Konto, keine Anmeldung, kein Umweg. Du brauchst dafür
+  einmalig eine Identitätsprüfung, danach geht das Geld aufs Bankkonto.
+- **Nur PayPal verbunden:** Zahlende landen bei PayPal. Wer dort ein Konto
+  hat, zahlt in zwei Klicks. Wer keines hat, ist auf PayPals Gastzahlung
+  angewiesen – die ist nicht überall und nicht immer verfügbar.
+
+Beides gleichzeitig geht auch; dann hat der Zahlende die Wahl. Wenn dir wichtig
+ist, dass niemand an einer Anmeldung scheitert, nimm Stripe.
 
 **Hinweis für dich als Schweizer:** TWINT hat keinen allgemein nutzbaren
 Zahlungslink für Websites. Wenn du TWINT anbieten willst, geht das über
