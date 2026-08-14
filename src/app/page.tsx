@@ -53,9 +53,9 @@ export default function HomePage() {
               Rechnen statt raten
             </h1>
             <p className="mt-4 text-lg leading-relaxed text-text-muted">
-              {site.name} bündelt verständliche Rechner für Ernährung, Fitness
-              und Alltag. Zahlen eingeben, Ergebnis ablesen – und darunter
-              nachlesen, wie es berechnet wurde.
+              {site.name} bündelt verständliche Rechner für Gesundheit,
+              Finanzen und Alltag. Zahlen eingeben, Ergebnis ablesen – und
+              darunter nachlesen, wie es berechnet wurde.
             </p>
             <div className="mt-8">
               <CalculatorSearch />
