@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1372 260" role="img" aria-label="Rechnerliste">
+  <!--
+    Wort-Bild-Marke: Zeichen plus Schriftzug, waagerecht.
+
+    Für die Web-Nutzung. Wo die Schrift nicht garantiert ist – etwa beim
+    Hochladen bei Drittanbietern – lieber die PNG-Fassung verwenden
+    (public/logo-wortmarke.png), dort ist der Text bereits gerastert.
+  -->
+  <g>
+    <rect width="260" height="260" rx="58" fill="#0f766e" />
+    <g stroke="#ffffff" stroke-linecap="round" fill="none">
+      <path d="M69 191 L191 69" stroke-width="24" />
+      <path d="M53 77 H100 M76.5 53.5 V100.5" stroke-width="22" />
+      <path d="M160 183 H207" stroke-width="22" />
+    </g>
+  </g>
+  <text
+    x="316" y="176"
+    font-family="ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif"
+    font-size="152"
+    font-weight="700"
+    letter-spacing="-4"
+    fill="#0f172a"
+  >Rechnerliste</text>
+</svg>

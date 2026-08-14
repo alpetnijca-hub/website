@@ -5,6 +5,7 @@ import { usePathname } from "next/navigation";
 import { useState } from "react";
 import { Container } from "@/components/ui/Container";
 import { ThemeToggle } from "@/components/layout/ThemeToggle";
+import { LogoMark } from "@/components/layout/Logo";
 import { site } from "@/config/site";
 import { activeCategories } from "@/config/categories";
 
@@ -34,22 +35,7 @@ export function Header() {
             href="/"
             className="flex items-center gap-2 text-lg font-bold tracking-tight text-text"
           >
-            <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-brand text-on-brand">
-              <svg
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth={2}
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                className="h-5 w-5"
-                aria-hidden="true"
-              >
-                <path d="M4 18 20 6" />
-                <path d="M4 6h6M7 3v6" />
-                <path d="M14 18h6" />
-              </svg>
-            </span>
+            <LogoMark className="h-8 w-8 text-brand" />
             {site.name}
           </Link>
 

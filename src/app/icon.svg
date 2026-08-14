@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-label="Rechnerliste">
+  <!--
+    Bildmarke von Rechnerliste.
+
+    Das Zeichen besteht aus drei Rechenoperatoren: Plus oben links,
+    Minus unten rechts, dazwischen ein Schrägstrich. Zusammen ergeben sie
+    die Form eines Prozentzeichens – das Symbol, das auf einer Rechnerseite
+    am häufigsten vorkommt.
+
+    Die Strichstärken sind bewusst kräftig gewählt, damit die Marke auch
+    als 16-Pixel-Favicon lesbar bleibt.
+  -->
+  <rect width="512" height="512" rx="112" fill="#0f766e" />
+  <g stroke="#ffffff" stroke-linecap="round" fill="none">
+    <!-- Schrägstrich -->
+    <path d="M136 376 L376 136" stroke-width="46" />
+    <!-- Plus oben links -->
+    <path d="M104 152 H196 M150 106 V198" stroke-width="42" />
+    <!-- Minus unten rechts -->
+    <path d="M316 360 H408" stroke-width="42" />
+  </g>
+</svg>
