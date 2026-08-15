@@ -12,6 +12,9 @@ const laenge = findCategory("laenge")!;
 const gewicht = findCategory("gewicht")!;
 const temperatur = findCategory("temperatur")!;
 const geschwindigkeit = findCategory("geschwindigkeit")!;
+const energie = findCategory("energie")!;
+const leistung = findCategory("leistung")!;
+const druck = findCategory("druck")!;
 
 describe("convertUnit – Länge", () => {
   it("rechnet Zentimeter in Zoll um", () => {
@@ -154,6 +157,135 @@ describe("convertUnit – Geschwindigkeit", () => {
       category: geschwindigkeit,
     })!;
     expect(result.converted).toBeCloseTo(1.852, 3);
+  });
+});
+
+describe("convertUnit – Energie", () => {
+  it("rechnet Kilokalorien in Kilojoule um", () => {
+    // Die Umrechnung auf Lebensmittelpackungen: 1 kcal = 4,184 kJ.
+    const result = convertUnit({
+      value: 2000,
+      from: "kcal",
+      to: "kj",
+      category: energie,
+    })!;
+    expect(result.converted).toBe(8368);
+  });
+
+  it("rechnet Kilojoule zurück in Kilokalorien", () => {
+    const result = convertUnit({
+      value: 8368,
+      from: "kj",
+      to: "kcal",
+      category: energie,
+    })!;
+    expect(result.converted).toBe(2000);
+  });
+
+  it("rechnet eine Kilowattstunde in Kilokalorien um", () => {
+    const result = convertUnit({
+      value: 1,
+      from: "kwh",
+      to: "kcal",
+      category: energie,
+    })!;
+    expect(result.converted).toBeCloseTo(860.42, 1);
+  });
+
+  it("kennt das Verhältnis von Wattstunde und Joule", () => {
+    // Eine Wattstunde ist eine Sekunde lang ein Watt, mal 3600 Sekunden.
+    const result = convertUnit({
+      value: 1,
+      from: "wh",
+      to: "j",
+      category: energie,
+    })!;
+    expect(result.converted).toBe(3600);
+  });
+});
+
+describe("convertUnit – Leistung", () => {
+  it("rechnet PS in Kilowatt um", () => {
+    // 1 PS ist als 75 kp·m/s definiert, also exakt 735,49875 W.
+    const result = convertUnit({
+      value: 100,
+      from: "ps",
+      to: "kw",
+      category: leistung,
+    })!;
+    expect(result.converted).toBeCloseTo(73.55, 2);
+  });
+
+  it("rechnet Kilowatt in PS um", () => {
+    const result = convertUnit({
+      value: 100,
+      from: "kw",
+      to: "ps",
+      category: leistung,
+    })!;
+    expect(result.converted).toBeCloseTo(135.96, 2);
+  });
+
+  it("unterscheidet metrische PS von britischem horsepower", () => {
+    const ps = convertUnit({
+      value: 100,
+      from: "ps",
+      to: "w",
+      category: leistung,
+    })!;
+    const hp = convertUnit({
+      value: 100,
+      from: "hp",
+      to: "w",
+      category: leistung,
+    })!;
+    expect(hp.converted).toBeGreaterThan(ps.converted);
+    // Auf zwei Stellen gerundet angezeigt.
+    expect(ps.converted).toBe(73549.88);
+  });
+});
+
+describe("convertUnit – Druck", () => {
+  it("rechnet Bar in psi um", () => {
+    // Reifendruck: 2,5 bar sind rund 36 psi.
+    const result = convertUnit({
+      value: 2.5,
+      from: "bar",
+      to: "psi",
+      category: druck,
+    })!;
+    expect(result.converted).toBeCloseTo(36.26, 1);
+  });
+
+  it("kennt den Zusammenhang von Bar und Pascal", () => {
+    const result = convertUnit({
+      value: 1,
+      from: "bar",
+      to: "pa",
+      category: druck,
+    })!;
+    expect(result.converted).toBe(100000);
+  });
+
+  it("rechnet den Luftdruck in Hektopascal", () => {
+    // Der Normdruck von 1 atm entspricht 1013,25 hPa.
+    const result = convertUnit({
+      value: 1,
+      from: "atm",
+      to: "hpa",
+      category: druck,
+    })!;
+    expect(result.converted).toBe(1013.25);
+  });
+
+  it("behandelt Millibar und Hektopascal als gleich gross", () => {
+    const result = convertUnit({
+      value: 1,
+      from: "mbar",
+      to: "hpa",
+      category: druck,
+    })!;
+    expect(result.converted).toBe(1);
   });
 });
 

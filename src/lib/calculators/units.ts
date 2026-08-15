@@ -110,6 +110,54 @@ export const unitCategories: UnitCategory[] = [
       { id: "kn", symbol: "kn", name: "Knoten", factor: 1852 / 3600 },
     ],
   },
+  {
+    id: "energie",
+    label: "Energie",
+    base: "Joule",
+    defaults: { from: "kcal", to: "kj" },
+    units: [
+      { id: "j", symbol: "J", name: "Joule", factor: 1 },
+      { id: "kj", symbol: "kJ", name: "Kilojoule", factor: 1000 },
+      // Die Kalorie der Ernährungsangaben ist die thermochemische Kalorie:
+      // 1 cal = exakt 4,184 J. Es gibt historisch weitere Definitionen, die
+      // sich in der dritten Stelle unterscheiden; auf Lebensmitteln gilt diese.
+      { id: "cal", symbol: "cal", name: "Kalorie", factor: 4.184 },
+      { id: "kcal", symbol: "kcal", name: "Kilokalorie", factor: 4184 },
+      { id: "wh", symbol: "Wh", name: "Wattstunde", factor: 3600 },
+      { id: "kwh", symbol: "kWh", name: "Kilowattstunde", factor: 3_600_000 },
+    ],
+  },
+  {
+    id: "leistung",
+    label: "Leistung",
+    base: "Watt",
+    defaults: { from: "ps", to: "kw" },
+    units: [
+      { id: "w", symbol: "W", name: "Watt", factor: 1 },
+      { id: "kw", symbol: "kW", name: "Kilowatt", factor: 1000 },
+      { id: "mw", symbol: "MW", name: "Megawatt", factor: 1_000_000 },
+      // Metrische Pferdestärke: 75 Kilopond·Meter je Sekunde,
+      // also 75 × 9,80665 W = exakt 735,49875 W.
+      { id: "ps", symbol: "PS", name: "Pferdestärke (metrisch)", factor: 735.49875 },
+      // Britisch-amerikanische horsepower – ein anderer Wert bei gleichem Namen.
+      { id: "hp", symbol: "hp", name: "Horsepower (mechanisch)", factor: 745.6998715822702 },
+    ],
+  },
+  {
+    id: "druck",
+    label: "Druck",
+    base: "Pascal",
+    defaults: { from: "bar", to: "psi" },
+    units: [
+      { id: "pa", symbol: "Pa", name: "Pascal", factor: 1 },
+      { id: "hpa", symbol: "hPa", name: "Hektopascal", factor: 100 },
+      { id: "kpa", symbol: "kPa", name: "Kilopascal", factor: 1000 },
+      { id: "bar", symbol: "bar", name: "Bar", factor: 100_000 },
+      { id: "mbar", symbol: "mbar", name: "Millibar", factor: 100 },
+      { id: "psi", symbol: "psi", name: "Pfund je Quadratzoll", factor: 6894.757293168361 },
+      { id: "atm", symbol: "atm", name: "Physikalische Atmosphäre", factor: 101_325 },
+    ],
+  },
 ];
 
 /** Temperaturen brauchen eigene Formeln – siehe Kommentar oben. */

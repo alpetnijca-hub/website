@@ -237,7 +237,7 @@ export const calculators: CalculatorMeta[] = [
     category: "mathematik",
     href: "/mathematik/einheitenumrechner",
     description:
-      "Länge, Gewicht, Temperatur, Fläche, Volumen und Geschwindigkeit umrechnen.",
+      "Länge, Gewicht, Temperatur, Energie, Leistung, Druck, Fläche, Volumen und Geschwindigkeit umrechnen.",
     icon: "calculator",
     related: ["dreisatz", "prozent"],
     keywords: [
@@ -246,12 +246,15 @@ export const calculators: CalculatorMeta[] = [
       "kg in pfund",
       "celsius fahrenheit",
       "meilen in kilometer",
+      "kcal in kj",
+      "ps in kw",
+      "bar in psi",
     ],
     status: "aktiv",
     seo: {
-      title: "Einheitenumrechner – Länge, Gewicht, Temperatur",
+      title: "Einheitenumrechner – Länge, Gewicht, Energie, Leistung",
       description:
-        "Zentimeter in Zoll, Kilogramm in Pfund, Celsius in Fahrenheit und mehr. Mit den exakten Definitionswerten gerechnet, nicht mit gerundeten Faktoren.",
+        "Zentimeter in Zoll, kcal in kJ, PS in kW, Celsius in Fahrenheit, bar in psi und mehr. Mit den exakten Definitionswerten gerechnet, nicht mit Faustformeln.",
     },
   },
 

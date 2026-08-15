@@ -19,9 +19,10 @@ export default function Page() {
       disclaimer="keiner"
       intro={
         <p>
-          Zentimeter in Zoll, Kilogramm in Pfund, Celsius in Fahrenheit und
-          zurück – dazu Fläche, Volumen und Geschwindigkeit. Gerechnet wird mit
-          den exakten Definitionswerten, nicht mit gerundeten Faustformeln.
+          Zentimeter in Zoll, Kilokalorien in Kilojoule, PS in Kilowatt,
+          Celsius in Fahrenheit – dazu Fläche, Volumen, Geschwindigkeit und
+          Druck. Gerechnet wird mit den exakten Definitionswerten, nicht mit
+          gerundeten Faustformeln.
         </p>
       }
       calculator={<UnitConverter />}
@@ -40,6 +41,13 @@ export default function Page() {
             ist seit 1959 international auf <strong>genau 25,4 Millimeter</strong>{" "}
             definiert, ein Pfund auf genau 0,45359237 Kilogramm und eine Meile
             auf genau 1609,344 Meter.
+          </p>
+          <p>
+            Dasselbe gilt bei den physikalischen Einheiten: Eine Kilokalorie
+            sind <strong>exakt 4,184 Kilojoule</strong>, eine metrische
+            Pferdestärke exakt 735,49875 Watt, ein Bar exakt 100.000 Pascal.
+            Das sind Festlegungen, keine Messwerte – deshalb stimmen die
+            Ergebnisse auf beliebig viele Stellen.
           </p>
           <p>
             Die <strong>Temperatur ist der Sonderfall</strong>. Ihre Skalen
@@ -71,6 +79,22 @@ export default function Page() {
             rechnet, landet bei völlig anderen Werten.
           </p>
           <p>
+            <strong>2.000 Kilokalorien auf der Packung.</strong> 2.000 × 4,184 =
+            8.368 kJ. Deshalb stehen auf Lebensmitteln immer beide Werte, und
+            deshalb ist die kJ-Zahl rund viermal so gross – es ist dieselbe
+            Energie in einer anderen Einheit.
+          </p>
+          <p>
+            <strong>Ein Auto mit 100 PS</strong> hat 73,5 kW. Die verbreitete
+            Faustregel „mal 0,75“ trifft es ziemlich genau: Eine metrische
+            Pferdestärke ist als 735,49875 Watt definiert.
+          </p>
+          <p>
+            <strong>Reifendruck 2,5 bar</strong> sind 36,3 psi. An
+            amerikanischen Luftpumpen und bei importierten Fahrzeugen steht die
+            zweite Zahl – ein Grund, warum viele Reifen falsch aufgepumpt sind.
+          </p>
+          <p>
             <strong>Eine Kuriosität:</strong> Bei −40 zeigen Celsius und
             Fahrenheit denselben Wert. Es ist der einzige Punkt, an dem sich die
             beiden Skalen kreuzen.
@@ -91,6 +115,22 @@ export default function Page() {
             amerikanische Gallone hat 3,785 Liter, eine britische 4,546 – ein
             Unterschied von zwanzig Prozent bei gleichem Namen. Dasselbe gilt
             für Pints. Der Rechner führt beide getrennt auf.
+          </p>
+          <p>
+            <strong>Kalorie ist nicht gleich Kalorie.</strong> Was auf
+            Lebensmitteln als „Kalorien“ steht, sind in Wirklichkeit
+            Kilokalorien – also Tausend Kalorien. Eine Tafel Schokolade hat
+            keine 500 Kalorien, sondern 500 Kilokalorien oder 500.000 Kalorien.
+            Der Rechner führt beide Einheiten getrennt auf, damit dieser
+            Faktor 1.000 nicht untergeht.
+          </p>
+          <p>
+            <strong>PS ist nicht gleich horsepower.</strong> Die metrische
+            Pferdestärke und das britisch-amerikanische horsepower sind zwei
+            verschiedene Einheiten mit fast gleichem Namen: 735,5 gegenüber
+            745,7 Watt. Bei einem Sportwagen macht das gut zehn PS Unterschied –
+            weshalb dieselbe Maschine in amerikanischen Prospekten mit einer
+            anderen Zahl beworben wird.
           </p>
           <p>
             <strong>Kelvin kennt keine negativen Werte.</strong> Der absolute
@@ -138,6 +178,16 @@ export default function Page() {
           question: "Wie rechnet man Fahrenheit in Celsius um?",
           answer:
             "32 abziehen, dann mit 5 multiplizieren und durch 9 teilen. Aus 100 °F werden so 37,8 °C. Eine Multiplikation mit einem Faktor allein funktioniert nicht, weil beide Skalen verschiedene Nullpunkte haben.",
+        },
+        {
+          question: "Wie rechnet man kcal in kJ um?",
+          answer:
+            "Mit 4,184 multiplizieren: 100 kcal sind 418,4 kJ. Für den umgekehrten Weg durch 4,184 teilen. Diese Zahl ist die Definition der thermochemischen Kalorie und genau die, die den Angaben auf Lebensmittelverpackungen zugrunde liegt.",
+        },
+        {
+          question: "Wie viel kW sind 100 PS?",
+          answer:
+            "73,5 kW. Eine metrische Pferdestärke ist als 735,49875 Watt festgelegt. Umgekehrt entspricht 1 kW rund 1,36 PS. Achtung: Das britisch-amerikanische horsepower ist mit 745,7 Watt etwas grösser.",
         },
         {
           question: "Warum ist eine amerikanische Gallone kleiner als eine britische?",
