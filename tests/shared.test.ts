@@ -85,4 +85,25 @@ describe("round", () => {
     expect(round(2.5)).toBe(3);
     expect(round(1.005, 2)).toBe(1.01);
   });
+
+  it("rundet auch sehr kleine Zahlen, statt sie auf null zu setzen", () => {
+    // Solche Werte stehen in JavaScript in Exponentialschreibweise da
+    // (6.2e-7). Eine Rundung, die das Komma durch Anhängen von "e10"
+    // verschiebt, ergibt dabei NaN und damit fälschlich 0 – etwa bei
+    // einem Millimeter, umgerechnet in Meilen.
+    expect(round(6.21371192237334e-7, 10)).toBe(6.214e-7);
+    expect(round(1.5e-8, 10)).toBe(1.5e-8);
+    expect(round(9.9e-9, 8)).toBe(1e-8);
+  });
+
+  it("rundet sehr grosse Zahlen", () => {
+    expect(round(1.23456789e12, 2)).toBe(1234567890000);
+  });
+
+  it("behält die Null", () => {
+    expect(round(0, 4)).toBe(0);
+    // Ergebnis ist die positive Null: "-0" auf einer Seite anzuzeigen wäre
+    // verwirrend.
+    expect(round(-0.0001, 2)).toBe(0);
+  });
 });

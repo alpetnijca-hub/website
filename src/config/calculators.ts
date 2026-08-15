@@ -201,10 +201,57 @@ export const calculators: CalculatorMeta[] = [
     icon: "calculator",
     related: ["prozent", "mehrwertsteuer"],
     keywords: ["dreisatz", "proportional", "verhältnis", "umgekehrter dreisatz"],
-    status: "geplant",
+    status: "aktiv",
     seo: {
-      title: "Dreisatz-Rechner",
-      description: "Dreisatz online lösen. In Vorbereitung.",
+      title: "Dreisatz-Rechner – proportional und umgekehrt",
+      description:
+        "Dreisatz online lösen, proportional oder umgekehrt proportional, mit vollständigem Rechenweg in zwei Schritten und Beispielen aus dem Alltag.",
+    },
+  },
+  {
+    id: "notendurchschnitt",
+    name: "Notendurchschnitt-Rechner",
+    category: "mathematik",
+    href: "/mathematik/notendurchschnitt-rechner",
+    description:
+      "Notenschnitt mit Gewichtung berechnen – für deutsche, österreichische und Schweizer Noten sowie Oberstufenpunkte.",
+    icon: "calculator",
+    related: ["prozent", "dreisatz"],
+    keywords: [
+      "notendurchschnitt",
+      "notenschnitt",
+      "durchschnittsnote",
+      "zeugnisnote",
+      "noten berechnen",
+    ],
+    status: "aktiv",
+    seo: {
+      title: "Notendurchschnitt berechnen – mit Gewichtung",
+      description:
+        "Notenschnitt mit unterschiedlich gewichteten Noten berechnen, für vier Notensysteme. Zeigt zusätzlich, welche Note für einen Zielschnitt nötig ist.",
+    },
+  },
+  {
+    id: "einheiten",
+    name: "Einheitenumrechner",
+    category: "mathematik",
+    href: "/mathematik/einheitenumrechner",
+    description:
+      "Länge, Gewicht, Temperatur, Fläche, Volumen und Geschwindigkeit umrechnen.",
+    icon: "calculator",
+    related: ["dreisatz", "prozent"],
+    keywords: [
+      "einheiten umrechnen",
+      "cm in zoll",
+      "kg in pfund",
+      "celsius fahrenheit",
+      "meilen in kilometer",
+    ],
+    status: "aktiv",
+    seo: {
+      title: "Einheitenumrechner – Länge, Gewicht, Temperatur",
+      description:
+        "Zentimeter in Zoll, Kilogramm in Pfund, Celsius in Fahrenheit und mehr. Mit den exakten Definitionswerten gerechnet, nicht mit gerundeten Faktoren.",
     },
   },
 
@@ -384,14 +431,16 @@ export const calculators: CalculatorMeta[] = [
     name: "Datumsrechner",
     category: "alltag",
     href: "/alltag/datumsrechner",
-    description: "Tage zwischen zwei Daten und Datum plus oder minus X Tage.",
+    description:
+      "Tage zwischen zwei Daten zählen oder ein Datum um Tage, Wochen und Monate verschieben.",
     icon: "calculator",
-    related: [],
+    related: ["altersrechner", "kalenderwoche"],
     keywords: ["datumsrechner", "tage berechnen", "zeitspanne", "tagezähler"],
-    status: "geplant",
+    status: "aktiv",
     seo: {
-      title: "Datumsrechner",
-      description: "Tage zwischen zwei Daten berechnen. In Vorbereitung.",
+      title: "Datumsrechner – Tage zwischen zwei Daten berechnen",
+      description:
+        "Tage, Wochen, Monate und Werktage zwischen zwei Daten zählen oder ein Datum um eine Frist verschieben. Mit Wochentag und Schaltjahren korrekt gerechnet.",
     },
   },
   {
@@ -401,12 +450,13 @@ export const calculators: CalculatorMeta[] = [
     href: "/alltag/altersrechner",
     description: "Alter auf Jahre, Monate und Tage genau aus dem Geburtsdatum.",
     icon: "calculator",
-    related: [],
-    keywords: ["altersrechner", "alter berechnen", "geburtstag"],
-    status: "geplant",
+    related: ["datumsrechner", "kalenderwoche"],
+    keywords: ["altersrechner", "alter berechnen", "geburtstag", "wie alt bin ich"],
+    status: "aktiv",
     seo: {
-      title: "Altersrechner",
-      description: "Alter genau berechnen. In Vorbereitung.",
+      title: "Altersrechner – Alter genau berechnen",
+      description:
+        "Alter in Jahren, Monaten und Tagen aus dem Geburtsdatum, dazu gelebte Tage, der Wochentag der Geburt und die Tage bis zum nächsten Geburtstag.",
     },
   },
   {
@@ -416,12 +466,30 @@ export const calculators: CalculatorMeta[] = [
     href: "/alltag/kalenderwochen-rechner",
     description: "Kalenderwoche zu einem Datum und umgekehrt, nach ISO 8601.",
     icon: "calculator",
-    related: [],
-    keywords: ["kalenderwoche", "kw berechnen", "iso 8601"],
-    status: "geplant",
+    related: ["datumsrechner", "altersrechner"],
+    keywords: ["kalenderwoche", "kw berechnen", "iso 8601", "welche kw"],
+    status: "aktiv",
     seo: {
-      title: "Kalenderwochen-Rechner",
-      description: "Kalenderwoche bestimmen. In Vorbereitung.",
+      title: "Kalenderwochen-Rechner – KW nach ISO 8601",
+      description:
+        "Welche Kalenderwoche hat ein Datum, und welche Tage umfasst eine KW? Nach ISO 8601 gerechnet, inklusive der kniffligen Wochen um den Jahreswechsel.",
+    },
+  },
+  {
+    id: "trinkgeld",
+    name: "Trinkgeld-Rechner",
+    category: "alltag",
+    href: "/alltag/trinkgeld-rechner",
+    description:
+      "Trinkgeld und Gesamtbetrag berechnen und die Rechnung durch mehrere Personen teilen.",
+    icon: "calculator",
+    related: ["prozent", "rabatt", "mehrwertsteuer"],
+    keywords: ["trinkgeld", "tip rechner", "rechnung teilen", "restaurant"],
+    status: "aktiv",
+    seo: {
+      title: "Trinkgeld-Rechner – Trinkgeld und Rechnung teilen",
+      description:
+        "Trinkgeld in Prozent berechnen, den Betrag aufrunden und die Rechnung durch mehrere Personen teilen. Mit dem tatsächlichen Satz beim Aufrunden.",
     },
   },
   {

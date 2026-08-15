@@ -81,10 +81,22 @@ export function round(value: number, decimals = 0): number {
   if (!Number.isFinite(value)) return 0;
   if (decimals === 0) return Math.round(value);
 
-  const shifted = Number(`${value}e${decimals}`);
+  // Das Komma wird über den Exponenten verschoben, nicht durch Anhängen von
+  // "e10" an die Zahl selbst: Steht der Wert bereits in
+  // Exponentialschreibweise – bei sehr kleinen Zahlen wie 6.2e-7 tut er das –,
+  // ergäbe das Anhängen "6.2e-7e10" und damit NaN.
+  const shifted = shiftExponent(value, decimals);
   if (!Number.isFinite(shifted)) return Math.round(value);
-  const result = Number(`${Math.round(shifted)}e-${decimals}`);
+
+  const result = shiftExponent(Math.round(shifted), -decimals);
   return Number.isFinite(result) ? result : Math.round(value);
+}
+
+/** Verschiebt das Komma um `by` Stellen, ohne Multiplikation mit 10er-Potenzen. */
+function shiftExponent(value: number, by: number): number {
+  if (value === 0) return 0;
+  const [mantissa, exponent] = value.toExponential().split("e");
+  return Number(`${mantissa}e${Number(exponent) + by}`);
 }
 
 /**

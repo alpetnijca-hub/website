@@ -178,6 +178,58 @@ export function TimeField({
   );
 }
 
+/**
+ * Datumsfeld. Der Wert ist immer "JJJJ-MM-TT" – das ist das Format, das
+ * `type="date"` liefert, unabhängig davon, wie der Browser das Datum anzeigt.
+ */
+export function DateField({
+  label,
+  value,
+  onChange,
+  hint,
+  error,
+  min,
+  max,
+}: {
+  label: string;
+  value: string;
+  onChange: (value: string) => void;
+  hint?: string;
+  error?: string;
+  min?: string;
+  max?: string;
+}) {
+  const id = useId();
+  const hintId = `${id}-hint`;
+  const errorId = `${id}-error`;
+  const describedBy =
+    [hint ? hintId : null, error ? errorId : null].filter(Boolean).join(" ") ||
+    undefined;
+
+  return (
+    <FieldShell
+      label={label}
+      hint={hint}
+      error={error}
+      htmlFor={id}
+      hintId={hintId}
+      errorId={errorId}
+    >
+      <input
+        id={id}
+        type="date"
+        value={value}
+        min={min}
+        max={max}
+        onChange={(event) => onChange(event.target.value)}
+        aria-invalid={error ? true : undefined}
+        aria-describedby={describedBy}
+        className={`${inputClasses} ${borderClasses(Boolean(error))}`}
+      />
+    </FieldShell>
+  );
+}
+
 export interface SelectOption {
   value: string;
   label: string;
