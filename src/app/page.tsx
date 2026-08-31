@@ -8,7 +8,7 @@ import { JsonLd } from "@/components/ui/JsonLd";
 import { SupportCard } from "@/components/support/SupportCard";
 import { websiteSchema } from "@/lib/schema";
 import { site } from "@/config/site";
-import { categories } from "@/config/categories";
+import { activeCategories, categories } from "@/config/categories";
 import {
   activeCalculators,
   calculatorsByCategory,
@@ -36,9 +36,6 @@ const benefits = [
 
 export default function HomePage() {
   const featured = featuredCalculators();
-  const health = calculatorsByCategory("gesundheit").filter(
-    (c) => c.status === "aktiv",
-  );
   const totalActive = activeCalculators().length;
 
   return (
@@ -274,21 +271,48 @@ export default function HomePage() {
           </div>
         </section>
 
-        {/* Alle Gesundheitsrechner als interne Verlinkung */}
-        <section aria-labelledby="alle-gesundheit" className="mt-14">
+        {/* Vollständige Liste als interne Verlinkung.
+            Jeder Rechner ist damit einen Klick von der Startseite entfernt –
+            wichtig, damit Suchmaschinen alle Seiten finden und einordnen. */}
+        <section aria-labelledby="alle-rechner" className="mt-14">
           <h2
-            id="alle-gesundheit"
+            id="alle-rechner"
             className="heading-accent text-2xl font-bold tracking-tight text-text"
           >
-            Alle Rechner für Gesundheit &amp; Fitness
+            Alle {totalActive} Rechner im Überblick
           </h2>
-          <ul className="mt-5 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-            {health.map((calculator) => (
-              <li key={calculator.id}>
-                <CalculatorCard calculator={calculator} />
-              </li>
-            ))}
-          </ul>
+          <div className="mt-5 grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
+            {activeCategories().map((category) => {
+              const items = calculatorsByCategory(category.slug).filter(
+                (c) => c.status === "aktiv",
+              );
+              if (items.length === 0) return null;
+              return (
+                <div key={category.slug} data-accent={category.slug}>
+                  <h3 className="flex items-center gap-2.5 font-semibold text-text">
+                    <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-accent-soft text-accent">
+                      <Icon name={category.icon} className="h-4.5 w-4.5" />
+                    </span>
+                    <Link href={category.href} className="hover:text-accent">
+                      {category.name}
+                    </Link>
+                  </h3>
+                  <ul className="mt-3 space-y-2 text-sm">
+                    {items.map((calculator) => (
+                      <li key={calculator.id}>
+                        <Link
+                          href={calculator.href}
+                          className="text-text-muted hover:text-accent hover:underline"
+                        >
+                          {calculator.name}
+                        </Link>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              );
+            })}
+          </div>
         </section>
 
         <SupportCard className="mt-14" />
