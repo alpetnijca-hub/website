@@ -144,6 +144,16 @@ export default function Page() {
       }
       faq={[
         {
+          question: "Wie viel Protein pro Kilogramm Körpergewicht?",
+          answer:
+            "Für Erwachsene ohne besondere Belastung nennt die DGE 0,8 g je Kilogramm Körpergewicht als Mindestzufuhr. Wer regelmässig Kraft- oder Ausdauersport treibt, liegt nach den Empfehlungen der International Society of Sports Nutrition eher zwischen 1,4 und 2,0 g/kg. Im Kaloriendefizit kommt ein Zuschlag dazu, weil dort mehr Körpereiweiss abgebaut wird. Der Rechner nennt deshalb eine Spanne statt einer einzelnen Zahl.",
+        },
+        {
+          question: "Wie viel Eiweiss brauche ich am Tag?",
+          answer:
+            "Das hängt vor allem vom Körpergewicht ab, nicht vom Alter oder Geschlecht. Eine 70 kg schwere Person ohne Sport kommt auf etwa 56 g pro Tag, mit regelmässigem Krafttraining eher auf 98 bis 140 g. Trag oben dein Gewicht und dein Aktivitätsniveau ein, dann rechnet der Rechner deine Spanne aus.",
+        },
+        {
           question: "Schadet viel Eiweiss den Nieren?",
           answer:
             "Bei gesunden Nieren gibt es nach aktuellem Stand keine Hinweise darauf, dass eine Zufuhr im hier genannten Bereich schädlich ist. Anders sieht es bei bestehender Nierenerkrankung aus – dort wird die Eiweissmenge ärztlich vorgegeben. Wenn du unsicher bist, kläre es in der Hausarztpraxis ab.",

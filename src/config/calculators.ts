@@ -27,6 +27,7 @@ export const calculators: CalculatorMeta[] = [
       "tdee",
       "bmr",
       "kalorien pro tag",
+      "kalorienbedarf berechnen abnehmen",
     ],
     status: "aktiv",
     seo: {
@@ -80,7 +81,9 @@ export const calculators: CalculatorMeta[] = [
     related: ["kalorienbedarf", "makronaehrstoffe", "protein", "bmi"],
     keywords: [
       "kaloriendefizit",
+      "kalorien defizit rechner",
       "abnehmen",
+      "kalorien zum abnehmen berechnen",
       "defizit berechnen",
       "gewichtsverlust pro woche",
     ],
@@ -100,12 +103,20 @@ export const calculators: CalculatorMeta[] = [
       "Empfohlene Eiweisszufuhr als Spanne in Gramm pro Tag – abhängig von Gewicht, Training und Ziel.",
     icon: "protein",
     related: ["makronaehrstoffe", "kalorienbedarf", "kaloriendefizit"],
-    keywords: ["proteinbedarf", "eiweissbedarf", "protein pro tag", "eiweiss"],
+    keywords: [
+      "proteinbedarf",
+      "proteinrechner",
+      "eiweissbedarf",
+      "eiweiss rechner",
+      "protein pro tag",
+      "protein pro kg körpergewicht",
+      "eiweiss",
+    ],
     status: "aktiv",
     seo: {
-      title: "Proteinbedarf berechnen – Eiweiss pro Tag in Gramm",
+      title: "Proteinbedarf-Rechner – Eiweissbedarf pro Tag berechnen",
       description:
-        "Täglichen Proteinbedarf als sinnvolle Spanne berechnen, abgestimmt auf Körpergewicht, Aktivitätsniveau und Ziel. Mit Quellenangaben zu den Richtwerten.",
+        "Wie viel Protein pro Tag? Der Rechner nennt eine Spanne in Gramm, abgestimmt auf Körpergewicht, Training und Ziel – mit Angabe je Kilogramm Körpergewicht und Quellen zu den Richtwerten.",
     },
   },
   {
